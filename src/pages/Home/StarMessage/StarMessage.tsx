@@ -1,10 +1,12 @@
-import React from "react";
 import { GoChevronLeft } from "react-icons/go";
-import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
-import { useAppDispatch } from "../../../utils/hooks";
-import StarMessageList from "./StarMessageList";
 import { useLocation, useNavigate } from "react-router-dom";
+
+// uitls and store
+import { useAppDispatch } from "../../../utils/hooks";
 import TextTranslate from "../../../utils/TextTranslate";
+import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
+
+import StarMessageList from "./StarMessageList";
 
 export default function StarMessage() {
   const dispatch = useAppDispatch();
@@ -16,8 +18,6 @@ export default function StarMessage() {
         <GoChevronLeft
           className="cursor-pointer text-xl"
           onClick={() => {
-            // console.log(locations.pathname, "locations.pathname");
-
             if (locations.pathname == "/star-messages") {
               navigate(-1);
             } else {

@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import useApiPost from "../../../hooks/PostData";
 import { PrivacyPolicyRes } from "../../../types/ResType";
-// import LandingNavbar from "../LandingPage/LandingNavbar";
 
 export default function PrivacyPolicy() {
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
   const [privacyPolicyLink, setPrivacyPolicyLink] = useState("");
-  let path = useLocation();
 
-  const { loading, postData } = useApiPost();
+  const { postData } = useApiPost();
 
   async function fetchPrivacyPolicy() {
     let response: PrivacyPolicyRes = await postData("get-privacy-policy", {});
@@ -27,7 +24,6 @@ export default function PrivacyPolicy() {
 
   return (
     <>
-      {/* {path.pathname == "/privacy-policy" && <LandingNavbar />} */}
       {!isIframeLoaded && (
         <div className="flex h-screen items-center justify-center bg-white text-black">
           <ClipLoader color="black" size={30} />

@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { GoChevronLeft } from "react-icons/go";
-import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
+
+// utils and store
 import { useAppDispatch } from "../../../utils/hooks";
-import Media from "./Media";
-import Documents from "./Documents";
-import Links from "./Links";
 import TextTranslate from "../../../utils/TextTranslate";
+import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
+
+// components
+import Media from "./Media";
+import Links from "./Links";
+import Documents from "./Documents";
 
 export default function MediaLinksDocsTabs() {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -28,11 +32,10 @@ export default function MediaLinksDocsTabs() {
           onClick={() => {
             setSelectedTab(0);
           }}
-          className={`p-2 ${
-            selectedTab == 0
-              ? "border-b border-[#FCC604] text-[#FCC604]"
-              : "opacity-50"
-          } ml-4 cursor-pointer text-center font-medium lg:w-36`}
+          className={`p-2 ${selectedTab == 0
+            ? "border-b border-rose-500 text-rose-500"
+            : "opacity-50"
+            } ml-4 cursor-pointer text-center font-medium lg:w-36`}
         >
           Media
         </div>
@@ -41,11 +44,10 @@ export default function MediaLinksDocsTabs() {
           onClick={() => {
             setSelectedTab(1);
           }}
-          className={`p-2 ${
-            selectedTab == 1
-              ? "border-b border-[#FCC604] text-[#FCC604]"
-              : "opacity-50"
-          } mx-2 cursor-pointer text-center font-medium lg:w-36`}
+          className={`p-2 ${selectedTab == 1
+            ? "border-b border-rose-500 text-rose-500"
+            : "opacity-50"
+            } mx-2 cursor-pointer text-center font-medium lg:w-36`}
         >
           Docs
         </div>
@@ -53,11 +55,10 @@ export default function MediaLinksDocsTabs() {
           onClick={() => {
             setSelectedTab(2);
           }}
-          className={`p-2 ${
-            selectedTab == 2
-              ? "border-b border-[#FCC604] text-[#FCC604]"
-              : "opacity-50"
-          } mr-4 cursor-pointer text-center font-medium lg:w-36`}
+          className={`p-2 ${selectedTab == 2
+            ? "border-b border-rose-500 text-rose-500"
+            : "opacity-50"
+            } mr-4 cursor-pointer text-center font-medium lg:w-36`}
         >
           Links
         </div>

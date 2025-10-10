@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
 
-// components
+// components:
 import Sidebar from "./Sidebar";
 import Bottombar from "./Bottombar";
 import MessageList from "./MessageList/MessageList";
 import EmptyChatScreen from "./Chat/EmptyChatScreen";
 
-// utils and context
+// utils and context:
 import { useAppSelector } from "../../utils/hooks";
 import { useTheme } from "../../context/ThemeProvider";
 import OnClickOutside from "../../utils/OnClickOutSide";

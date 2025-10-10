@@ -1,25 +1,29 @@
-import { FiChevronDown, FiSearch } from "react-icons/fi";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+// icons
 import { TiVideo } from "react-icons/ti";
+import { FiChevronDown, FiSearch } from "react-icons/fi";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
-import { FaCalendarAlt } from "react-icons/fa";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/react";
+
+// utils and hooks
+import useApiPost from "../../../hooks/PostData";
+import { CallUserRes } from "../../../types/ResType";
+import TextTranslate from "../../../utils/TextTranslate";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
-import { updateMessageOptions } from "../../../store/Slices/MessageOptionsSlice";
+
+// components:
 import ReusableModal from "./ReusableModal";
+import { MeetingScheduleModal } from "../../../components/MeetingSchedule";
+
+// store
 import {
   toggleProfileView,
   updateViewState,
 } from "../../../store/Slices/ViewManagerSlice";
-import TextTranslate from "../../../utils/TextTranslate";
-import { useNavigate } from "react-router-dom";
-import useApiPost from "../../../hooks/PostData";
-import { CallUserRes } from "../../../types/ResType";
 import { updatePeerData } from "../../../store/Slices/PeerJsSlice";
-import {
-  MeetingScheduleModal,
-  useMeetingSchedule,
-} from "../../../components/MeetingSchedule";
-import { useState } from "react";
+import { updateMessageOptions } from "../../../store/Slices/MessageOptionsSlice";
 
 export default function RightSideOptions() {
   const navigate = useNavigate();
@@ -28,7 +32,6 @@ export default function RightSideOptions() {
     (state) => state.CurrentConversation,
   );
   const { postData } = useApiPost();
-  const { openModal } = useMeetingSchedule();
   const [showAllOptions, setShowAllOptions] = useState(false);
 
   const toggleOptions = () => setShowAllOptions(!showAllOptions);
@@ -54,22 +57,10 @@ export default function RightSideOptions() {
       <ReusableModal />
       <MeetingScheduleModal />
       <div className="flex items-center gap-3 lg:gap-4">
-        {/* Schedule Meeting Button */}
-        {/* <div   onClick={openModal} className="cursor-pointer rounded-xl border border-[#FEE383] bg-yellow-500 bg-opacity-10 px-3 py-1">
-          Schedule Meeting
-        </div> */}
-        {/* Video Call Button */}
         <div className="flex cursor-pointer items-center">
           <Menu>
             <MenuButton className="inline-flex items-center gap-2 rounded-md py-1.5 text-sm/6 font-semibold shadow-2xl focus:outline-none data-[focus]:outline-1 lg:px-3">
-              {/* <PiDotsThreeVerticalBold
-                onClick={() => {
-                  setShowAllOptions(true);
-                }}
-                className="cursor-pointer text-2xl"
-              /> */}
               <TiVideo className="text-xl sm:text-2xl" />
-
               <FiChevronDown className="hidden w-fit lg:flex" />
             </MenuButton>
 
@@ -86,9 +77,6 @@ export default function RightSideOptions() {
                   className="group flex w-full cursor-pointer items-center gap-2 rounded-lg py-1.5 pl-6 data-[focus]:bg-dropdownOptionHover"
                 >
                   <TextTranslate text="Video Call" />
-                  {/* {currentConversationData.is_group
-                    ? "Group Info"
-                    : "Contact Info"} */}
                 </div>
               </MenuItem>
               <MenuItem>
@@ -99,35 +87,17 @@ export default function RightSideOptions() {
                   className="group flex w-full cursor-pointer items-center gap-2 rounded-lg py-1.5 pl-6 data-[focus]:bg-dropdownOptionHover"
                 >
                   <TextTranslate text="Audio Call" />
-                  {/* {currentConversationData.is_group
-                    ? "Group Info"
-                    : "Contact Info"} */}
                 </div>
               </MenuItem>
-              {/* <MenuItem>
-                <div
-                  onClick={() => {
-                    navigate("/video-call");
-                  }}
-                  className="group  flex w-full items-center gap-2 rounded-lg py-1.5 pl-6 data-[focus]:bg-dropdownOptionHover"
-                >
-                  <TextTranslate text="Coming Soon" />
-
-                </div>
-              </MenuItem> */}
             </MenuItems>
           </Menu>
-
-          {/* text-lightText */}
         </div>
 
-        {/* Search Button */}
         <FiSearch
           onClick={() => dispatch(updateViewState({ showSearchMessage: true }))}
           className="cursor-pointer text-xl lg:text-2xl"
         />
 
-        {/* Options Menu */}
         <Menu>
           <MenuButton className="inline-flex items-center gap-2 rounded-md py-1.5 text-sm/6 font-semibold shadow-2xl focus:outline-none data-[focus]:outline-1 lg:px-3">
             <PiDotsThreeVerticalBold

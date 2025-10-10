@@ -1,12 +1,14 @@
+import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { RxCross2, RxRadiobutton } from "react-icons/rx";
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+
+// context
+import TextTranslate from "../../../utils/TextTranslate";
 import { useTheme } from "../../../context/ThemeProvider";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
-import TextTranslate from "../../../utils/TextTranslate";
 import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
 import { useFetchLanguageList } from "../../../store/api/useFetchLanguageList";
-import Cookies from "js-cookie";
 
 const SelectLanguageModal: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -48,7 +50,7 @@ const SelectLanguageModal: React.FC = () => {
               style={{
                 backgroundSize: "100%",
               }}
-              className="w-full space-y-5 bg-[url('/Home/add_member_bg.png')] bg-no-repeat px-4 xl:space-y-7"
+              className="w-full space-y-5 bg-no-repeat px-4 xl:space-y-7"
             >
               <div className="flex items-center gap-3 py-7 font-semibold ">
                 <RxCross2
@@ -73,7 +75,7 @@ const SelectLanguageModal: React.FC = () => {
                     >
                       {e.status_id === status_id ? (
                         <div className="w-3">
-                          <RxRadiobutton className="text-lg text-[#FDCF29]" />
+                          <RxRadiobutton className="text-lg text-rose-500" />
                         </div>
                       ) : (
                         <div className="w-3"></div>
@@ -89,7 +91,7 @@ const SelectLanguageModal: React.FC = () => {
                     Cookies.set("status_id", status_id.toString());
                     location.reload();
                   }}
-                  className={`primary-gradient relative mx-auto h-9 w-44 rounded-lg px-4 py-2 text-base font-medium outline-none lg:px-9`}
+                  className={`bg-rose-500 text-white relative mx-auto w-44 rounded-lg px-4 py-2 text-sm font-medium outline-none lg:px-9`}
                 >
                   <span className="">Save</span>
                 </button>

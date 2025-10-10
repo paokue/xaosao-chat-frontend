@@ -1,11 +1,13 @@
-import React from "react";
-import { useConversationInfo } from "../../../store/api/useConversationInfo";
-import { RiDeleteBin6Line, RiUserForbidLine } from "react-icons/ri";
-import { TbMessageReport } from "react-icons/tb";
-import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
-import { updateMessageOptions } from "../../../store/Slices/MessageOptionsSlice";
+// icons:
 import { MdLogout } from "react-icons/md";
+import { RiUserForbidLine } from "react-icons/ri";
+import { TbMessageReport } from "react-icons/tb";
+
+// utils and store:
 import TextTranslate from "../../../utils/TextTranslate";
+import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
+import { useConversationInfo } from "../../../store/api/useConversationInfo";
+import { updateMessageOptions } from "../../../store/Slices/MessageOptionsSlice";
 
 export default function GroupActions() {
   let { data } = useConversationInfo();
@@ -18,14 +20,13 @@ export default function GroupActions() {
 
   return (
     <>
-      {/* Other Options */}
       {!data?.conversationDetails.is_group && (
         <div
           onClick={() =>
             dispatch(
               updateMessageOptions({
                 showModal: true,
-                title: `Are you sure you want ${currentConversationData.is_block ? "Unblock" : "Block"} ${currentConversationData.user_name}?`,
+                title: `Are you sure you want to ${currentConversationData.is_block ? "Unblock" : "Block"} ${currentConversationData.user_name}?`,
                 description: "",
                 modalName: "block_user",
               }),
@@ -49,8 +50,6 @@ export default function GroupActions() {
           onClick={() =>
             dispatch(
               updateMessageOptions({
-                // title: `Are you sure you want Report ${currentConversationData.user_name}?`,
-                // description: "",
                 modalName: "report_user",
               }),
             )
@@ -91,24 +90,6 @@ export default function GroupActions() {
               </div>
             </div>
           ) : (
-            // <div className="flex cursor-pointer items-center border border-borderColor bg-otherProfileSidebar px-10 py-2 2xl:py-3">
-            //   <div
-            //     onClick={() =>
-            //       dispatch(
-            //         updateMessageOptions({
-            //           showModal: true,
-            //           title: `Are you sure you want Delete this group ${currentConversationData.group_name}?`,
-            //           description: "All the chats will be deleted!",
-            //           modalName: "delete_group",
-            //         }),
-            //       )
-            //     }
-            //     className="flex items-center gap-3 text-sm text-[#FF2525]"
-            //   >
-            //     <RiDeleteBin6Line className="text-lg" />
-            //     <div className="">Delete Group</div>
-            //   </div>
-            // </div>
             <div className="flex cursor-pointer items-center border border-borderColor bg-otherProfileSidebar px-10 py-2 2xl:py-3">
               <div
                 onClick={() =>

@@ -1,25 +1,16 @@
-import React from "react";
-
-import { HiOutlineDocumentText } from "react-icons/hi";
-import { IoImageOutline, IoLocationOutline } from "react-icons/io5";
-import { RiContactsLine } from "react-icons/ri";
-import { updateNavigateToSpesificMessage } from "../../../store/Slices/NavigateToSpesificMessageSlice";
-import { useAppSelector, useAppDispatch } from "../../../utils/hooks";
-import { MessageList } from "../../../types/MessageListType";
 import { GoDotFill } from "react-icons/go";
+import { useAppSelector } from "../../../utils/hooks";
+import { MessageList } from "../../../types/MessageListType";
 
 export default function ShowStatusReply({
   messageData,
 }: {
   messageData: MessageList;
 }) {
-  const MessageListArray = useAppSelector((state) => state.MessageList);
   const userData = useAppSelector((state) => state.userData);
-  const dispatch = useAppDispatch();
   const currentConversation = useAppSelector(
     (state) => state.CurrentConversation,
   );
-  // console.log(repliedMessage, "repliedMessage");
   if (
     messageData?.statusData == undefined ||
     messageData?.statusData.length == 0
@@ -31,14 +22,6 @@ export default function ShowStatusReply({
     <div className="flex flex-col">
       <div
         onClick={() => {
-          // dispatch(
-          //   updateNavigateToSpesificMessage({
-          //     conversation_id: messageData.conversation_id,
-          //     navigate_to_message: true,
-          //     message_id: messageData.message_id,
-          //   }),
-          // );
-          // scrollToMessage(repliedMessage?.reply_id!);
         }}
         className="my-1 flex min-w-52 cursor-pointer items-center gap-2 rounded-xl bg-primary px-3 py-2 text-darkText lg:min-w-72"
       >

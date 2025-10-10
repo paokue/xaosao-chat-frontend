@@ -1,24 +1,26 @@
+import toast from "react-hot-toast";
 import React, { useEffect, useState } from "react";
+
+// icons:
+import { MdCheck } from "react-icons/md";
+import { BiEditAlt } from "react-icons/bi";
 import { GoDotFill } from "react-icons/go";
 import LoadingSkeletonImageDynamic from "../../../components/LoadingSkeletonImageDynamic";
-import { RxCross2 } from "react-icons/rx";
-import {
-  setViewImage,
-  toggleProfileView,
-} from "../../../store/Slices/ViewManagerSlice";
-import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
-import { useFile } from "../../../context/FileProvider";
-import { useConversationInfo } from "../../../store/api/useConversationInfo";
-import { UpdateGroupRes } from "../../../types/ResType";
-import { updateCurrentConversation } from "../../../store/Slices/CurrentConversationSlice";
-import toast from "react-hot-toast";
-import { socketInstance } from "../../../socket/socket";
+import { setViewImage } from "../../../store/Slices/ViewManagerSlice";
+
+// utils and context:
 import useApiPost from "../../../hooks/PostData";
-import { BiEditAlt } from "react-icons/bi";
-import { MdCheck } from "react-icons/md";
+import { useFile } from "../../../context/FileProvider";
+import { UpdateGroupRes } from "../../../types/ResType";
+import { socketInstance } from "../../../socket/socket";
 import TextTranslate from "../../../utils/TextTranslate";
+import { useTheme } from "../../../context/ThemeProvider";
+import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
+import { useConversationInfo } from "../../../store/api/useConversationInfo";
+import { updateCurrentConversation } from "../../../store/Slices/CurrentConversationSlice";
 
 export default function GroupHeader() {
+  const theme = useTheme()
   let { data } = useConversationInfo();
   const { setSelectedFile } = useFile();
   const [selectedFileUrl, setSelectedFileUrl] = useState("");
@@ -33,9 +35,6 @@ export default function GroupHeader() {
     setGroup_name(data?.conversationDetails.group_name);
   }, [data?.conversationDetails.group_name]);
 
-  function closeSideBar() {
-    dispatch(toggleProfileView(false));
-  }
   const currentConversationData = useAppSelector(
     (state) => state.CurrentConversation,
   );
@@ -100,23 +99,12 @@ export default function GroupHeader() {
         style={{
           backgroundSize: "100%",
         }}
-        className="mb-4 h-80 w-full space-y-5 bg-[url('/Home/profile_bg.png')] bg-no-repeat xl:space-y-7"
+        className={`mb-4 h-80 w-full space-y-5 ${theme.theme === "dark" ? "bg-[#2A2A2A]" : "bg-[#F1F1F1]"} bg-no-repeat xl:space-y-7`}
       >
         <div className="flex items-center gap-3 px-3 pt-16 font-semibold text-black 2xl:pt-16">
-          {/* <RxCross2
-            className="cursor-pointer text-2xl"
-            onClick={() => {
-              closeSideBar();
-            }}
-          />
-          <span className="">
-            {data?.conversationDetails.is_group == true
-              ? "Group Info"
-              : "Contact Info"}
-          </span> */}
           <div className="py-2"></div>
         </div>
-        {/* Profile Image */}
+
         <div className="grid place-content-center gap-y-2 text-center">
           <div className="mx-auto  rounded-full bg-primary p-2 h-36 w-36">
             <div className="relative">
@@ -127,9 +115,9 @@ export default function GroupHeader() {
                 image_url={
                   data?.conversationDetails.is_group == true
                     ? selectedFileUrl ||
-                      data?.conversationDetails.group_profile_image
+                    data?.conversationDetails.group_profile_image
                     : data?.conversationDetails.ConversationsUsers[0].User
-                        .profile_image! || currentConversationData.profile_image
+                      .profile_image! || currentConversationData.profile_image
                 }
                 image_width=""
                 onClickFunc={() => {
@@ -175,7 +163,7 @@ export default function GroupHeader() {
                 data?.conversationDetails.is_group
                   ? group_name
                   : data?.conversationDetails.ConversationsUsers[0].User
-                      .user_name! || currentConversationData.user_name
+                    .user_name! || currentConversationData.user_name
               }
             />
 
@@ -201,7 +189,7 @@ export default function GroupHeader() {
             )}
           </div>
 
-          <span className="flex items-center justify-center gap-2 font-sans text-sm font-medium text-[#808080]">
+          <span className="flex items-center justify-center gap-2 font-sans text-sm font-medium text-[#808080] pb-4">
             {data?.conversationDetails.is_group ? (
               <>
                 <TextTranslate text="Group" /> <GoDotFill />{" "}
@@ -213,11 +201,7 @@ export default function GroupHeader() {
                 {
                   data?.conversationDetails.ConversationsUsers[0].User
                     .country_code
-                }{" "}
-                {/* {
-                  data?.conversationDetails.ConversationsUsers[0].User
-                    .phone_number
-                } */}
+                }
                 xxxxxxxxxx
               </>
             )}

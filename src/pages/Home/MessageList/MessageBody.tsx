@@ -10,8 +10,10 @@ import scrollToMessage from "../../../utils/scrollToMessage";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { formatUTCtoLocalDate } from "../../../utils/formatUTCtoLocalDate";
 import { updateMessageOptions } from "../../../store/Slices/MessageOptionsSlice";
+import { useTheme } from "../../../context/ThemeProvider";
 
 export default function MessageBody() {
+  const theme = useTheme();
   const [isIOS, setIsIOS] = useState(false);
   const MessageListArray = useAppSelector((state) => state.MessageList);
 
@@ -89,7 +91,7 @@ export default function MessageBody() {
             {e.message_type == "date" ? (
               <div
                 id={String(e.message_id)}
-                className="mx-auto my-3 w-fit rounded-full bg-messageHead px-5 py-1 text-center text-sm font-medium text-darkText shadow-sm"
+                className={`${theme.theme === "dark" ? "bg-[#2A2A2A]" : "bg-[#F1F1F1]"} mx-auto my-3 w-fit rounded-full bg-messageHead px-5 py-1 text-center text-sm font-medium text-darkText shadow-sm`}
               >
                 {formatUTCtoLocalDate(e.message)}
               </div>

@@ -1,9 +1,10 @@
-import React from "react";
 import { CiStar } from "react-icons/ci";
 import { FaAngleRight } from "react-icons/fa6";
-import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
+
+// uitls and store
 import { useAppDispatch } from "../../../utils/hooks";
 import TextTranslate from "../../../utils/TextTranslate";
+import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
 import { useStarMessageList } from "../../../store/api/useStarMessageList";
 
 export default function StarMessageTab() {

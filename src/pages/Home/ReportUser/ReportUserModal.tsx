@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import React from "react";
 import { RxCross2 } from "react-icons/rx";
-import { IoSearchOutline } from "react-icons/io5";
-import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
-import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
-import { useTheme } from "../../../context/ThemeProvider";
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+
+// components and store
 import ReportTypesList from "./ReportTypesList";
+import { useTheme } from "../../../context/ThemeProvider";
+import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { updateMessageOptions } from "../../../store/Slices/MessageOptionsSlice";
 
 const ReportUserModal: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [searchUser, setsearchUser] = useState("");
   // @ts-ignore
   const { theme } = useTheme();
   const handleCloseModal = () => {
@@ -41,12 +40,12 @@ const ReportUserModal: React.FC = () => {
               style={{
                 backgroundSize: "100%",
               }}
-              className="w-full space-y-5 bg-[url('/Home/add_member_bg.png')] bg-no-repeat px-4 xl:space-y-7"
+              className="w-full space-y-5 bg-rose-50 bg-no-repeat px-4 xl:space-y-7"
             >
               <div className="flex items-center gap-3 py-10 font-semibold text-black">
                 <RxCross2
                   onClick={handleCloseModal}
-                  className="cursor-pointer text-2xl"
+                  className="text-rose-500 cursor-pointer text-2xl"
                 />
                 <span className="">Report</span>
               </div>

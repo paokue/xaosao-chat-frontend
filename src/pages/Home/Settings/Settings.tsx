@@ -1,40 +1,44 @@
-// import ConversationList from "./ConversationList";
-import { FaChevronLeft, FaPlus } from "react-icons/fa6";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { GoDotFill } from "react-icons/go";
-import ReusableProfileCard from "../Profile/ReusableProfileCard"; // Adjust the import path accordingly
-import { BsInfoCircle } from "react-icons/bs";
+import { RWebShare } from "react-web-share";
+import { useNavigate } from "react-router-dom";
+
+// icons:
 import {
   MdOutlinePrivacyTip,
   MdOutlineStarBorderPurple500,
 } from "react-icons/md";
-import { RxShare2 } from "react-icons/rx";
-import { RiExchangeDollarFill, RiUserUnfollowLine } from "react-icons/ri";
-import { HiOutlineLogout } from "react-icons/hi";
-import LogoutModal from "./LogOutModal";
-import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
-import { updateMessageOptions } from "../../../store/Slices/MessageOptionsSlice";
-import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
-import BlockUserListModal from "./BlockUserListModal";
-import { SiGnuprivacyguard } from "react-icons/si";
-import { RWebShare } from "react-web-share";
 import { CiLock } from "react-icons/ci";
-import TextTranslate from "../../../utils/TextTranslate";
-import { useTranslateText } from "../../../hooks/useTranslateText";
+import { RxShare2 } from "react-icons/rx";
 import { HiLanguage } from "react-icons/hi2";
+import { BsInfoCircle } from "react-icons/bs";
+import { HiOutlineLogout } from "react-icons/hi";
+import { RiUserUnfollowLine } from "react-icons/ri";
+import { FaChevronLeft, FaPlus } from "react-icons/fa6";
+
+// conponents:
+import LogoutModal from "./LogOutModal";
+import BlockUserListModal from "./BlockUserListModal";
+import ReusableProfileCard from "../Profile/ReusableProfileCard";
+
+// utils:
+import TextTranslate from "../../../utils/TextTranslate";
 import ThemeToggleFromSettings from "../ThemeToggleFromSettings";
+import { useTranslateText } from "../../../hooks/useTranslateText";
+import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
+import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
+import { updateMessageOptions } from "../../../store/Slices/MessageOptionsSlice";
+import { useTheme } from "../../../context/ThemeProvider";
 
 export default function Setting() {
+  const theme = useTheme()
   const navigate = useNavigate();
+  const translate = useTranslateText();
   const [showLogOutModal, setShowLogOutModal] = useState(false);
   const userData = useAppSelector((state) => state.userData);
-  const location = useLocation();
-  const translate = useTranslateText();
 
   let dispatch = useAppDispatch();
   const handleValueChange = (newValue: string) => {
-    // Handle the updated value here
     console.log(newValue);
   };
 
@@ -42,7 +46,7 @@ export default function Setting() {
 
   function translateTextFunc(text: string) {
     if (!LanguageTextList || !LanguageTextList.results) {
-      return <>{text}</>; // Return the original text if no translations are available
+      return <>{text}</>;
     }
 
     const results = LanguageTextList.results;
@@ -62,30 +66,19 @@ export default function Setting() {
           style={{
             backgroundSize: "100%",
           }}
-          className="h-full w-full space-y-5 bg-[url('/Home/profile_bg.png')] bg-no-repeat px-4 xl:space-y-7"
+          className={`h-full w-full space-y-3 px-4 py-2 xl:space-y-5 ${theme.theme === "dark" ? "bg-[#2A2A2A]" : "bg-[#F1F1F1]"}`}
         >
           <div className="flex items-center gap-3 pt-6 font-semibold text-black lg:pt-16 2xl:pt-16">
             <FaChevronLeft
-              className="cursor-pointer"
+              className={`cursor-pointer ${theme.theme === "dark" ? "text-white" : "text-black"}`}
               onClick={() => {
                 navigate(-1);
               }}
             />
-            <span className="">
+            <span className={`${theme.theme === "dark" ? "text-white" : "text-black"}`}>
               <TextTranslate text="Settings" />
             </span>
           </div>
-
-          {/* Profile Image */}
-          {/* <div>
-            <img
-              src={userData.profile_image}
-              className={`mx-auto h-20 w-20 rounded-full bg-secondary object-cover p-2 2xl:h-32 2xl:w-32`}
-              alt=""
-            />
-          </div> */}
-          {/* Profile Image */}
-          {/* <div className="relative mx-auto pt-16 lg:pt-3 h-fit w-fit"> */}
 
           <div className="relative mx-auto h-fit w-fit pt-16 lg:pt-3">
             <img
@@ -104,10 +97,10 @@ export default function Setting() {
           </div>
 
           <div className="space-y-2 text-center">
-            <span className="text-xl font-semibold">
+            <span className="text-lg font-semibold">
               {userData.first_name} {userData.last_name}
             </span>
-            <div className="mx-auto flex w-fit items-center justify-center gap-2 rounded-xl bg-primary px-2 py-1 shadow-2xl">
+            <div className="mx-auto flex w-fit items-center justify-center gap-2 rounded-xl bg-primary px-2 py-1 shadow-2xl text-sm">
               <GoDotFill className="text-[#2AAC7A]" />
               Online
             </div>
@@ -116,8 +109,7 @@ export default function Setting() {
 
         {/* Starred messages,blocked contacts */}
 
-        <div className="mt-10 flex flex-col gap-4 space-y-3 px-4">
-          {/* User Bio ====================================================================================*/}
+        <div className="mt-10 flex flex-col gap-4 px-4">
           <ReusableProfileCard
             onClick={() => {
               dispatch(
@@ -162,7 +154,7 @@ export default function Setting() {
           </div>
 
           {/* Privacy Policy ====================================================================================*/}
-          <div
+          {/* <div
             onClick={() => {
               dispatch(
                 updateViewState({
@@ -178,10 +170,10 @@ export default function Setting() {
               onChange={handleValueChange}
               isDisabled={true}
             />
-          </div>
+          </div> */}
 
           {/* Terms & Condition ====================================================================================*/}
-          <div
+          {/* <div
             onClick={() => {
               dispatch(
                 updateViewState({
@@ -197,14 +189,14 @@ export default function Setting() {
               onChange={handleValueChange}
               isDisabled={true}
             />
-          </div>
+          </div> */}
 
           {/* Share a link ====================================================================================*/}
           <RWebShare
             data={{
-              text: "Whoxa Chat",
+              text: "Xaosao Chat",
               url: `${window.location.origin}`,
-              title: "Whoxa Chat",
+              title: "Xaosao Chat",
             }}
           >
             <ReusableProfileCard
@@ -257,21 +249,9 @@ export default function Setting() {
           </div>
         </div>
 
-        <div className="my-4 pb-16 text-center font-semibold lg:pb-0">
+        <div className="text-sm my-4 pb-16 text-center font-semibold lg:pb-0">
           <TextTranslate text="Version" /> 1.0.10
         </div>
-        {/* <DeleteAccountModal
-          isOpen={showDeleteModal}
-          setIsOpen={setShowDeleteModal}
-        />
-        <button
-          onClick={() => {
-            setShowDeleteModal(true);
-          }}
-          className="primary-gradient mx-auto mb-10 mt-auto w-[90%] rounded-xl py-2 font-medium shadow-xl"
-        >
-          Delete Account
-        </button> */}
       </div>
     </>
   );

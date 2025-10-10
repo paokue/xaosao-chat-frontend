@@ -86,10 +86,10 @@ export default function Profile() {
           </div>
 
           <div className="space-y-2 text-center">
-            <span className="text-xl capitalize font-semibold">
+            <span className="text-lg capitalize font-semibold">
               {userData.first_name} {userData.last_name}
             </span>
-            <div className="mx-auto flex w-fit items-center justify-center gap-2 rounded-xl bg-primary px-2 py-1 shadow-2xl">
+            <div className="mx-auto flex w-fit items-center justify-center gap-2 rounded-xl bg-primary px-2 py-1 shadow-2xl text-sm">
               <GoDotFill className="text-[#2AAC7A]" />
               Online
             </div>
@@ -273,7 +273,7 @@ export default function Profile() {
                   onClickFunc={() => {
                     updateUserDetails();
                   }}
-                  className={"!h-10 !w-fit bg-white"}
+                  className={`!h-10 w-full bg-rose-500 text-sm`}
                   text={<TextTranslate text="Update" />}
                 />
               )}

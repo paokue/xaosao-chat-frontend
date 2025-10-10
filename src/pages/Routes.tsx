@@ -130,8 +130,6 @@ const AppRoutes = () => {
             <ViewReactionModal />
 
             <Routes>
-              {/* <Route path="/" element={<Chat />} /> */}
-
               <Route path="/" element={<Home />}>
                 <Route path="profile" element={<Profile />} />
                 <Route path="chat" element={<Chat />} />

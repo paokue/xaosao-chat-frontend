@@ -107,7 +107,9 @@ const MyMessage: React.FC<MyMessageProps> = ({ messageData, image_urls }) => {
       key={messageData.message_id}
       id={String(messageData.message_id)}
       className={`my-2 flex flex-col rounded-lg ${MessageOptions.selectMessage && isMessageSelected
-        ? "bg-selectedMessage"
+        ? theme === "dark"
+          ? "bg-[#2A2A2A]"
+          : "bg-[#F1F1F1]"
         : ""
         }`}
     >
@@ -120,12 +122,12 @@ const MyMessage: React.FC<MyMessageProps> = ({ messageData, image_urls }) => {
           (isMessageSelected ? (
             <FaSquareCheck
               onClick={() => dispatch(removeMessage(messageData.message_id))}
-              className="mx-5 my-auto h-5 w-5 cursor-pointer text-[#FCC604]"
+              className="mx-5 my-auto h-5 w-5 cursor-pointer text-rose-500"
             />
           ) : (
             <IoSquareOutline
               onClick={() => dispatch(addMessage(messageData))}
-              className="mx-5 my-auto h-5 w-5 cursor-pointer text-[#BDBDBD]"
+              className="mx-5 my-auto h-5 w-5 cursor-pointer text-rose-500"
             />
           ))}
 
@@ -179,7 +181,7 @@ const MyMessage: React.FC<MyMessageProps> = ({ messageData, image_urls }) => {
                           className={` ${isOnlyEmojis(messageData.message) ? "text-4xl" : ""} pr-5`}
                           style={{ overflowWrap: "anywhere" }}
                         >
-                          {messageData.message} 
+                          {messageData.message}
                         </div>
                       )
                     ) : messageData.message_type === "link" ? (
