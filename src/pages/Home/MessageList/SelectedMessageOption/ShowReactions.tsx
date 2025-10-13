@@ -1,7 +1,7 @@
-import { MessageList } from "../../../../types/MessageListType";
-import { useTheme } from "../../../../context/ThemeProvider";
-import { updateMessageOptions } from "../../../../store/Slices/MessageOptionsSlice";
 import { useAppDispatch } from "../../../../utils/hooks";
+import { useTheme } from "../../../../context/ThemeProvider";
+import { MessageList } from "../../../../types/MessageListType";
+import { updateMessageOptions } from "../../../../store/Slices/MessageOptionsSlice";
 
 export default function ShowReactions({
   messageData,
@@ -29,9 +29,8 @@ export default function ShowReactions({
           }),
         );
       }}
-      className={`absolute -bottom-5 flex cursor-pointer gap-2 rounded-xl bg-primary px-3 py-[2px] ${
-        messageData.myMessage ? "right-1" : "left-1"
-      } `}
+      className={`absolute -bottom-5 flex cursor-pointer gap-2 rounded-xl bg-primary px-3 py-[2px] ${messageData.myMessage ? "right-1" : "left-1"
+        } `}
     >
       {Object.entries(reactionCounts).map(([reaction, count]) => (
         <div key={reaction} className="flex items-center gap-1 text-base">

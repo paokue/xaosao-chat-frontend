@@ -1,15 +1,14 @@
-import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
-import { useStream } from "../../../context/StreamProvider";
-import { useEffect, useState } from "react";
-import { useWebsiteSettings } from "../../../store/api/useWebsiteSettings";
-import { socketInstance } from "../../../socket/socket";
-import { usePeer } from "../../../hooks/usePeer";
+// import { useStream } from "../../../context/StreamProvider";
 import { LuUsers } from "react-icons/lu";
-import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
 import { RxCross1 } from "react-icons/rx";
 
+import { usePeer } from "../../../hooks/usePeer";
+import { socketInstance } from "../../../socket/socket";
+import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
+import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
+
 export default function CallHeader() {
-  const { userStreams } = useStream();
+  // const { userStreams } = useStream();
   const dispatch = useAppDispatch();
   const socket = socketInstance();
   const { room_id } = useAppSelector((state) => state.PeerJsSlice);

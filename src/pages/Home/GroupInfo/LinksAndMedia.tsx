@@ -1,13 +1,12 @@
-import React from "react";
-import LoadingSkeletonImageDynamic from "../../../components/LoadingSkeletonImageDynamic";
-import { FaAngleRight, FaPlay } from "react-icons/fa6";
 import { useAppDispatch } from "../../../utils/hooks";
+import { FaAngleRight, FaPlay } from "react-icons/fa6";
 import {
   setViewImage,
   updateViewState,
 } from "../../../store/Slices/ViewManagerSlice";
 import { useConversationInfo } from "../../../store/api/useConversationInfo";
 import LinkPreviewForSidebar from "../../../components/LinkPreviewForSidebar";
+import LoadingSkeletonImageDynamic from "../../../components/LoadingSkeletonImageDynamic";
 
 export default function LinksAndMedia() {
   const dispatch = useAppDispatch();
@@ -60,9 +59,8 @@ export default function LinksAndMedia() {
       </div>
 
       <div
-        className={`${
-          items.length > 0 && "mt-2"
-        } grid grid-cols-2 gap-1 md:grid-cols-3`}
+        className={`${items.length > 0 && "mt-2"
+          } grid grid-cols-2 gap-1 md:grid-cols-3`}
       >
         {items.map((item, index) => {
           if (item.type === "media") {

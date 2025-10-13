@@ -1,7 +1,8 @@
+import Cookies from "js-cookie";
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 import TextTranslate from "../../../utils/TextTranslate";
 
 interface LogoutModalProps {

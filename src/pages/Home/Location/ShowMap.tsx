@@ -1,6 +1,5 @@
 import GoogleMapReact from "google-map-react";
 import { useAppSelector } from "../../../utils/hooks";
-import { MdLocationPin } from "react-icons/md";
 
 export default function ShowMap() {
   let sendMessageData = useAppSelector((state) => state.SendMessageData);

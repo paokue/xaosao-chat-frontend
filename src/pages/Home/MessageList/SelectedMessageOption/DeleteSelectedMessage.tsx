@@ -1,8 +1,8 @@
 import { RxCross2 } from "react-icons/rx";
+import { useTheme } from "../../../../context/ThemeProvider";
 import { useTranslateText } from "../../../../hooks/useTranslateText";
 import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
 import { updateMessageOptions } from "../../../../store/Slices/MessageOptionsSlice";
-import { useTheme } from "../../../../context/ThemeProvider";
 
 export default function DeleteSelectedMessage() {
   const theme = useTheme()

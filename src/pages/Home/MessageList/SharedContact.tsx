@@ -1,7 +1,5 @@
-import React from "react";
-import { MessageList } from "../../../types/MessageListType";
-import { IoCallOutline } from "react-icons/io5";
 import { useAppSelector } from "../../../utils/hooks";
+import { MessageList } from "../../../types/MessageListType";
 
 // Define the props interface
 interface SharedContactProps {
@@ -10,7 +8,7 @@ interface SharedContactProps {
 
 // Define the functional component with the proper type
 export default function SharedContact({ messageData }: SharedContactProps) {
-  const userData = useAppSelector((state) => state.userData);
+  useAppSelector((state) => state.userData);
 
   return (
     <div className="">

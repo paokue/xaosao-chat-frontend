@@ -87,9 +87,8 @@ export default function SearchMessage() {
               }
               searchMessageApiCall(e.target.value);
             }}
-            className={` ${
-              theme == "dark" ? "bg-transparent" : "bg-[#F2F2F2]"
-            } w-full rounded-xl border border-borderColor py-2 pl-11 placeholder-lightText outline-none`}
+            className={` ${theme == "dark" ? "bg-transparent" : "bg-[#F2F2F2]"
+              } w-full rounded-xl border border-borderColor py-2 pl-11 placeholder-lightText outline-none`}
             type="text"
             placeholder={translate("Search Messages")}
           />
@@ -146,11 +145,10 @@ export default function SearchMessage() {
                       >
                         <div className="flex items-start gap-1">
                           <div
-                            className={`${
-                              message.senderId == userData.user_id
-                                ? "primary-gradient order-1 rounded-br-none"
-                                : "order-2 rounded-bl-none bg-otherMessageBg"
-                            } relative inline-block h-fit min-w-[1rem] max-w-[17rem] rounded-lg px-2 py-1 text-sm sm:max-w-xl 2xl:max-w-3xl`}
+                            className={`${message.senderId == userData.user_id
+                              ? "primary-gradient order-1 rounded-br-none"
+                              : "order-2 rounded-bl-none bg-otherMessageBg"
+                              } relative inline-block h-fit min-w-[1rem] max-w-[17rem] rounded-lg px-2 py-1 text-sm sm:max-w-xl 2xl:max-w-3xl`}
                           >
                             {message.message_type === "text" ? (
                               message.message
@@ -166,15 +164,13 @@ export default function SearchMessage() {
                           <img
                             src={message.User?.profile_image}
                             alt="My profile"
-                            className={`h-7 w-7 rounded-full object-cover ${
-                              message.senderId == userData.user_id
-                                ? "order-2"
-                                : "order-1"
-                            } mt-auto ${
-                              ["video", "image"].includes(message.message_type!)
+                            className={`h-7 w-7 rounded-full object-cover ${message.senderId == userData.user_id
+                              ? "order-2"
+                              : "order-1"
+                              } mt-auto ${["video", "image"].includes(message.message_type!)
                                 ? "mb-7"
                                 : "mb-5"
-                            }`}
+                              }`}
                           />
                         </div>
                       </div>

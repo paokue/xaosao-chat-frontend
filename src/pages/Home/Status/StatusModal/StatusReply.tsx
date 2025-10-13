@@ -1,27 +1,21 @@
-import { VscSend } from "react-icons/vsc";
-import { useTheme } from "../../../../context/ThemeProvider";
-import { updateSendMessageData } from "../../../../store/Slices/SendMessageSlice";
-import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
-import useApiPost from "../../../../hooks/PostData";
-import { MessageList } from "../../../../types/MessageListType";
-import { appendMessageWithDateCheck } from "../../../../store/Slices/MessageListSlice";
-import { useFile } from "../../../../context/FileProvider";
-import { ClipLoader } from "react-spinners";
-import base64ToFile from "../../../../utils/base64ToFile";
-import { socketInstance } from "../../../../socket/socket";
-import { useScrollToBottom } from "react-scroll-to-bottom";
-import { useEffect, useRef } from "react";
-import scrollToMessage from "../../../../utils/scrollToMessage";
-import {
-  toggleProfileView,
-  updateViewState,
-} from "../../../../store/Slices/ViewManagerSlice";
-import { useConversationInfo } from "../../../../store/api/useConversationInfo";
 import toast from "react-hot-toast";
-import { updateCurrentConversation } from "../../../../store/Slices/CurrentConversationSlice";
-import { useTranslateText } from "../../../../hooks/useTranslateText";
+import { useEffect, useRef } from "react";
+import { VscSend } from "react-icons/vsc";
+import { ClipLoader } from "react-spinners";
 import { useLocation } from "react-router-dom";
+
+import useApiPost from "../../../../hooks/PostData";
+import { socketInstance } from "../../../../socket/socket";
+import { useTheme } from "../../../../context/ThemeProvider";
+import { MessageList } from "../../../../types/MessageListType";
+import scrollToMessage from "../../../../utils/scrollToMessage";
+import { useTranslateText } from "../../../../hooks/useTranslateText";
+import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
+import { updateViewState } from "../../../../store/Slices/ViewManagerSlice";
 import EmojiPickerCompo from "../../MessageList/SendMessage/EmojiPickerCompo";
+import { useConversationInfo } from "../../../../store/api/useConversationInfo";
+import { updateSendMessageData } from "../../../../store/Slices/SendMessageSlice";
+import { appendMessageWithDateCheck } from "../../../../store/Slices/MessageListSlice";
 
 export default function StatusReply() {
   // @ts-ignore
@@ -197,7 +191,7 @@ export default function StatusReply() {
 
             <form
               className="w-full"
-              // onSubmit={sendMessageApiCall}
+            // onSubmit={sendMessageApiCall}
             >
               <input
                 value={messageData.message}

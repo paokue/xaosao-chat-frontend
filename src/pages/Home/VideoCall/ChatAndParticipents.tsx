@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Participants from "./Participants";
-import MessageBody from "../MessageList/MessageBody";
-import { useAppSelector } from "../../../utils/hooks";
+
 import ChatInCall from "./ChatInCall";
+import Participants from "./Participants";
+import { useAppSelector } from "../../../utils/hooks";
 
 export default function ChatAndParticipents() {
   const [selectedTab, setSelectedTab] = useState(0);

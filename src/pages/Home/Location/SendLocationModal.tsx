@@ -1,13 +1,8 @@
-import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import { Dialog, DialogPanel } from "@headlessui/react";
 
-import toast from "react-hot-toast";
-import { ClipLoader } from "react-spinners";
-import Button from "../../../components/Button";
-import TextTranslate from "../../../utils/TextTranslate";
-import { updateMessageOptions } from "../../../store/Slices/MessageOptionsSlice";
-import useApiPost from "../../../hooks/PostData";
-import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import SearchLocationDropdown from "./SearchLocationDropdown";
+import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
+import { updateMessageOptions } from "../../../store/Slices/MessageOptionsSlice";
 
 export default function SendLocationModal() {
   const dispatch = useAppDispatch();

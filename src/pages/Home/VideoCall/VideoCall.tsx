@@ -1,17 +1,18 @@
 import { useNavigate } from "react-router-dom";
+
+import CallHeader from "./CallHeader";
 import { usePeer } from "../../../hooks/usePeer";
+import VideoListComponent from "./VideoListComponent";
+import ChatAndParticipents from "./ChatAndParticipents";
 import { useDeviceCheck } from "../../../hooks/useCameraCheck";
 import { DeviceErrorPopup } from "../../../components/DeviceErrorPopup";
-import CallHeader from "./CallHeader";
-import ChatAndParticipents from "./ChatAndParticipents";
-import VideoListComponent from "./VideoListComponent";
 
 export default function VideoCall() {
   const navigate = useNavigate();
-  const { 
-    cameraError, 
-    microphoneError, 
-    isChecking 
+  const {
+    cameraError,
+    microphoneError,
+    isChecking
   } = useDeviceCheck();
 
   const handleBack = () => {
@@ -26,10 +27,10 @@ export default function VideoCall() {
 
   if (cameraError || microphoneError) {
     return (
-      <DeviceErrorPopup 
+      <DeviceErrorPopup
         cameraError={cameraError}
         microphoneError={microphoneError}
-        onBack={handleBack} 
+        onBack={handleBack}
       />
     );
   }

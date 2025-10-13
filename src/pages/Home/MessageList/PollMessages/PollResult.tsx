@@ -1,10 +1,9 @@
-import React from "react";
-import { MessageList, PollData } from "../../../../types/MessageListType";
 import { LinearProgress } from "@mui/material";
+
+import useApiPost from "../../../../hooks/PostData";
+import { MessageList, PollData } from "../../../../types/MessageListType";
 import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
 import { useConversationInfo } from "../../../../store/api/useConversationInfo";
-import useApiPost from "../../../../hooks/PostData";
-import { updatePollVote } from "../../../../store/Slices/MessageListSlice";
 import { updateMessageOptions } from "../../../../store/Slices/MessageOptionsSlice";
 
 export default function PollResult({
@@ -128,9 +127,9 @@ export function SingleOption({
                       vote.user_id === userData.user_id
                         ? userData.profile_image
                         : data!.conversationDetails.ConversationsUsers.find(
-                            (convoUser) =>
-                              convoUser.User.user_id === vote.user_id,
-                          )?.User.profile_image
+                          (convoUser) =>
+                            convoUser.User.user_id === vote.user_id,
+                        )?.User.profile_image
                     }
                     alt=""
                   />

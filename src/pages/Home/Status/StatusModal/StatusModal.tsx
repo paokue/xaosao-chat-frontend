@@ -1,12 +1,13 @@
 import { Dialog, DialogPanel } from "@headlessui/react";
+
+import { StatusViewer } from "./StatusViewer";
+import { mapStatusesGrouped } from "./StatusUtils";
+import MyStatusViewer from "../MyStatus/MyStatusViewer";
+import AddStatusViewer from "../MyStatus/AddStatusViewer";
+import { useStatusList } from "../../../../store/api/useStatusList";
 import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
 import { updateViewState } from "../../../../store/Slices/ViewManagerSlice";
-import { mapStatusesGrouped } from "./StatusUtils";
-import { StatusViewer } from "./StatusViewer";
-import { useStatusList } from "../../../../store/api/useStatusList";
 import { updateSendMessageData } from "../../../../store/Slices/SendMessageSlice";
-import AddStatusViewer from "../MyStatus/AddStatusViewer";
-import MyStatusViewer from "../MyStatus/MyStatusViewer";
 
 export default function StatusModal() {
   const dispatch = useAppDispatch();

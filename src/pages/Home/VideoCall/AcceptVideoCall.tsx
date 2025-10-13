@@ -1,12 +1,11 @@
-import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import Button from "../../../components/Button";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
+
+import useApiPost from "../../../hooks/PostData";
 import TextTranslate from "../../../utils/TextTranslate";
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
-import { useEffect, useRef } from "react";
-import useApiPost from "../../../hooks/PostData";
 
 export default function AcceptVideoCall() {
   let navigate = useNavigate();
@@ -65,7 +64,7 @@ export default function AcceptVideoCall() {
         open={ViewManager.show_accept_call_modal}
         as="div"
         className="relative z-10"
-        onClose={() => {}}
+        onClose={() => { }}
       >
         <div className="fixed inset-0 z-10 backdrop-blur-sm">
           <div className="flex min-h-full items-center justify-center p-4">

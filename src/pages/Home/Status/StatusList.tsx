@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
-import { IoSearchOutline } from "react-icons/io5";
-import { useTheme } from "../../../context/ThemeProvider";
+import { useState } from "react";
 // import ConversationList from "./ConversationList";
-import NotViewedStatusList from "./NotViewedStatusList";
-import ViewedStatusList from "./ViewedStatusList";
-import { useStatusList } from "../../../store/api/useStatusList";
 import MyStatus from "./MyStatus/MyStatus";
+import ViewedStatusList from "./ViewedStatusList";
 import { useAppSelector } from "../../../utils/hooks";
+import NotViewedStatusList from "./NotViewedStatusList";
+import { useTheme } from "../../../context/ThemeProvider";
+import { useStatusList } from "../../../store/api/useStatusList";
 import { formatRelativeTime } from "../../../utils/formatUTCtoLocalDate";
 
 export default function StatusList() {

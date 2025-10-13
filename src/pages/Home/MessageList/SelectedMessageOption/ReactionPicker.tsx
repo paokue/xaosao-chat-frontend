@@ -1,8 +1,9 @@
-import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
-import { MessageList } from "../../../../types/MessageListType";
 import EmojiPicker, { EmojiClickData, Theme } from "emoji-picker-react";
-import { useTheme } from "../../../../context/ThemeProvider";
+
 import useApiPost from "../../../../hooks/PostData";
+import { useTheme } from "../../../../context/ThemeProvider";
+import { MessageList } from "../../../../types/MessageListType";
+import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
 import { updateReaction } from "../../../../store/Slices/MessageListSlice";
 
 export default function ReactionPicker({
@@ -15,14 +16,14 @@ export default function ReactionPicker({
     (state) => state.CurrentConversation,
   );
   const MessageOptions = useAppSelector((state) => state.MessageOptions);
-  const { loading, postData } = useApiPost();
+  const { postData } = useApiPost();
 
   const userData = useAppSelector((state) => state.userData);
   // @ts-ignore
   const { theme } = useTheme();
 
   async function handleEmojiClick(emoji: EmojiClickData) {
-    const giveReactionRes = await postData("give-reaction", {
+    await postData("give-reaction", {
       conversation_id: currentConversation.conversation_id,
       reaction: emoji.emoji,
       message_id: messageData.message_id,
@@ -42,7 +43,7 @@ export default function ReactionPicker({
     <>
       <div
         className={`absolute -top-12 ${messageData.myMessage ? "right-0" : "-left-4"} pl-2 opacity-0 ${MessageOptions.selectMessage ? "" : "group-hover:opacity-100"}`}
-        // className={`pl-2 opacity-0 ${["video", "image", "link", "location"].includes(messageData.message_type!) && "absolute right-3 top-3"} ${MessageOptions.selectMessage ? "" : "group-hover:opacity-100"}`}
+      // className={`pl-2 opacity-0 ${["video", "image", "link", "location"].includes(messageData.message_type!) && "absolute right-3 top-3"} ${MessageOptions.selectMessage ? "" : "group-hover:opacity-100"}`}
       >
         <div
           className={`relative text-darkText ${messageData.myMessage ? "" : "text-darkText"} `}
@@ -52,14 +53,14 @@ export default function ReactionPicker({
             className="z-50 items-center font-semibold shadow-2xl"
           >
             <EmojiPicker
-              width={window.innerWidth<= 500?300:350}
+              width={window.innerWidth <= 500 ? 300 : 350}
               reactionsDefaultOpen={true}
               reactions={["1f44d", "1f603", "1f622", "1f621", "1f44e"]}
               theme={theme == "dark" ? Theme.DARK : Theme.LIGHT}
               onEmojiClick={handleEmojiClick}
               allowExpandReactions={true}
               autoFocusSearch={false}
-              // open={false}
+            // open={false}
             />
           </div>
         </div>

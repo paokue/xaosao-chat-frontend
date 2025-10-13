@@ -3,10 +3,10 @@ import { FaPlus } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
 
 // Redux slice actions
+import toast from "react-hot-toast";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { updateViewState } from "../../../../store/Slices/ViewManagerSlice";
 import { updateAddStatus } from "../../../../store/Slices/AddStatusSlice";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
-import toast from "react-hot-toast";
 
 interface MyStatusProps {
   time: string;

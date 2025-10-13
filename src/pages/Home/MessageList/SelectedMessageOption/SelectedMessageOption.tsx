@@ -1,26 +1,24 @@
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
-import React, { useEffect, useRef, useState } from "react";
-import { IoIosArrowDown } from "react-icons/io";
-import { PiDotsThreeVerticalBold } from "react-icons/pi";
-import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
-import { LuTrash2 } from "react-icons/lu";
-import { CiStar } from "react-icons/ci";
+import toast from "react-hot-toast";
 import { BsReply } from "react-icons/bs";
+import { LuTrash2 } from "react-icons/lu";
+import { FaRegStar } from "react-icons/fa6";
+import { IoIosArrowDown } from "react-icons/io";
 import { RiArrowGoForwardLine } from "react-icons/ri";
-import { GrPin } from "react-icons/gr";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+
+
 import {
   addMessage,
   updateMessageOptions,
 } from "../../../../store/Slices/MessageOptionsSlice";
-import { MessageList } from "../../../../types/MessageListType";
+import PinMessageButton from "./PinMessageButton";
 import useApiPost from "../../../../hooks/PostData";
+import { MessageList } from "../../../../types/MessageListType";
+import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
 import { updateIsStarMessage } from "../../../../store/Slices/MessageListSlice";
-import toast from "react-hot-toast";
 import { updateSendMessageData } from "../../../../store/Slices/SendMessageSlice";
 import { useStarMessageList } from "../../../../store/api/useStarMessageList";
 import { useTranslateText } from "../../../../hooks/useTranslateText";
-import PinMessageButton from "./PinMessageButton";
-import { FaRegStar } from "react-icons/fa6";
 
 export default function SelectedMessageOption({
   messageData,
@@ -89,10 +87,10 @@ export default function SelectedMessageOption({
                       // show only delete from button if message is allready deleted ======================================================
                       delete_only_from_me:
                         messageData.delete_from_everyone ||
-                        messageData.delete_for_me
-                          .split(",")
-                          .includes(userData.user_id.toString()) ||
-                        !messageData.myMessage
+                          messageData.delete_for_me
+                            .split(",")
+                            .includes(userData.user_id.toString()) ||
+                          !messageData.myMessage
                           ? true
                           : false,
                     }),

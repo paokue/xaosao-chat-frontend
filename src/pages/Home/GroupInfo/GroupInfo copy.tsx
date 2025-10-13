@@ -1,5 +1,3 @@
-/* eslint-disable prefer-const */
-import React from "react";
 import { CiStar } from "react-icons/ci";
 import { FaAngleRight, FaPlay } from "react-icons/fa6";
 import { RiUserForbidLine, RiDeleteBin6Line } from "react-icons/ri";
@@ -23,7 +21,7 @@ export default function GroupInfo() {
     dispatch(toggleProfileView(false));
   }
 
-  let { data, isLoading } = useConversationInfo();
+  let { data } = useConversationInfo();
   let OnlineUserList = useAppSelector((state) => state.OnlineUserList);
   let userData = useAppSelector((state) => state.userData);
 
@@ -72,7 +70,7 @@ export default function GroupInfo() {
                 data?.conversationDetails.is_group == true
                   ? data?.conversationDetails.group_profile_image
                   : data?.conversationDetails.ConversationsUsers[0].User
-                      .profile_image!
+                    .profile_image!
               }
               image_width=""
             />
@@ -250,12 +248,12 @@ export default function GroupInfo() {
                       {OnlineUserList.onlineUserList.includes(
                         member.User.user_id.toString(),
                       ) && (
-                        <img
-                          className="absolute bottom-0 right-0 z-30 h-4 w-4"
-                          src="/Home/Online_Green_dot.png"
-                          alt=""
-                        />
-                      )}
+                          <img
+                            className="absolute bottom-0 right-0 z-30 h-4 w-4"
+                            src="/Home/Online_Green_dot.png"
+                            alt=""
+                          />
+                        )}
                     </div>
                     <div className="w-full">
                       <div className="text-base font-medium capitalize text-darkText">

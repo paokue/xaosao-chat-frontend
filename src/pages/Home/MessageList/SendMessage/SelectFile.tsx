@@ -1,17 +1,14 @@
 import React from "react";
-import { IoIosAttach } from "react-icons/io";
-import OnClickOutside from "../../../../utils/OnClickOutSide";
-import { updateSendMessageData } from "../../../../store/Slices/SendMessageSlice";
-import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
-import { useFile } from "../../../../context/FileProvider";
-import { FaFileAlt } from "react-icons/fa";
-import { FaRegFileLines } from "react-icons/fa6";
-import { useTheme } from "../../../../context/ThemeProvider";
 import toast from "react-hot-toast";
+import { IoIosAttach } from "react-icons/io";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/react";
-import { FiChevronDown } from "react-icons/fi";
-import { TiVideo } from "react-icons/ti";
+
+import { useFile } from "../../../../context/FileProvider";
 import TextTranslate from "../../../../utils/TextTranslate";
+import { useTheme } from "../../../../context/ThemeProvider";
+import OnClickOutside from "../../../../utils/OnClickOutSide";
+import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
+import { updateSendMessageData } from "../../../../store/Slices/SendMessageSlice";
 import { updateMessageOptions } from "../../../../store/Slices/MessageOptionsSlice";
 
 export default function SelectFile() {
@@ -192,7 +189,7 @@ export default function SelectFile() {
                         <TextTranslate text="Video" />
                       </div>
                     </label>
-     
+
                     <label
                       onClick={() => {
                         dispatch(
@@ -229,11 +226,10 @@ export default function SelectFile() {
         </Menu>
 
         <div
-          className={` ${
-            messageData.showAttachmentOptions
-              ? "visible translate-y-3"
-              : "invisible translate-y-20 opacity-0"
-          } absolute -right-28 bottom-16 transition-all duration-500 sm:-right-0`}
+          className={` ${messageData.showAttachmentOptions
+            ? "visible translate-y-3"
+            : "invisible translate-y-20 opacity-0"
+            } absolute -right-28 bottom-16 transition-all duration-500 sm:-right-0`}
         >
           <div className="w-70 grid h-28 grid-cols-3 gap-5 rounded-lg bg-primary p-4 px-6 text-sm shadow-md">
             <label

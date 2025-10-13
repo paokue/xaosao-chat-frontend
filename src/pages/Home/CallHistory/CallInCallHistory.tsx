@@ -1,4 +1,3 @@
-import { ArchiveList, ChatList } from "../../../types/ChatListType";
 import { CallList } from "../../../types/ResType";
 import { useAppSelector } from "../../../utils/hooks";
 

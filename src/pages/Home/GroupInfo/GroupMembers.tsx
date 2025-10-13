@@ -1,16 +1,15 @@
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import toast from "react-hot-toast";
+import { TbUserPlus } from "react-icons/tb";
+import useApiPost from "../../../hooks/PostData";
 import { ContextMenuTrigger } from "rctx-contextmenu";
-import React from "react";
+import { PiDotsThreeVerticalBold } from "react-icons/pi";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { updateMessageOptions } from "../../../store/Slices/MessageOptionsSlice";
 import { useConversationInfo } from "../../../store/api/useConversationInfo";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { updateCreateGroupData } from "../../../store/Slices/CreateGroupSlice";
-import { TbUserPlus } from "react-icons/tb";
 import { updateSelectedGroupMember } from "../../../store/Slices/SelectedGroupMemberSlice";
 import LoadingSkeletonImageDynamic from "../../../components/LoadingSkeletonImageDynamic";
-import { PiDotsThreeVerticalBold } from "react-icons/pi";
-import useApiPost from "../../../hooks/PostData";
-import toast from "react-hot-toast";
 import { removeMessageList } from "../../../store/Slices/MessageListSlice";
 import { updateCurrentConversation } from "../../../store/Slices/CurrentConversationSlice";
 import { ConversationsUser } from "../../../types/ConversationInfoType";
@@ -32,7 +31,8 @@ export default function GroupMembers() {
   const ChatListArray = useAppSelector((state) => state.chatList);
 
   async function makeGrouAdmin() {
-    let createGroupAdminRes = await postData("create-group-admin", {
+    // let createGroupAdminRes = await postData("create-group-admin", {
+    await postData("create-group-admin", {
       new_user_id: selectedGroupMember.User.user_id,
       remove_from_admin: selectedGroupMember.is_admin ? true : false,
       conversation_id: currentConversationData.conversation_id.toString(),
@@ -90,30 +90,30 @@ export default function GroupMembers() {
           {data.conversationDetails.ConversationsUsers.find(
             (convoUser) => convoUser.User.user_id === userData.user_id,
           )?.is_admin && (
-            <div
-              onClick={() => {
-                let existing_member_user_id =
-                  data.conversationDetails.ConversationsUsers.map(
-                    (user) => user.User.user_id,
+              <div
+                onClick={() => {
+                  let existing_member_user_id =
+                    data.conversationDetails.ConversationsUsers.map(
+                      (user) => user.User.user_id,
+                    );
+                  dispatch(
+                    updateCreateGroupData({
+                      show_add_member_modal: true,
+                      existing_member_user_id: existing_member_user_id,
+                    }),
                   );
-                dispatch(
-                  updateCreateGroupData({
-                    show_add_member_modal: true,
-                    existing_member_user_id: existing_member_user_id,
-                  }),
-                );
-              }}
-              className={`flex cursor-pointer items-center py-2`}
-            >
-              <div className="relative mr-3 grid h-14 w-14 place-content-center rounded-full bg-[#FDE693] text-black 2xl:h-12 2xl:w-12">
-                <TbUserPlus className="h-5 w-5 object-cover 2xl:h-7 2xl:w-7" />
-              </div>
+                }}
+                className={`flex cursor-pointer items-center py-2`}
+              >
+                <div className="relative mr-3 grid h-14 w-14 place-content-center rounded-full bg-[#FDE693] text-black 2xl:h-12 2xl:w-12">
+                  <TbUserPlus className="h-5 w-5 object-cover 2xl:h-7 2xl:w-7" />
+                </div>
 
-              <div className="text-base font-medium capitalize text-darkText">
-                Add Member
+                <div className="text-base font-medium capitalize text-darkText">
+                  Add Member
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
           {data?.conversationDetails.ConversationsUsers.map((member) => {
             return (
@@ -136,15 +136,15 @@ export default function GroupMembers() {
                       {OnlineUserList.onlineUserList.includes(
                         member.User.user_id.toString(),
                       ) && (
-                        <img
-                          onClick={() => {
-                            changeCurrentConversation(member);
-                          }}
-                          className="absolute bottom-0 right-0 z-30 h-4 w-4"
-                          src="/Home/Online_Green_dot.png"
-                          alt=""
-                        />
-                      )}
+                          <img
+                            onClick={() => {
+                              changeCurrentConversation(member);
+                            }}
+                            className="absolute bottom-0 right-0 z-30 h-4 w-4"
+                            src="/Home/Online_Green_dot.png"
+                            alt=""
+                          />
+                        )}
                     </div>
                     <div
                       onClick={() => {
@@ -173,55 +173,53 @@ export default function GroupMembers() {
                       (convoUser) =>
                         convoUser.User.user_id === userData.user_id,
                     )?.is_admin && (
-                      <Menu>
-                        <MenuButton className="inline-flex items-center gap-2 rounded-md px-1 py-1.5 text-sm/6 font-semibold shadow-2xl focus:outline-none">
-                          <PiDotsThreeVerticalBold
-                            onClick={() => {
-                              dispatch(updateSelectedGroupMember(member));
-                            }}
-                            className="cursor-pointer text-2xl"
-                          />
-                        </MenuButton>
+                        <Menu>
+                          <MenuButton className="inline-flex items-center gap-2 rounded-md px-1 py-1.5 text-sm/6 font-semibold shadow-2xl focus:outline-none">
+                            <PiDotsThreeVerticalBold
+                              onClick={() => {
+                                dispatch(updateSelectedGroupMember(member));
+                              }}
+                              className="cursor-pointer text-2xl"
+                            />
+                          </MenuButton>
 
-                        <MenuItems className="absolute right-12 w-52 rounded-xl border border-borderColor bg-modalBg p-1 text-sm transition duration-200 ease-out focus:outline-none">
-                          <MenuItem>
-                            {({ active }) => (
-                              <button
-                                onClick={() => makeGrouAdmin()}
-                                className={`group flex w-full items-center gap-2 rounded-lg py-1.5 pl-6 ${
-                                  active ? "bg-dropdownOptionHover" : ""
-                                }`}
-                              >
-                                {member.is_admin
-                                  ? "Remove From Admin"
-                                  : "Make Group Admin"}
-                              </button>
-                            )}
-                          </MenuItem>
-                          <MenuItem>
-                            {({ active }) => (
-                              <button
-                                onClick={() =>
-                                  dispatch(
-                                    updateMessageOptions({
-                                      showModal: true,
-                                      title: `Are you sure you want Remove ${selectedGroupMember.User.first_name} ${selectedGroupMember.User.last_name} From this Group??`,
-                                      description: "",
-                                      modalName: "remove_member",
-                                    }),
-                                  )
-                                }
-                                className={`group flex w-full items-center gap-2 rounded-lg py-1.5 pl-6 ${
-                                  active ? "bg-dropdownOptionHover" : ""
-                                }`}
-                              >
-                                Remove
-                              </button>
-                            )}
-                          </MenuItem>
-                        </MenuItems>
-                      </Menu>
-                    )}
+                          <MenuItems className="absolute right-12 w-52 rounded-xl border border-borderColor bg-modalBg p-1 text-sm transition duration-200 ease-out focus:outline-none">
+                            <MenuItem>
+                              {({ active }) => (
+                                <button
+                                  onClick={() => makeGrouAdmin()}
+                                  className={`group flex w-full items-center gap-2 rounded-lg py-1.5 pl-6 ${active ? "bg-dropdownOptionHover" : ""
+                                    }`}
+                                >
+                                  {member.is_admin
+                                    ? "Remove From Admin"
+                                    : "Make Group Admin"}
+                                </button>
+                              )}
+                            </MenuItem>
+                            <MenuItem>
+                              {({ active }) => (
+                                <button
+                                  onClick={() =>
+                                    dispatch(
+                                      updateMessageOptions({
+                                        showModal: true,
+                                        title: `Are you sure you want Remove ${selectedGroupMember.User.first_name} ${selectedGroupMember.User.last_name} From this Group??`,
+                                        description: "",
+                                        modalName: "remove_member",
+                                      }),
+                                    )
+                                  }
+                                  className={`group flex w-full items-center gap-2 rounded-lg py-1.5 pl-6 ${active ? "bg-dropdownOptionHover" : ""
+                                    }`}
+                                >
+                                  Remove
+                                </button>
+                              )}
+                            </MenuItem>
+                          </MenuItems>
+                        </Menu>
+                      )}
                   </div>
                 </ContextMenuTrigger>
               </>

@@ -1,6 +1,6 @@
+import GroupInfo from "./GroupInfo";
 import { useAppSelector } from "../../../utils/hooks";
 import StarMessage from "../StarMessage/StarMessage";
-import GroupInfo from "./GroupInfo";
 import MediaLinksDocsTabs from "./MediaLinksDocsTabs";
 
 export default function ConversationInfoDrawer() {

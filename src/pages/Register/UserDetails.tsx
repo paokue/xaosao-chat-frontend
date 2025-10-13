@@ -1,27 +1,24 @@
-import React, { useEffect, useState } from "react";
-import "react-phone-input-2/lib/high-res.css";
-import PhoneInput from "react-phone-input-2";
-import PhoneInputField from "./PhoneInputField";
-import Button from "../../components/Button";
-import { useNavigate } from "react-router-dom";
-import useApiPost from "../../hooks/PostData";
 import { toast } from "react-toastify";
 import { ClipLoader } from "react-spinners";
+import { useEffect, useState } from "react";
+import "react-phone-input-2/lib/high-res.css";
+import { useNavigate } from "react-router-dom";
+import { SlLocationPin } from "react-icons/sl";
+import { IoCallOutline } from "react-icons/io5";
+import { FaCircleCheck } from "react-icons/fa6";
+import { RxCrossCircled } from "react-icons/rx";
+import { BsFillPatchCheckFill } from "react-icons/bs";
+
+import useApiPost from "../../hooks/PostData";
 import LoginLeftSections from "./LoginLeftSections";
 import {
   updateSpesificUserData,
   updateUserData,
 } from "../../store/Slices/UserSlice";
-import { useAppDispatch, useAppSelector } from "../../utils/hooks";
-import ReusableProfileCard from "../Home/Profile/ReusableProfileCard";
-import { FaCheckCircle, FaRegUser } from "react-icons/fa";
-import { IoCallOutline } from "react-icons/io5";
-import { SlLocationPin } from "react-icons/sl";
-import { BsFillPatchCheckFill } from "react-icons/bs";
-import { FaCircleCheck } from "react-icons/fa6";
-import { RxCross1, RxCrossCircled } from "react-icons/rx";
 import TextTranslate from "../../utils/TextTranslate";
 import { useUserProfile } from "../../store/api/useUserProfile";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import ReusableProfileCard from "../Home/Profile/ReusableProfileCard";
 
 export default function UserDetails() {
   let navigate = useNavigate();
@@ -276,7 +273,7 @@ export default function UserDetails() {
                       ? userData.email_id
                       : userData.country_code + " " + userData.phone_number
                   }
-                  onChange={() => {}}
+                  onChange={() => { }}
                   isDisabled={true}
                 />
               </div>
@@ -286,8 +283,8 @@ export default function UserDetails() {
                   right_icon={
                     <BsFillPatchCheckFill className="text-green-400" />
                   }
-                  value={userData.country_full_name || country_full_name}
-                  onChange={() => {}}
+                  value={userData.country_full_name || country_full_name || ""}
+                  onChange={() => { }}
                   isDisabled={true}
                 />
               </div>

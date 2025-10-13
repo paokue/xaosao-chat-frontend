@@ -1,20 +1,17 @@
-import { GrPin } from "react-icons/gr";
-
-import { MessageList } from "../../../../types/MessageListType";
+import toast from "react-hot-toast";
 import {
   updateMessageOptions,
   addMessage,
 } from "../../../../store/Slices/MessageOptionsSlice";
-import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
-import toast from "react-hot-toast";
 import useApiPost from "../../../../hooks/PostData";
-import { Chat } from "../../../../types/ResType";
 import PinIcon from "/MessageListIcons/pin_outline.png";
-import PinDarkIcon from "/MessageListIcons/pin_icon_outline_dark.png";
 import UnPinIcon from "/MessageListIcons/unpin_icon.png";
-import UnPinDarkIcon from "/MessageListIcons/unpin_icon_outline_dark.png";
 import { useTheme } from "../../../../context/ThemeProvider";
-import { socketInstance } from "../../../../socket/socket";
+import { MessageList } from "../../../../types/MessageListType";
+import PinDarkIcon from "/MessageListIcons/pin_icon_outline_dark.png";
+import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
+import UnPinDarkIcon from "/MessageListIcons/unpin_icon_outline_dark.png";
+
 interface Props {
   messageData: MessageList;
 }

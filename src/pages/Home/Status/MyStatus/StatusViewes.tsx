@@ -1,11 +1,11 @@
+import { formatRelative } from "date-fns";
+import { useEffect, useState } from "react";
+
+import useApiPost from "../../../../hooks/PostData";
+import { StatusViewesRes } from "../../../../types/ResType";
 import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
 import { updateViewState } from "../../../../store/Slices/ViewManagerSlice";
 import { updateSendMessageData } from "../../../../store/Slices/SendMessageSlice";
-import useApiPost from "../../../../hooks/PostData";
-import { useEffect, useState } from "react";
-import { StatusViewesRes } from "../../../../types/ResType";
-import { HiOutlineEye } from "react-icons/hi";
-import { formatDate, formatRelative } from "date-fns";
 
 export default function StatusViewes() {
   const dispatch = useAppDispatch();

@@ -1,19 +1,17 @@
+import { SlLocationPin } from "react-icons/sl";
 import { useRef, useState, useEffect } from "react";
 import { useLoadScript, Autocomplete } from "@react-google-maps/api";
-import { SlLocationPin } from "react-icons/sl";
-import { updateAddPropertyData } from "../../../app/Slices/AddPropertySlice";
+
+import ShowMap from "./ShowMap";
+import NearbyPlaces from "./NearbyPlaces";
+import ShareLocation from "./ShareLocation";
+import GetUserLocation from "./GetUserLocation";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { updateSendMessageData } from "../../../store/Slices/SendMessageSlice";
-import NearbyPlaces from "./NearbyPlaces";
-import GoogleMapReact from "google-map-react";
-import { MdLocationPin } from "react-icons/md";
-import ShowMap from "./ShowMap";
-import GetUserLocation from "./GetUserLocation";
-import ShareLocation from "./ShareLocation";
 
 const libraries = ["places"];
 
-const SearchLocationDropdown = ({}) => {
+const SearchLocationDropdown = ({ }) => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_Google_MAP_KEY,
     libraries,

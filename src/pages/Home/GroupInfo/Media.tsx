@@ -1,13 +1,12 @@
-import React from "react";
-import { setViewImage } from "../../../store/Slices/ViewManagerSlice";
-import { useAppDispatch } from "../../../utils/hooks";
-import { useConversationInfo } from "../../../store/api/useConversationInfo";
 import { FaPlay } from "react-icons/fa6";
+import { useAppDispatch } from "../../../utils/hooks";
 import TextTranslate from "../../../utils/TextTranslate";
+import { setViewImage } from "../../../store/Slices/ViewManagerSlice";
+import { useConversationInfo } from "../../../store/api/useConversationInfo";
 
 export default function Media() {
   let dispatch = useAppDispatch();
-  let { data, isLoading } = useConversationInfo();
+  let { data } = useConversationInfo();
   const urls = data?.mediaData?.filter((message) => {
     return (
       (message.message_type === "image" || message.message_type === "video") &&

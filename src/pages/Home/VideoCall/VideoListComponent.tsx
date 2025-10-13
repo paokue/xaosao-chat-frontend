@@ -1,4 +1,3 @@
-import React from "react";
 import VideoGrid from "./VideoGrid";
 import MainVideo from "./MainVideo";
 

@@ -1,25 +1,13 @@
-import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
-import { updateMessageOptions } from "../../../../store/Slices/MessageOptionsSlice";
-import {
-  setQuestion,
-  addOption,
-  updateOption,
-  removeOption,
-  resetPoll,
-} from "../../../../store/Slices/PollSlice"; // Import Poll Actions
-import TextTranslate from "../../../../utils/TextTranslate";
-import Button from "../../../../components/Button";
-import useApiPost from "../../../../hooks/PostData";
-import toast from "react-hot-toast";
-import { useTheme } from "../../../../context/ThemeProvider";
-import { useTranslateText } from "../../../../hooks/useTranslateText";
-import { ClipLoader } from "react-spinners";
-import { IoClose } from "react-icons/io5";
 import { useEffect, useState } from "react";
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+
+import TextTranslate from "../../../../utils/TextTranslate";
 import { MessageList } from "../../../../types/MessageListType";
-import { useConversationInfo } from "../../../../store/api/useConversationInfo";
+import { useTranslateText } from "../../../../hooks/useTranslateText";
+import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
 import { formatRelativeTime } from "../../../../utils/formatUTCtoLocalDate";
+import { useConversationInfo } from "../../../../store/api/useConversationInfo";
+import { updateMessageOptions } from "../../../../store/Slices/MessageOptionsSlice";
 
 export default function ViewPollVoteModal() {
   const dispatch = useAppDispatch();
@@ -30,7 +18,7 @@ export default function ViewPollVoteModal() {
   let { data } = useConversationInfo();
   let MessageOptions = useAppSelector((state) => state.MessageOptions);
   const [messageData, setmessageData] = useState<MessageList>();
-  const { conversation_id } = useAppSelector(
+  useAppSelector(
     (state) => state.CurrentConversation,
   );
 
@@ -56,7 +44,7 @@ export default function ViewPollVoteModal() {
       open={MessageOptions.show_view_poll_vote_modal}
       as="div"
       className="relative z-10"
-      onClose={() => {}}
+      onClose={() => { }}
     >
       <div className="fixed inset-0 z-10 flex min-h-full items-center justify-center p-4 backdrop-blur-sm">
         <DialogPanel className="data-[closed]:transform-[scale(95%)] w-full max-w-md rounded-xl bg-modalBg shadow-2xl backdrop-blur-md transition-all duration-300 ease-in-out data-[closed]:opacity-0">
@@ -123,29 +111,27 @@ export default function ViewPollVoteModal() {
                                     vote.user_id == userData.user_id
                                       ? userData.profile_image
                                       : data?.conversationDetails?.ConversationsUsers.find(
-                                          (convoUser) =>
-                                            convoUser.User.user_id ===
-                                            vote.user_id,
-                                        )?.User.profile_image
+                                        (convoUser) =>
+                                          convoUser.User.user_id ===
+                                          vote.user_id,
+                                      )?.User.profile_image
                                   } // Replace with actual user avatar if available
                                   alt=""
                                 />
                                 <div>
                                   {vote.user_id == userData.user_id
                                     ? "You"
-                                    : `${
-                                        data!.conversationDetails.ConversationsUsers.find(
-                                          (convoUser) =>
-                                            convoUser.User.user_id ===
-                                            vote.user_id,
-                                        )?.User.first_name
-                                      } ${
-                                        data!.conversationDetails.ConversationsUsers.find(
-                                          (convoUser) =>
-                                            convoUser.User.user_id ===
-                                            vote.user_id,
-                                        )?.User.last_name
-                                      }`}
+                                    : `${data!.conversationDetails.ConversationsUsers.find(
+                                      (convoUser) =>
+                                        convoUser.User.user_id ===
+                                        vote.user_id,
+                                    )?.User.first_name
+                                    } ${data!.conversationDetails.ConversationsUsers.find(
+                                      (convoUser) =>
+                                        convoUser.User.user_id ===
+                                        vote.user_id,
+                                    )?.User.last_name
+                                    }`}
                                 </div>
                               </div>
                             </div>

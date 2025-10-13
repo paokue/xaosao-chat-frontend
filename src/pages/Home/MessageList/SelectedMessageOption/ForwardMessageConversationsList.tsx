@@ -1,11 +1,12 @@
-import LoadingSkeletonImageDynamic from "../../../../components/LoadingSkeletonImageDynamic";
-import { useTheme } from "../../../../context/ThemeProvider";
+import { IoCheckmarkOutline } from "react-icons/io5";
+
 import useApiPost from "../../../../hooks/PostData";
+import { socketInstance } from "../../../../socket/socket";
+import { useTheme } from "../../../../context/ThemeProvider";
+import { MessageList } from "../../../../types/MessageListType";
 import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
 import { updateForwardedList } from "../../../../store/Slices/ForwardMessageSlice";
-import { MessageList } from "../../../../types/MessageListType";
-import { socketInstance } from "../../../../socket/socket";
-import { IoCheckmarkOutline } from "react-icons/io5";
+import LoadingSkeletonImageDynamic from "../../../../components/LoadingSkeletonImageDynamic";
 
 export default function ForwardMessageConversationsList({
   searchUser,
@@ -18,14 +19,14 @@ export default function ForwardMessageConversationsList({
   const ChatListArray = useAppSelector((state) => state.chatList);
 
   let ForwardMessageData = useAppSelector((state) => state.ForwardMessage);
-  let CurrentConversation = useAppSelector(
+  useAppSelector(
     (state) => state.CurrentConversation,
   );
   const MessageOptions = useAppSelector((state) => state.MessageOptions);
 
   let OnlineUserList = useAppSelector((state) => state.OnlineUserList);
   const dispatch = useAppDispatch();
-  const { loading, postData } = useApiPost();
+  const { postData } = useApiPost();
 
   async function forwardMessage({
     conversation_id,
@@ -76,11 +77,10 @@ export default function ForwardMessageConversationsList({
           return (
             <>
               <div
-                className={`flex cursor-pointer items-center justify-start px-3 py-4 hover:bg-selectedChat ${
-                  ForwardMessageData.forwarded_conversations_id.includes(
-                    e.conversation_id,
-                  ) && "opacity-70"
-                }`}
+                className={`flex cursor-pointer items-center justify-start px-3 py-4 hover:bg-selectedChat ${ForwardMessageData.forwarded_conversations_id.includes(
+                  e.conversation_id,
+                ) && "opacity-70"
+                  }`}
               >
                 <div className="relative mr-3 h-14 w-14 2xl:h-12 2xl:w-12">
                   <LoadingSkeletonImageDynamic
@@ -93,12 +93,12 @@ export default function ForwardMessageConversationsList({
                   {OnlineUserList.onlineUserList.includes(
                     e.user_id.toString(),
                   ) && (
-                    <img
-                      className="absolute bottom-0 right-0 z-30 h-4 w-4"
-                      src="/Home/Online_Green_dot.png"
-                      alt=""
-                    />
-                  )}
+                      <img
+                        className="absolute bottom-0 right-0 z-30 h-4 w-4"
+                        src="/Home/Online_Green_dot.png"
+                        alt=""
+                      />
+                    )}
                 </div>
 
                 <div>
@@ -131,13 +131,12 @@ export default function ForwardMessageConversationsList({
                         ? "none"
                         : "auto",
                   }}
-                  className={`relative ml-auto mr-3 h-9 w-24 overflow-hidden rounded-full border ${
-                    ForwardMessageData.forwarded_conversations_id.includes(
-                      e.conversation_id,
-                    )
-                      ? "border-[#D6D6D6]"
-                      : "border-[#FCC605]"
-                  } px-4 text-base font-medium outline-none`}
+                  className={`relative ml-auto mr-3 h-9 w-24 overflow-hidden rounded-full border ${ForwardMessageData.forwarded_conversations_id.includes(
+                    e.conversation_id,
+                  )
+                    ? "border-[#D6D6D6]"
+                    : "border-[#FCC605]"
+                    } px-4 text-base font-medium outline-none`}
                 >
                   {ForwardMessageData.forwarded_conversations_id.includes(
                     e.conversation_id,

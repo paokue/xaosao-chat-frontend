@@ -1,18 +1,18 @@
 import { FiMic, FiMicOff } from "react-icons/fi";
-import { LuVideo, LuVideoOff } from "react-icons/lu";
 import { MdOutlineCallEnd } from "react-icons/md";
-import { PiSpeakerSimpleHigh, PiSpeakerSimpleSlash } from "react-icons/pi";
-import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
-import { updatePeerData } from "../../../store/Slices/PeerJsSlice";
-import { socketInstance } from "../../../socket/socket";
+import { LuVideo, LuVideoOff } from "react-icons/lu";
+
 import { usePeer } from "../../../hooks/usePeer";
+import { socketInstance } from "../../../socket/socket";
+import { updatePeerData } from "../../../store/Slices/PeerJsSlice";
+import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 
 export default function Controlls() {
   const dispatch = useAppDispatch();
   // const = useAppSelector((state) => state.PeerJsSlice);
   const socket = socketInstance();
   const { myPeer } = usePeer();
-  const { isVideoEnabled, isAudioEnabled, isScreenSharing, room_id } =
+  const { isVideoEnabled, isAudioEnabled, room_id } =
     useAppSelector((state) => state.PeerJsSlice);
   const call_type = sessionStorage.getItem("call_type");
   function endCall() {
@@ -28,7 +28,7 @@ export default function Controlls() {
   return (
 
     <div className="pt-5 absolute bottom-4 grid w-full place-content-center">
-          {/* <div className="absolute top-4 flex w-full justify-between px-12"> */}
+      {/* <div className="absolute top-4 flex w-full justify-between px-12"> */}
 
       <div className="flex gap-6 rounded-xl bg-black bg-opacity-60 px-7 py-3">
         <div

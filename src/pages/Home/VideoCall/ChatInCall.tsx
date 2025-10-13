@@ -1,4 +1,3 @@
-import React from "react";
 import MessageBody from "../MessageList/MessageBody";
 import SendMessage from "../MessageList/SendMessage/SendMessage";
 

@@ -65,7 +65,7 @@ export default function DoneButton() {
         className="primary-gradient mx-auto my-5 w-[90%] cursor-pointer rounded-lg py-2 text-center"
       >
         {loading ? (
-          <ClipLoader size={17} color={theme == "dark" ? "white" : "black"} />
+          <ClipLoader size={17} color={theme.theme == "dark" ? "white" : "black"} />
         ) : (
           "Done"
         )}

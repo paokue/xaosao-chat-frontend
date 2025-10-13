@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { CiFaceSmile } from "react-icons/ci";
 import EmojiPicker, { EmojiClickData, Theme } from "emoji-picker-react";
+
+import { useTheme } from "../../../../context/ThemeProvider";
+import OnClickOutside from "../../../../utils/OnClickOutSide";
 import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
 import { updateSendMessageData } from "../../../../store/Slices/SendMessageSlice";
-import { CiFaceSmile } from "react-icons/ci";
-import OnClickOutside from "../../../../utils/OnClickOutSide";
-import { useTheme } from "../../../../context/ThemeProvider";
 
 export default function EmojiPickerCompo() {
   const dispatch = useAppDispatch();
@@ -33,11 +34,10 @@ export default function EmojiPickerCompo() {
         className="my-auto ml-3 text-darkText cursor-pointer text-2xl"
       />
       <div
-        className={` ${
-          isOpen
+        className={` ${isOpen
             ? "visible translate-y-3"
             : "invisible translate-y-20 opacity-0"
-        } absolute -left-28 bottom-16 z-10 transition duration-500 sm:-left-0`}
+          } absolute -left-28 bottom-16 z-10 transition duration-500 sm:-left-0`}
       >
         <EmojiPicker
           theme={theme == "dark" ? Theme.DARK : Theme.LIGHT}

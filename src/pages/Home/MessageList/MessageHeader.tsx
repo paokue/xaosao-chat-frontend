@@ -1,9 +1,10 @@
 import { useEffect } from "react";
+
 import Profile from "./Profile";
 import RightSideOptions from "./RightSideOptions";
 import PinMessages from "./PinMessages/PinMessages";
-import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { socketInstance } from "../../../socket/socket";
+import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { removePinMessageList } from "../../../store/Slices/PinMessagesSlice";
 
 export default function MessageHeader() {

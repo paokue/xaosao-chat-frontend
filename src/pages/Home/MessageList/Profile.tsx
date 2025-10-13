@@ -1,18 +1,18 @@
-import { PulseLoader } from "react-spinners";
-import LoadingSkeletonImageDynamic from "../../../components/LoadingSkeletonImageDynamic";
+import { useEffect, useState } from "react";
+import { IoChevronBack } from "react-icons/io5";
+
 import {
   setViewImage,
   toggleProfileView,
   updateViewState,
 } from "../../../store/Slices/ViewManagerSlice";
+import TextTranslate from "../../../utils/TextTranslate";
+import { TypingUserList } from "../../../types/OnlineUserType";
 import { formatLastSeen } from "../../../utils/formatUTCtoLocalDate";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { useConversationInfo } from "../../../store/api/useConversationInfo";
-import { useEffect, useState } from "react";
-import { TypingUserList } from "../../../types/OnlineUserType";
-import TextTranslate from "../../../utils/TextTranslate";
-import { IoChevronBack } from "react-icons/io5";
 import { resetCurrentConversation } from "../../../store/Slices/CurrentConversationSlice";
+import LoadingSkeletonImageDynamic from "../../../components/LoadingSkeletonImageDynamic";
 
 export default function Profile() {
   let dispatch = useAppDispatch();

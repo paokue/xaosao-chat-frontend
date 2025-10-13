@@ -1,15 +1,16 @@
-import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
-import { useTheme } from "../../../../context/ThemeProvider";
-import { useEffect, useState } from "react";
-import { useFile } from "../../../../context/FileProvider";
-import { setViewImage } from "../../../../store/Slices/ViewManagerSlice";
-import { RxCross2 } from "react-icons/rx";
-// import { generateVideoThumbnails } from "@rajesh896/video-thumbnails-generator"; // Import the package
-import { updateSendMessageData } from "../../../../store/Slices/SendMessageSlice";
-import Skeleton from "react-loading-skeleton";
 import { FaPlay } from "react-icons/fa6";
-import LoadingSkeletonImageDynamic from "../../../../components/LoadingSkeletonImageDynamic";
+import { RxCross2 } from "react-icons/rx";
+import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+
+import { useFile } from "../../../../context/FileProvider";
+import { useTheme } from "../../../../context/ThemeProvider";
+import { setViewImage } from "../../../../store/Slices/ViewManagerSlice";
+import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
+// import { generateVideoThumbnails } from "@rajesh896/video-thumbnails-generator"; // Import the package
 import generateVideoThumbnail from "../../../../utils/generateVideoThumbnails";
+import { updateSendMessageData } from "../../../../store/Slices/SendMessageSlice";
+import LoadingSkeletonImageDynamic from "../../../../components/LoadingSkeletonImageDynamic";
 
 export default function ShowSelectedFile({
   progress,
@@ -72,11 +73,10 @@ export default function ShowSelectedFile({
   return (
     <>
       <div
-        className={` ${
-          selectedFile != null || (messageData.message_type == "gif" && messageData.message != "")
-            ? "visible translate-y-3"
-            : "invisible translate-y-20 opacity-0"
-        } -left- absolute bottom-3 z-10 max-w-96 border ${theme === "dark" ? "border-[#EEEEEE14]" : ""} w-full rounded-xl bg-primary transition-all duration-500 sm:-left-0`}
+        className={` ${selectedFile != null || (messageData.message_type == "gif" && messageData.message != "")
+          ? "visible translate-y-3"
+          : "invisible translate-y-20 opacity-0"
+          } -left- absolute bottom-3 z-10 max-w-96 border ${theme === "dark" ? "border-[#EEEEEE14]" : ""} w-full rounded-xl bg-primary transition-all duration-500 sm:-left-0`}
       >
         <div className="relative">
           <RxCross2
@@ -132,9 +132,8 @@ export default function ShowSelectedFile({
                   <div
                     className="absolute inset-0 mx-auto my-auto h-44 w-44 rounded-full transition-all duration-500 ease-in-out"
                     style={{
-                      background: `conic-gradient(#facc15 ${progress * 3.6}deg, ${
-                        theme === "dark" ? "#eeeeee14" : "#F2F2F2"
-                      } 0deg)`,
+                      background: `conic-gradient(#facc15 ${progress * 3.6}deg, ${theme === "dark" ? "#eeeeee14" : "#F2F2F2"
+                        } 0deg)`,
                     }}
                   />
                   <div className="absolute inset-[3px] mx-auto my-auto flex h-[10.5rem] w-[10.5rem] items-center justify-center rounded-full bg-primary">

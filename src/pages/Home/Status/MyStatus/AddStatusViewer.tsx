@@ -1,8 +1,9 @@
 import Stories from "react-insta-stories";
-import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
 import { RxCross1 } from "react-icons/rx";
-import { updateViewState } from "../../../../store/Slices/ViewManagerSlice";
+
 import SendStatus from "./SendStatus";
+import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
+import { updateViewState } from "../../../../store/Slices/ViewManagerSlice";
 
 export default function AddStatusViewer() {
   const addStatus = useAppSelector((state) => state.addStatus);

@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useAtTop } from "react-scroll-to-bottom";
-import { socketInstance } from "../../../socket/socket";
-import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
+import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 
-import { updateMessageOptions } from "../../../store/Slices/MessageOptionsSlice";
+import { socketInstance } from "../../../socket/socket";
 import { useTheme } from "../../../context/ThemeProvider";
+import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
+import { updateMessageOptions } from "../../../store/Slices/MessageOptionsSlice";
 
 export default function LoadMoreMessages() {
-  const MessageList = useAppSelector((state) => state.MessageList);
+  useAppSelector((state) => state.MessageList);
   const MessageOptions = useAppSelector((state) => state.MessageOptions);
   const currentConversationData = useAppSelector(
     (state) => state.CurrentConversation,

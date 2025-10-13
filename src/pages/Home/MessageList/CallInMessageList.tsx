@@ -1,7 +1,5 @@
-import React from "react";
-import { MessageList } from "../../../types/MessageListType";
-import { IoCallOutline } from "react-icons/io5";
 import { useAppSelector } from "../../../utils/hooks";
+import { MessageList } from "../../../types/MessageListType";
 
 // Define the props interface
 interface CallInMessageListProps {

@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
-import { useStream } from "../../../context/StreamProvider";
+
 import Controlls from "./Controlls";
-import { useAppSelector } from "../../../utils/hooks";
 import UserNameAndTime from "./UserNameAndTime";
+import { useAppSelector } from "../../../utils/hooks";
+import { useStream } from "../../../context/StreamProvider";
 
 export default function MainVideo() {
   const { userStreams } = useStream();
@@ -30,8 +31,8 @@ export default function MainVideo() {
           ref={videoRef}
           autoPlay
           muted={currentStream.isLocal}
-          // muted
-          // playsInline
+        // muted
+        // playsInline
         />
       ) : currentStream?.isAudioEnabled ? (
         <div

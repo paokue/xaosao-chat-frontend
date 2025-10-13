@@ -1,15 +1,16 @@
-import { VscSend } from "react-icons/vsc";
-import { useTheme } from "../../../../context/ThemeProvider";
-import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
-import useApiPost from "../../../../hooks/PostData";
-import { ClipLoader } from "react-spinners";
-import { useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
-import { updateAddStatus } from "../../../../store/Slices/AddStatusSlice";
 import toast from "react-hot-toast";
-import EmojiPickerCompo from "../../MessageList/SendMessage/EmojiPickerCompo";
-import { updateViewState } from "../../../../store/Slices/ViewManagerSlice";
+import { VscSend } from "react-icons/vsc";
+import { useEffect, useRef } from "react";
+import { ClipLoader } from "react-spinners";
+import { useLocation } from "react-router-dom";
+
+import useApiPost from "../../../../hooks/PostData";
+import { useTheme } from "../../../../context/ThemeProvider";
 import { useStatusList } from "../../../../store/api/useStatusList";
+import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
+import { updateAddStatus } from "../../../../store/Slices/AddStatusSlice";
+import { updateViewState } from "../../../../store/Slices/ViewManagerSlice";
+import EmojiPickerCompo from "../../MessageList/SendMessage/EmojiPickerCompo";
 
 export default function SendStatus() {
   const { theme } = useTheme(); // @ts-ignore
@@ -85,17 +86,15 @@ export default function SendStatus() {
   return (
     <div className="absolute bottom-24 z-[9999] flex items-center gap-2 rounded-full p-2 ">
       <div
-        className={`${
-          location.pathname !== "/video-call" &&
+        className={`${location.pathname !== "/video-call" &&
           location.pathname !== "/status" &&
           "absolute"
-        } flex w-full lg:min-w-[24rem] -translate-y-12 items-center justify-center transition-all duration-300 md:translate-y-0`}
+          } flex w-full lg:min-w-[24rem] -translate-y-12 items-center justify-center transition-all duration-300 md:translate-y-0`}
       >
         <div className="flex w-[90%] items-center gap-3 xl:w-[100%]">
           <div
-            className={`relative flex h-12 w-full gap-2 rounded-xl border bg-secondary ${
-              theme === "dark" ? "border-[#EEEEEE14]" : "border-[#B0B0B0]"
-            }`}
+            className={`relative flex h-12 w-full gap-2 rounded-xl border bg-secondary ${theme === "dark" ? "border-[#EEEEEE14]" : "border-[#B0B0B0]"
+              }`}
           >
             <EmojiPickerCompo />
             <form className="w-full">

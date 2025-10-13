@@ -1,26 +1,23 @@
-import React, { useState } from "react";
-import { FiPlusSquare } from "react-icons/fi";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FaChevronLeft } from "react-icons/fa6";
 import { IoSearchOutline } from "react-icons/io5";
 import { useTheme } from "../../../context/ThemeProvider";
-import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
-import { FaChevronLeft } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
-import { PiUsersThree } from "react-icons/pi";
-import { updateCreateGroupData } from "../../../store/Slices/CreateGroupSlice";
-import { useWebsiteSettings } from "../../../store/api/useWebsiteSettings";
+// import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
+// import { useWebsiteSettings } from "../../../store/api/useWebsiteSettings";
+import PublicGroupList from "./PublicGroupList";
 import TextTranslate from "../../../utils/TextTranslate";
 import { useTranslateText } from "../../../hooks/useTranslateText";
-import PublicGroupList from "./PublicGroupList";
 
 export default function PublicGroup() {
   const [searchUser, setsearchUser] = useState("");
   // @ts-ignore
   const { theme } = useTheme();
-  const userData = useAppSelector((state) => state.userData);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  let { data: websiteSettings } = useWebsiteSettings();
   const translate = useTranslateText();
+  // const dispatch = useAppDispatch();
+  // let { data: websiteSettings } = useWebsiteSettings();
+  // const userData = useAppSelector((state) => state.userData);
 
   return (
     // <div className="relative flex h-screen min-w-96 flex-col bg-secondary pb-0 pt-16 shadow-inner 2xl:min-w-96">
@@ -45,9 +42,8 @@ export default function PublicGroup() {
             onChange={(e) => {
               setsearchUser(e.target.value);
             }}
-            className={` ${
-              theme == "dark" ? "bg-transparent" : "bg-[#F2F2F2]"
-            } w-full rounded-xl border border-borderColor py-2 pl-11 placeholder-lightText outline-none`}
+            className={` ${theme == "dark" ? "bg-transparent" : "bg-[#F2F2F2]"
+              } w-full rounded-xl border border-borderColor py-2 pl-11 placeholder-lightText outline-none`}
             type="text"
             placeholder={translate("Search User")}
           />

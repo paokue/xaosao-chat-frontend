@@ -1,7 +1,7 @@
-import { FaArrowDown } from "react-icons/fa6";
-import scrollToMessage from "../../../utils/scrollToMessage";
-import { useAppSelector } from "../../../utils/hooks";
 import { useEffect, useState } from "react";
+import { FaArrowDown } from "react-icons/fa6";
+import { useAppSelector } from "../../../utils/hooks";
+import scrollToMessage from "../../../utils/scrollToMessage";
 
 export default function OnClickScrollToBottom() {
   const [isLastElementVisible, setIsLastElementVisible] = useState(true);

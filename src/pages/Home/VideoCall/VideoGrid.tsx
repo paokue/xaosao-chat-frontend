@@ -1,14 +1,15 @@
 "use client";
-import React, { useEffect } from "react";
-import { useStream } from "../../../context/StreamProvider";
+import { useEffect } from "react";
 import { FiMic, FiMicOff } from "react-icons/fi";
-import { usePeer } from "../../../hooks/usePeer";
+
+// import { usePeer } from "../../../hooks/usePeer";
 import { useAppSelector } from "../../../utils/hooks";
+import { useStream } from "../../../context/StreamProvider";
 
 export default function VideoGrid() {
   const { userStreams } = useStream();
 
-  const { myPeer } = usePeer();
+  // const { myPeer } = usePeer();
 
   const { updateCurrentStream } = useStream();
   const ConnectedUser = useAppSelector((state) => state.ConnectedUser);
@@ -41,10 +42,10 @@ export default function VideoGrid() {
                 {ConnectedUser.length >= 1 && userData.user_id == userId
                   ? "You"
                   : ConnectedUser.find((user) => user.user_id == userId)
-                      ?.first_name +
-                    " " +
-                    ConnectedUser.find((user) => user.user_id == userId)
-                      ?.last_name}
+                    ?.first_name +
+                  " " +
+                  ConnectedUser.find((user) => user.user_id == userId)
+                    ?.last_name}
                 {/* {peerId === "local" ? "(You)" : ""} */}
               </div>
 

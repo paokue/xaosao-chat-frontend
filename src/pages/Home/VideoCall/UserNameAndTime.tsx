@@ -1,6 +1,6 @@
-import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
-import { useStream } from "../../../context/StreamProvider";
 import { useEffect, useState } from "react";
+import { useAppSelector } from "../../../utils/hooks";
+import { useStream } from "../../../context/StreamProvider";
 
 export default function UserNameAndTime() {
   const { userStreams } = useStream();
@@ -12,7 +12,7 @@ export default function UserNameAndTime() {
 
   const [elapsedTime, setElapsedTime] = useState(0);
 
-  let startTime = sessionStorage.getItem("callStartTime");
+  // let startTime = sessionStorage.getItem("callStartTime");
 
   // useEffect(() => {
   //   // Check if there's a stored start time

@@ -1,5 +1,5 @@
-import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
 import { useAppDispatch } from "../../../utils/hooks";
+import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
 
 interface StatusProfileProps {
   profile_url: string;

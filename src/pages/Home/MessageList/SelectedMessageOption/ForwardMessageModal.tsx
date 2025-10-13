@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { RxCross2 } from "react-icons/rx";
-
-import { updateCreateGroupData } from "../../../../store/Slices/CreateGroupSlice";
-
 import { IoSearchOutline } from "react-icons/io5";
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+
 import { useTheme } from "../../../../context/ThemeProvider";
-import ForwardMessageConversationsList from "./ForwardMessageConversationsList";
+import { useTranslateText } from "../../../../hooks/useTranslateText";
 import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
+import ForwardMessageConversationsList from "./ForwardMessageConversationsList";
 import { updateMessageOptions } from "../../../../store/Slices/MessageOptionsSlice";
 import { clearnForwardedList } from "../../../../store/Slices/ForwardMessageSlice";
-import { useTranslateText } from "../../../../hooks/useTranslateText";
 
 const ForwardMessageModal: React.FC = () => {
-  const CreateGroup = useAppSelector((state) => state.CreateGroup);
+  useAppSelector((state) => state.CreateGroup);
   const dispatch = useAppDispatch();
   const [searchUser, setsearchUser] = useState("");
   // @ts-ignore
@@ -36,7 +34,7 @@ const ForwardMessageModal: React.FC = () => {
   return (
     <Dialog
       open={MessageOptions.show_forward_message_modal}
-      onClose={() => {}}
+      onClose={() => { }}
       className="relative z-50"
     >
       <div className="fixed inset-0 bg-black/35 backdrop-blur-sm">
@@ -64,9 +62,8 @@ const ForwardMessageModal: React.FC = () => {
                 onChange={(e) => {
                   setsearchUser(e.target.value);
                 }}
-                className={` ${
-                  theme == "dark" ? "bg-transparent" : "bg-[#F2F2F2]"
-                } w-full rounded-xl border border-borderColor py-2 pl-11 placeholder-lightText outline-none`}
+                className={` ${theme == "dark" ? "bg-transparent" : "bg-[#F2F2F2]"
+                  } w-full rounded-xl border border-borderColor py-2 pl-11 placeholder-lightText outline-none`}
                 type="text"
                 placeholder={translate("Search User")}
               />

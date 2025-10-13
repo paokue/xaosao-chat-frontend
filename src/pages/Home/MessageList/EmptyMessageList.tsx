@@ -1,15 +1,14 @@
-import React from "react";
-import { useTheme } from "../../../context/ThemeProvider";
-import { MessageList } from "../../../types/MessageListType";
+import toast from "react-hot-toast";
+
+import Button from "../../../components/Button";
 import useApiPost from "../../../hooks/PostData";
-import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
-import { appendMessageWithDateCheck } from "../../../store/Slices/MessageListSlice";
-import { updateSendMessageData } from "../../../store/Slices/SendMessageSlice";
 import { socketInstance } from "../../../socket/socket";
 import { useFile } from "../../../context/FileProvider";
-import Button from "../../../components/Button";
+import { useTheme } from "../../../context/ThemeProvider";
+import { MessageList } from "../../../types/MessageListType";
+import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { useConversationInfo } from "../../../store/api/useConversationInfo";
-import toast from "react-hot-toast";
+import { updateSendMessageData } from "../../../store/Slices/SendMessageSlice";
 import { updateCurrentConversation } from "../../../store/Slices/CurrentConversationSlice";
 
 export default function EmptyMessageList() {
@@ -131,10 +130,10 @@ export default function EmptyMessageList() {
       </div>
 
       {currentConversationData.public_group &&
-      !ChatListArray.some(
-        (chatUser) =>
-          chatUser.conversation_id === currentConversationData.conversation_id,
-      ) ? (
+        !ChatListArray.some(
+          (chatUser) =>
+            chatUser.conversation_id === currentConversationData.conversation_id,
+        ) ? (
         <Button
           onClickFunc={joinInGroup}
           className={"!h-10 !w-fit"}

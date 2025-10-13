@@ -1,4 +1,3 @@
-import React from "react";
 import { useTheme } from "../../../context/ThemeProvider";
 import LinkPreview from "../../../components/LinkPreview";
 import { useConversationInfo } from "../../../store/api/useConversationInfo";
@@ -9,7 +8,7 @@ import TextTranslate from "../../../utils/TextTranslate";
 export default function Links() {
   // @ts-ignore
   const { theme } = useTheme();
-  let { data, isLoading } = useConversationInfo();
+  let { data } = useConversationInfo();
   const userData = useAppSelector((state) => state.userData);
 
   return (

@@ -1,20 +1,20 @@
-import React from "react";
+import toast from "react-hot-toast";
+
 import Button from "../../../components/Button";
-import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
-import { MessageList } from "../../../types/MessageListType";
 import useApiPost from "../../../hooks/PostData";
 import { socketInstance } from "../../../socket/socket";
 import scrollToMessage from "../../../utils/scrollToMessage";
+import { MessageList } from "../../../types/MessageListType";
+import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { updateSendMessageData } from "../../../store/Slices/SendMessageSlice";
-import { updateCurrentConversation } from "../../../store/Slices/CurrentConversationSlice";
-import toast from "react-hot-toast";
-import { appendMessageWithDateCheck } from "../../../store/Slices/MessageListSlice";
 import { updateMessageOptions } from "../../../store/Slices/MessageOptionsSlice";
+import { appendMessageWithDateCheck } from "../../../store/Slices/MessageListSlice";
+import { updateCurrentConversation } from "../../../store/Slices/CurrentConversationSlice";
 
 export default function ShareLocation() {
   let sendMessageData = useAppSelector((state) => state.SendMessageData);
 
-  const { loading: sendMessageLoading, progress, postData } = useApiPost();
+  const { postData } = useApiPost();
   const dispatch = useAppDispatch();
   const currentConversationData = useAppSelector(
     (state) => state.CurrentConversation,

@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
-import { useContactList } from "../../../store/api/useContactList";
+import { useEffect } from "react";
 import { RxCross2 } from "react-icons/rx";
 import {
   addOrRemoveUserId,
   addUserId,
 } from "../../../store/Slices/CreateGroupSlice";
+import { useContactList } from "../../../store/api/useContactList";
+import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 
 export default function SelectedContact() {
   let CreateGroup = useAppSelector((state) => state.CreateGroup);
@@ -27,7 +27,8 @@ export default function SelectedContact() {
       }),
     );
   }, [userData]);
-  console.log(CreateGroup.user_id,"CreateGroup.user_id.length");
+
+  // console.log(CreateGroup.user_id, "CreateGroup.user_id.length");
 
   return (
     <>

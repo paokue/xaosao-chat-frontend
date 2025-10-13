@@ -1,6 +1,6 @@
 import StatusProfile from "./StatusProfile";
-import { formatRelativeTime } from "../../../utils/formatUTCtoLocalDate";
 import { useAppSelector } from "../../../utils/hooks";
+import { formatRelativeTime } from "../../../utils/formatUTCtoLocalDate";
 
 export default function NotViewedStatusList() {
   const statusData = useAppSelector((state) => state.status);

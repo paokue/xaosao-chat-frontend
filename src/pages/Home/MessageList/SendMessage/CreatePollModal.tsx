@@ -12,7 +12,7 @@ import TextTranslate from "../../../../utils/TextTranslate";
 import Button from "../../../../components/Button";
 import useApiPost from "../../../../hooks/PostData";
 import toast from "react-hot-toast";
-import { useTheme } from "../../../../context/ThemeProvider";
+// import { useTheme } from "../../../../context/ThemeProvider";
 import { useTranslateText } from "../../../../hooks/useTranslateText";
 import { ClipLoader } from "react-spinners";
 import { IoClose } from "react-icons/io5";
@@ -21,7 +21,7 @@ export default function CreatePollModal() {
   const dispatch = useAppDispatch();
   const { postData, loading } = useApiPost();
   const translate = useTranslateText();
-  const theme = useTheme();
+  // const theme = useTheme();
 
   // Select Poll Data
   const { question, options } = useAppSelector((state) => state.PollData);
@@ -74,7 +74,7 @@ export default function CreatePollModal() {
       )}
       as="div"
       className="relative z-10"
-      onClose={() => {}}
+      onClose={() => { }}
     >
       <div className="fixed inset-0 z-10 flex min-h-full items-center justify-center p-4 backdrop-blur-sm">
         <DialogPanel className="data-[closed]:transform-[scale(95%)] w-full max-w-md rounded-xl bg-modalBg shadow-2xl backdrop-blur-md transition-all duration-300 ease-in-out data-[closed]:opacity-0">

@@ -1,10 +1,11 @@
+import { useState } from "react";
 import Stories from "react-insta-stories";
-import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
 import { RxCross1 } from "react-icons/rx";
 import { HiOutlineEye } from "react-icons/hi";
-import { updateViewState } from "../../../../store/Slices/ViewManagerSlice";
+
 import StatusViewes from "./StatusViewes";
-import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
+import { updateViewState } from "../../../../store/Slices/ViewManagerSlice";
 
 export default function MyStatusViewer() {
   const userData = useAppSelector((state) => state.userData);

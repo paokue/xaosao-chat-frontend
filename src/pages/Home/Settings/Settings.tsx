@@ -5,10 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 // icons:
 import {
-  MdOutlinePrivacyTip,
   MdOutlineStarBorderPurple500,
 } from "react-icons/md";
-import { CiLock } from "react-icons/ci";
 import { RxShare2 } from "react-icons/rx";
 import { HiLanguage } from "react-icons/hi2";
 import { BsInfoCircle } from "react-icons/bs";

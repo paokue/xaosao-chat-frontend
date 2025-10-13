@@ -217,13 +217,13 @@ import GroupProfileImage from "./GroupProfileImage";
 import GroupNameInput from "./GroupNameInput";
 import GroupMembersList from "./GroupMembersList";
 import DoneButton from "./DoneButton";
-import { useContactList } from "../../../store/api/useContactList";
+// import { useContactList } from "../../../store/api/useContactList";
 import { useAppSelector } from "../../../utils/hooks";
 import { useGroupSettings } from "../../../store/api/useGroupSettings";
 import TextTranslate from "../../../utils/TextTranslate";
 
 export default function Profile() {
-  let { data: contactListUser } = useContactList({});
+  // let { data: contactListUser } = useContactList({});
   let CreateGroup = useAppSelector((state) => state.CreateGroup);
   let { data: groupSettingsData } = useGroupSettings();
 

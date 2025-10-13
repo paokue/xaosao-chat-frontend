@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useGoogleLogin } from "@react-oauth/google";
-import useApiPost from "../../hooks/PostData";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useGoogleLogin } from "@react-oauth/google";
+
+import useApiPost from "../../hooks/PostData";
 
 export default function SignInWithGoogle() {
-  const [userInfo, setUserInfo] = useState(null);
-  const { loading, error, data, postData } = useApiPost();
   let navigate = useNavigate();
+  const { postData } = useApiPost();
+  const [userInfo, setUserInfo] = useState(null);
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
@@ -18,7 +19,7 @@ export default function SignInWithGoogle() {
     flow: "implicit",
   });
 
-  const fetchUserInfo = async (accessToken) => {
+  const fetchUserInfo = async (accessToken: string) => {
     try {
       const response = await fetch(
         "https://www.googleapis.com/oauth2/v2/userinfo",
@@ -82,12 +83,6 @@ export default function SignInWithGoogle() {
         />
         <div>Signin with Google</div>
       </button>
-      {/* {userInfo && (
-        <div>
-          <p>Email: {userInfo.email}</p>
-          <img src={userInfo.picture} alt="Profile" />
-        </div>
-      )} */}
     </>
   );
 }

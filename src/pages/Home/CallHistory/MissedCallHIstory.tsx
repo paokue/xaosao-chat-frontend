@@ -1,9 +1,9 @@
-import LoadingSkeletonImageDynamic from "../../../components/LoadingSkeletonImageDynamic";
 import { ClipLoader } from "react-spinners";
+import CallInCallHistory from "./CallInCallHistory";
 import { useTheme } from "../../../context/ThemeProvider";
 import { useCallHistory } from "../../../store/api/useCallHistory";
-import CallInCallHistory from "./CallInCallHistory";
 import { formatDate, formatTime } from "../../../utils/formatUTCtoLocalDate";
+import LoadingSkeletonImageDynamic from "../../../components/LoadingSkeletonImageDynamic";
 
 export default function MissedCallHIstory() {
   let { data: callHistory, isLoading } = useCallHistory();
@@ -43,8 +43,8 @@ export default function MissedCallHIstory() {
             return (
               <>
                 <div
-                  onClick={() => {}}
-                  onContextMenu={() => {}}
+                  onClick={() => { }}
+                  onContextMenu={() => { }}
                   //   key={e.id}
                   className={`flex cursor-pointer items-center px-3 py-4 hover:bg-selectedChat ${false && "bg-selectedChat"}`}
                 >

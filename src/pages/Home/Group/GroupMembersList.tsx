@@ -8,7 +8,7 @@ export default function GroupMembersList() {
   let CreateGroup = useAppSelector((state) => state.CreateGroup);
   let OnlineUserList = useAppSelector((state) => state.OnlineUserList);
   const dispatch = useAppDispatch();
-  let { data: contactListUser, isLoading } = useContactList({});
+  let { data: contactListUser } = useContactList({});
   return (
     <div className="relative mb-28 flex w-full max-w-full flex-col overflow-x-hidden lg:h-[80dvh]">
       {contactListUser?.myContactList
@@ -30,12 +30,12 @@ export default function GroupMembersList() {
                   {OnlineUserList.onlineUserList.includes(
                     e.userDetails.user_id.toString(),
                   ) && (
-                    <img
-                      className="absolute bottom-0 right-0 z-30 h-4 w-4"
-                      src="/Home/Online_Green_dot.png"
-                      alt=""
-                    />
-                  )}
+                      <img
+                        className="absolute bottom-0 right-0 z-30 h-4 w-4"
+                        src="/Home/Online_Green_dot.png"
+                        alt=""
+                      />
+                    )}
                 </div>
                 <div>
                   <div className="text-base font-medium capitalize text-darkText">

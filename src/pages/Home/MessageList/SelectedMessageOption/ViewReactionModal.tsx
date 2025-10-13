@@ -1,12 +1,12 @@
-import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
-import { updateMessageOptions } from "../../../../store/Slices/MessageOptionsSlice";
-import TextTranslate from "../../../../utils/TextTranslate";
-import { useTranslateText } from "../../../../hooks/useTranslateText";
-import { useEffect, useState } from "react";
-import { MessageList } from "../../../../types/MessageListType";
-import { useConversationInfo } from "../../../../store/api/useConversationInfo";
 import { RxCross1 } from "react-icons/rx";
+import { useEffect, useState } from "react";
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+
+import TextTranslate from "../../../../utils/TextTranslate";
+import { MessageList } from "../../../../types/MessageListType";
+import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
+import { useConversationInfo } from "../../../../store/api/useConversationInfo";
+import { updateMessageOptions } from "../../../../store/Slices/MessageOptionsSlice";
 
 export default function ViewReactionModal() {
   const dispatch = useAppDispatch();
@@ -75,29 +75,27 @@ export default function ViewReactionModal() {
                                 reaction.user_id == userData.user_id
                                   ? userData.profile_image
                                   : data?.conversationDetails?.ConversationsUsers.find(
-                                      (convoUser) =>
-                                        convoUser.User.user_id ===
-                                        reaction.user_id,
-                                    )?.User.profile_image
+                                    (convoUser) =>
+                                      convoUser.User.user_id ===
+                                      reaction.user_id,
+                                  )?.User.profile_image
                               } // Replace with actual user avatar if available
                               alt=""
                             />
                             <div>
                               {reaction.user_id == userData.user_id
                                 ? "You"
-                                : `${
-                                    data!.conversationDetails.ConversationsUsers.find(
-                                      (convoUser) =>
-                                        convoUser.User.user_id ===
-                                        reaction.user_id,
-                                    )?.User.first_name
-                                  } ${
-                                    data!.conversationDetails.ConversationsUsers.find(
-                                      (convoUser) =>
-                                        convoUser.User.user_id ===
-                                        reaction.user_id,
-                                    )?.User.last_name
-                                  }`}
+                                : `${data!.conversationDetails.ConversationsUsers.find(
+                                  (convoUser) =>
+                                    convoUser.User.user_id ===
+                                    reaction.user_id,
+                                )?.User.first_name
+                                } ${data!.conversationDetails.ConversationsUsers.find(
+                                  (convoUser) =>
+                                    convoUser.User.user_id ===
+                                    reaction.user_id,
+                                )?.User.last_name
+                                }`}
                             </div>
                           </div>
                         </div>

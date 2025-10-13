@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { RxCross2 } from "react-icons/rx";
-import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
-import { updateCreateGroupData } from "../../../store/Slices/CreateGroupSlice";
-import { FaChevronLeft } from "react-icons/fa6";
-import ContactList from "../Contacts/ContactList";
 import { IoSearchOutline } from "react-icons/io5";
 import { useTheme } from "../../../context/ThemeProvider";
-import AddMemberContactList from "../Contacts/AddMemberContactList";
 import { useTranslateText } from "../../../hooks/useTranslateText";
+import AddMemberContactList from "../Contacts/AddMemberContactList";
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
+import { updateCreateGroupData } from "../../../store/Slices/CreateGroupSlice";
 
 const AddMemberModal: React.FC = () => {
   const CreateGroup = useAppSelector((state) => state.CreateGroup);
@@ -60,9 +58,8 @@ const AddMemberModal: React.FC = () => {
                 onChange={(e) => {
                   setsearchUser(e.target.value);
                 }}
-                className={` ${
-                  theme == "dark" ? "bg-transparent" : "bg-[#F2F2F2]"
-                } w-full rounded-xl border border-borderColor py-2 pl-11 placeholder-lightText outline-none`}
+                className={` ${theme == "dark" ? "bg-transparent" : "bg-[#F2F2F2]"
+                  } w-full rounded-xl border border-borderColor py-2 pl-11 placeholder-lightText outline-none`}
                 type="text"
                 placeholder={translate("Search User")}
               />

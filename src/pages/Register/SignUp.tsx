@@ -1,28 +1,19 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-// import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
-// import LogoDark from '../../images/logo/logo-dark.svg';
-import Logo from "/Home/Zeroe_Logo.png";
-// import DefaultLayout from '../../layout/DefaultLayout';
-// import useApiPost from '../../hooks/PostData';
-// import { toast } from 'react-toastify';
-import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
-import "react-phone-input-2/lib/high-res.css";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 import PhoneInput from "react-phone-input-2";
-import { AiOutlineEyeInvisible } from "react-icons/ai";
+import "react-phone-input-2/lib/high-res.css";
 import { AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEyeInvisible } from "react-icons/ai";
+
 import Button from "../../components/Button";
 import useApiPost from "../../hooks/PostData.jsx";
 
 export default function SignUp() {
-  //   let navigate = useNavigate();
-  //   const { loading, postData } = useApiPost();
-  const [email_id, setEmail_id] = useState("");
-  const [password, setPassword] = useState("");
   const [showpassword, setshowPassword] = useState(false);
   const [phone, setPhone] = useState(0);
-  const { loading, error, data, postData } = useApiPost();
+  const { loading, postData } = useApiPost();
 
   const [formData, setFormData] = useState({
     firstname: "",
@@ -40,12 +31,12 @@ export default function SignUp() {
     e.preventDefault();
 
     try {
-      let response = await postData("register_new", formData);
+      await postData("register_new", formData);
       // console.log("response", response);
 
       // Handle successful registration
       toast.success("Registration successful");
-    } catch (error) {
+    } catch (error: any) {
       // Handle error
       console.error("Registration error:", error);
       if (error.response) {
@@ -53,7 +44,7 @@ export default function SignUp() {
         if (responseData && responseData.message === "Error validation") {
           const errors = responseData.data;
           let singleError = Object.values(errors);
-          console.log(singleError[0][0]);
+          // console.log(singleError[0][0]);
 
           toast.error(singleError[0][0]);
         } else {
@@ -219,7 +210,7 @@ export default function SignUp() {
                   </label>
                   <div className="relative">
                     <PhoneInput
-                      className=" py-2  rounded-xl px-4 w-full border-2"
+                      className="py-2 rounded-xl px-4 w-full border-2"
                       placeholder=""
                       value={phone}
                       onChange={(value: string, data) => {

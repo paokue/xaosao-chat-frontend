@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { updateSendMessageData } from "../../../store/Slices/SendMessageSlice";
 import TextTranslate from "../../../utils/TextTranslate";
+import { updateSendMessageData } from "../../../store/Slices/SendMessageSlice";
 
 export default function NearbyPlaces({
   nearbyPlaces,

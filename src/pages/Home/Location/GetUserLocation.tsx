@@ -15,14 +15,14 @@ export default function GetUserLocation() {
 
           dispatch(
             updateSendMessageData({
-              latitude: lat,
-              longitude: lng,
+              latitude: lat.toString(),
+              longitude: lng.toString(),
               message_type: "location",
             }),
           );
         },
         (error) => {
-          setError("Location access denied. Enable GPS and refresh.");
+          setError("Location access denied. Enable GPS and refresh." + error.message);
         },
       );
     } else {

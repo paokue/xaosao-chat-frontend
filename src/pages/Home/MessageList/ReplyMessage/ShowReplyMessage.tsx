@@ -1,11 +1,8 @@
-import React from "react";
-import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
-import { BsCameraVideo } from "react-icons/bs";
-import { HiOutlineDocumentText } from "react-icons/hi";
-import { IoImageOutline, IoLocationOutline } from "react-icons/io5";
-import { updateNavigateToSpesificMessage } from "../../../../store/Slices/NavigateToSpesificMessageSlice";
-import { MdOutlineGifBox } from "react-icons/md";
 import { RiContactsLine } from "react-icons/ri";
+import { HiOutlineDocumentText } from "react-icons/hi";
+
+import { useAppDispatch, useAppSelector } from "../../../../utils/hooks";
+import { updateNavigateToSpesificMessage } from "../../../../store/Slices/NavigateToSpesificMessageSlice";
 
 export default function ShowReplyMessage({ reply_id }: { reply_id: number }) {
   const MessageListArray = useAppSelector((state) => state.MessageList);
@@ -34,8 +31,8 @@ export default function ShowReplyMessage({ reply_id }: { reply_id: number }) {
         {repliedMessage?.senderData.user_id == userData.user_id
           ? "You"
           : repliedMessage?.senderData.first_name +
-            " " +
-            repliedMessage?.senderData.last_name}
+          " " +
+          repliedMessage?.senderData.last_name}
       </div>
       <div className="line-clamp-1">
         {repliedMessage?.message_type == "text" ? (
