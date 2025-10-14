@@ -33,9 +33,9 @@ export default function Sidebar() {
           {/* <NavLink to={"/status"} className="cursor-pointer">
             <ChartPie size={22} className={`${location.pathname === "/status" ? "text-rose-500" : ""}`} />
           </NavLink> */}
-          {/* <NavLink to={"/contact-list"} className="cursor-pointer">
+          <NavLink to={"/contact-list"} className="cursor-pointer">
             <Users size={22} className={`${location.pathname === "/contact-list" ? "text-rose-500" : ""}`} />
-          </NavLink> */}
+          </NavLink>
           <NavLink to={"/call-history"} className="cursor-pointer">
             <Phone size={22} className={`${location.pathname === "/call-history" ? "text-rose-500" : ""}`} />
           </NavLink>
