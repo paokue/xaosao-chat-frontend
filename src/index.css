@@ -10,6 +10,7 @@
 
 body {
   overflow-x: hidden;
+  font-family: "Noto Sans Lao Looped" !important;
 }
 
 /* React Multi Carousel Start ================================================================ */

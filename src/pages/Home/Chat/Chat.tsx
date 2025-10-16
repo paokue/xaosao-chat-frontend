@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { FiPlusSquare } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { FolderDown } from "lucide-react";
 import { MdArrowBackIos } from "react-icons/md";
 import { IoSearchOutline } from "react-icons/io5";
 
@@ -16,17 +15,13 @@ import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 
 // store or redux
 import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
-import { updateCreateGroupData } from "../../../store/Slices/CreateGroupSlice";
-import { FolderDown } from "lucide-react";
 
 export default function Chat() {
   const { theme } = useTheme();
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const translate = useTranslateText();
   const [searchUser, setsearchUser] = useState("");
 
-  const userData = useAppSelector((state) => state.userData);
   const ViewManager = useAppSelector((state) => state.ViewManager);
   const archiveList = useAppSelector((state) => state.archiveList);
 
@@ -34,27 +29,10 @@ export default function Chat() {
     <>
       <div className="relative flex h-screen w-full min-w-[21rem] flex-col bg-secondary pb-14 pt-6 shadow-inner lg:max-w-md lg:pb-0 lg:pt-16 2xl:min-w-[22rem]">
         <div className="w-full px-4">
-          <h4 className="mb-5 text-lg font-semibold lg:mb-10">
-            {userData.user_name}
-          </h4>
-
           <div className="flex items-center justify-between">
             <h4 className="text-lg font-semibold">
-              <TextTranslate text="Chat" />
+              <TextTranslate text="My chats" />
             </h4>
-
-            <div
-              onClick={() => {
-                dispatch(updateCreateGroupData({ createNewGroup: true }));
-                navigate("/add-member-to-group");
-              }}
-              className="flex cursor-pointer items-center gap-1 rounded-lg bg-rose-500 p-2 text-xs text-white"
-            >
-              <FiPlusSquare />
-              <span>
-                <TextTranslate text="New Group" />
-              </span>
-            </div>
           </div>
           <div className="relative mt-4 h-fit">
             <IoSearchOutline className="absolute left-3 top-2 text-2xl text-lightText" />

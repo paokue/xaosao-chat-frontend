@@ -292,7 +292,7 @@ export default function SendMessage() {
 
   return (
     <div
-      className={` ${location.pathname != "/video-call" && location.pathname != "/status" && "absolute"} -bottom-16 lg:bottom-5  flex w-full ${isIOS ? (isKeyboardOpen ? "-translate-y-20" : "-translate-y-20") : isKeyboardOpen ? "-translate-y-14" : "-translate-y-14"} items-center justify-center transition-all duration-300 md:translate-y-0`}
+      className={`mb-5 sm:-mb-3 ${location.pathname != "/video-call" && location.pathname != "/status" && "absolute"} -bottom-16 lg:bottom-5  flex w-full ${isIOS ? (isKeyboardOpen ? "-translate-y-20" : "-translate-y-20") : isKeyboardOpen ? "-translate-y-14" : "-translate-y-14"} items-center justify-center transition-all duration-300 md:translate-y-0`}
     >
       <div className="flex w-[90%] items-center gap-3 xl:w-[90%]">
         <div

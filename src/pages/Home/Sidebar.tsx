@@ -24,43 +24,18 @@ export default function Sidebar() {
     <>
       <div className="fixed hidden h-screen min-w-24 flex-col justify-between bg-primary py-10 text-darkText shadow-xl lg:flex 2xl:min-w-28">
         <div className="bgGradient flex flex-col items-center gap-7">
-          <NavLink to={"/profile"} className="cursor-pointer">
-            <UserRound size={22} className={`${location.pathname === "/profile" ? "text-rose-500" : ""}`} />
-          </NavLink>
           <NavLink to={"/chat"} className="cursor-pointer" >
-            <MessageSquareText size={22} className={`${location.pathname === "/chat" ? "text-rose-500" : ""}`} />
+            <MessageSquareText size={18} className={`${location.pathname === "/chat" ? "text-rose-500" : ""}`} />
           </NavLink>
-          {/* <NavLink to={"/status"} className="cursor-pointer">
-            <ChartPie size={22} className={`${location.pathname === "/status" ? "text-rose-500" : ""}`} />
-          </NavLink> */}
           <NavLink to={"/contact-list"} className="cursor-pointer">
-            <Users size={22} className={`${location.pathname === "/contact-list" ? "text-rose-500" : ""}`} />
+            <Users size={18} className={`${location.pathname === "/contact-list" ? "text-rose-500" : ""}`} />
           </NavLink>
           <NavLink to={"/call-history"} className="cursor-pointer">
-            <Phone size={22} className={`${location.pathname === "/call-history" ? "text-rose-500" : ""}`} />
+            <Phone size={18} className={`${location.pathname === "/call-history" ? "text-rose-500" : ""}`} />
           </NavLink>
           <NavLink to={"/setting"} className="cursor-pointer">
-            <Settings size={22} className={`${location.pathname === "/setting" ? "text-rose-500" : ""}`} />
+            <Settings size={18} className={`${location.pathname === "/setting" ? "text-rose-500" : ""}`} />
           </NavLink>
-        </div>
-        <div className="flex flex-col items-center gap-7">
-          <ThemeToggleButton />
-          <LogoutModal
-            isOpen={showLogOutModal}
-            setIsOpen={setShowLogOutModal}
-          />
-          <button
-            onClick={() => {
-              setShowLogOutModal(true);
-            }}
-          >
-            <img
-              className="h-6"
-              src={`${theme === "dark" ? "/DarkIcons" : "/LightIcons"
-                }/logout.png`}
-              alt=""
-            />
-          </button>
         </div>
       </div>
       <div className="hidden min-w-24 lg:flex 2xl:min-w-28"></div>

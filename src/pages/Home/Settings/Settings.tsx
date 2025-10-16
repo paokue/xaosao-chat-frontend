@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { RWebShare } from "react-web-share";
 import { useNavigate } from "react-router-dom";
@@ -10,18 +9,15 @@ import {
 import { RxShare2 } from "react-icons/rx";
 import { HiLanguage } from "react-icons/hi2";
 import { BsInfoCircle } from "react-icons/bs";
-import { HiOutlineLogout } from "react-icons/hi";
 import { RiUserUnfollowLine } from "react-icons/ri";
 import { FaChevronLeft, FaPlus } from "react-icons/fa6";
 
 // conponents:
-import LogoutModal from "./LogOutModal";
 import BlockUserListModal from "./BlockUserListModal";
 import ReusableProfileCard from "../Profile/ReusableProfileCard";
 
 // utils:
 import TextTranslate from "../../../utils/TextTranslate";
-import ThemeToggleFromSettings from "../ThemeToggleFromSettings";
 import { useTranslateText } from "../../../hooks/useTranslateText";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
@@ -32,7 +28,6 @@ export default function Setting() {
   const theme = useTheme()
   const navigate = useNavigate();
   const translate = useTranslateText();
-  const [showLogOutModal, setShowLogOutModal] = useState(false);
   const userData = useAppSelector((state) => state.userData);
 
   let dispatch = useAppDispatch();
@@ -105,9 +100,22 @@ export default function Setting() {
           </div>
         </div>
 
-        {/* Starred messages,blocked contacts */}
 
         <div className="mt-10 flex flex-col gap-4 px-4">
+          <div
+            onClick={() => {
+              dispatch(updateMessageOptions({ show_all_star_messages: true }));
+              navigate("/profile");
+            }}
+          >
+            <ReusableProfileCard
+              icon={<MdOutlineStarBorderPurple500 className="text-xl" />}
+              value={translate("Profile")}
+              onChange={handleValueChange}
+              isDisabled={true}
+            />
+          </div>
+
           <ReusableProfileCard
             onClick={() => {
               dispatch(
@@ -151,44 +159,6 @@ export default function Setting() {
             />
           </div>
 
-          {/* Privacy Policy ====================================================================================*/}
-          {/* <div
-            onClick={() => {
-              dispatch(
-                updateViewState({
-                  showPrivacyPolicy: true,
-                  showTermsAndCondition: false,
-                }),
-              );
-            }}
-          >
-            <ReusableProfileCard
-              icon={<CiLock className="text-2xl" />}
-              value={translate("Privacy Policy")}
-              onChange={handleValueChange}
-              isDisabled={true}
-            />
-          </div> */}
-
-          {/* Terms & Condition ====================================================================================*/}
-          {/* <div
-            onClick={() => {
-              dispatch(
-                updateViewState({
-                  showTermsAndCondition: true,
-                  showPrivacyPolicy: false,
-                }),
-              );
-            }}
-          >
-            <ReusableProfileCard
-              icon={<MdOutlinePrivacyTip className="text-xl" />}
-              value={translate("Terms & Condition")}
-              onChange={handleValueChange}
-              isDisabled={true}
-            />
-          </div> */}
-
           {/* Share a link ====================================================================================*/}
           <RWebShare
             data={{
@@ -222,34 +192,9 @@ export default function Setting() {
               isDisabled={true}
             />
           </div>
-          {/* toggle form settings  ===================================================================================*/}
-          <ThemeToggleFromSettings />
-
-          {/* Logout ====================================================================================*/}
-          <div
-            onClick={() => {
-              setShowLogOutModal(true);
-            }}
-            className="text-[#FF2525]"
-          >
-            <ReusableProfileCard
-              icon={<HiOutlineLogout className="rotate-180 text-xl" />}
-              value={translateTextFunc("Logout")}
-              onChange={handleValueChange}
-              hideRightArrow={true}
-              isDisabled={true}
-            />
-
-            <LogoutModal
-              isOpen={showLogOutModal}
-              setIsOpen={setShowLogOutModal}
-            />
-          </div>
         </div>
 
-        <div className="text-sm my-4 pb-16 text-center font-semibold lg:pb-0">
-          <TextTranslate text="Version" /> 1.0.10
-        </div>
+        <div className="text-sm my-4 pt-16 text-center font-semibold lg:pb-0"></div>
       </div>
     </>
   );
