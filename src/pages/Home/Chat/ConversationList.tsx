@@ -1,10 +1,11 @@
 import {
   ContextMenu,
-  ContextMenuTrigger,
   ContextMenuItem,
+  ContextMenuTrigger,
 } from "rctx-contextmenu";
-import { useState } from "react";
+import { Loader } from "lucide-react";
 import toast from "react-hot-toast";
+import { useState } from "react";
 import { CgPoll } from "react-icons/cg";
 import { PulseLoader } from "react-spinners";
 import { BsCameraVideo } from "react-icons/bs";
@@ -43,6 +44,7 @@ import useApiPost from "../../../hooks/PostData";
 // components:
 import { useTheme } from "../../../context/ThemeProvider";
 import CallInConversationList from "./CallInConversationList";
+import { useChatList } from "../../../store/api/useChatList";
 import LoadingSkeletonImageDynamic from "../../../components/LoadingSkeletonImageDynamic";
 
 
@@ -53,13 +55,22 @@ export default function ConversationList({
 }) {
   const { theme } = useTheme();
   const dispatch = useAppDispatch();
-  const { loading, postData } = useApiPost();
+  const { postData } = useApiPost();
+
+  const ChatListArray = useAppSelector((state) => state.chatList);
   const OnlineUserList = useAppSelector((state) => state.OnlineUserList);
   const TypingUserList = useAppSelector((state) => state.TypingUserList);
-  const ChatListArray = useAppSelector((state) => state.chatList);
   const currentConversationData = useAppSelector(
     (state) => state.CurrentConversation,
   );
+
+
+  let {
+    // data: chatList,
+    isLoading,
+  } = useChatList({
+    full_name: searchUser,
+  });
 
   const [SelectedConversation, setSelectedConversation] = useState<ChatList>();
 
@@ -116,31 +127,47 @@ export default function ConversationList({
     e;
   };
 
-  if (loading) {
-    <div>
-      Loading....
-    </div>
-  }
+  const filteredChats = ChatListArray.filter(
+    (chat) =>
+      chat.user_name.toLowerCase().includes(searchUser.toLowerCase()) ||
+      chat.group_name.toLowerCase().includes(searchUser.toLowerCase()),
+  );
 
   return (
     <>
       <div className="flex h-[75vh] w-full flex-col overflow-y-auto overflow-x-hidden lg:max-w-md">
-        {ChatListArray.length == 0 ? (
-          <div className="grid h-96 place-content-center gap-5">
-            <img
-              className="mx-auto h-16 w-16"
-              src="/LightIcons/no_search_result_found.png"
-              alt=""
-            />
-            <div>No Conversations Found</div>
+        {isLoading ?
+          <div className="w-full h-full flex items-center justify-center gap-2">
+            <Loader className="text-rose-500 animate-spin" size={18} />
+            <span className="text-md text-rose-500">Loading....</span>
           </div>
-        ) : (
-          ChatListArray.filter(
-            (chat) =>
-              chat.user_name.toLowerCase().includes(searchUser.toLowerCase()) ||
-              chat.group_name.toLowerCase().includes(searchUser.toLowerCase()),
-          ).map((e) => {
-            return (
+          : ChatListArray.length === 0 ? (
+            <div className="grid h-96 place-content-center gap-5">
+              <img
+                className="mx-auto h-16 w-16"
+                src="/LightIcons/no_search_result_found.png"
+                alt=""
+              />
+              <div>No Conversations Found</div>
+            </div>
+          ) : filteredChats.length === 0 ? (
+            <div className="grid h-96 place-content-center gap-5">
+              <img
+                className="mx-auto h-10 w-10"
+                src="/LightIcons/no_search_result_found.png"
+                alt=""
+              />
+              <div>You don't have any conversation with {searchUser}</div>
+              <a
+                type="submit"
+                className="text-center px-4 py-2 bg-rose-500 text-white rounded-md shadow-sm"
+                href={`/contact-list?id=${searchUser}`}
+              >
+                Find on contact list
+              </a>
+            </div>
+          ) : (
+            filteredChats.map((e) => (
               <div key={e.conversation_id} className="px-4">
                 <ContextMenuTrigger id="my-context-menu-1">
                   <div
@@ -391,60 +418,61 @@ export default function ConversationList({
                   <hr className="border-t border-borderColor" />
                 </ContextMenuTrigger>
               </div>
-            );
-          })
-        )}
-      </div>
+            ))
+          )}
+      </div >
 
-      {SelectedConversation?.is_group ? (
-        <ContextMenu id="my-context-menu-1" className="!rounded-xl !bg-modalBg">
-          <ContextMenuItem
-            onClick={() => {
-              archiveConversation();
-            }}
-            className="hover:!bg-dropdownOptionHover"
-          >
-            <TextTranslate text="Archive Chat" />
-          </ContextMenuItem>
-          <ContextMenuItem
-            onClick={() => {
-              deleteConversation();
-            }}
-            className="hover:!bg-dropdownOptionHover"
-          >
-            <TextTranslate text="Delete Chat" />
-          </ContextMenuItem>
-        </ContextMenu>
-      ) : (
-        <ContextMenu id="my-context-menu-1" className="!rounded-xl !bg-modalBg">
-          <ContextMenuItem
-            onClick={() => {
-              archiveConversation();
-            }}
-            className="hover:!bg-dropdownOptionHover"
-          >
-            <TextTranslate text="Archive Chat" />
-          </ContextMenuItem>
-          <ContextMenuItem
-            onClick={() => {
-              deleteConversation();
-            }}
-            className="hover:!bg-dropdownOptionHover"
-          >
-            <TextTranslate text="Delete Chat" />
-          </ContextMenuItem>
-          <ContextMenuItem
-            onClick={() => {
-              blockUser();
-            }}
-            className="hover:!bg-dropdownOptionHover"
-          >
-            <TextTranslate
-              text={SelectedConversation?.is_block ? "Unblock" : "Block"}
-            />
-          </ContextMenuItem>
-        </ContextMenu>
-      )}
+      {
+        SelectedConversation?.is_group ? (
+          <ContextMenu id="my-context-menu-1" className="!rounded-xl !bg-modalBg" >
+            <ContextMenuItem
+              onClick={() => {
+                archiveConversation();
+              }}
+              className="hover:!bg-dropdownOptionHover"
+            >
+              <TextTranslate text="Archive Chat" />
+            </ContextMenuItem>
+            <ContextMenuItem
+              onClick={() => {
+                deleteConversation();
+              }}
+              className="hover:!bg-dropdownOptionHover"
+            >
+              <TextTranslate text="Delete Chat" />
+            </ContextMenuItem>
+          </ContextMenu>
+        ) : (
+          <ContextMenu id="my-context-menu-1" className="!rounded-xl !bg-modalBg">
+            <ContextMenuItem
+              onClick={() => {
+                archiveConversation();
+              }}
+              className="hover:!bg-dropdownOptionHover"
+            >
+              <TextTranslate text="Archive Chat" />
+            </ContextMenuItem>
+            <ContextMenuItem
+              onClick={() => {
+                deleteConversation();
+              }}
+              className="hover:!bg-dropdownOptionHover"
+            >
+              <TextTranslate text="Delete Chat" />
+            </ContextMenuItem>
+            <ContextMenuItem
+              onClick={() => {
+                blockUser();
+              }}
+              className="hover:!bg-dropdownOptionHover"
+            >
+              <TextTranslate
+                text={SelectedConversation?.is_block ? "Unblock" : "Block"}
+              />
+            </ContextMenuItem>
+          </ContextMenu>
+        )
+      }
     </>
   );
 }

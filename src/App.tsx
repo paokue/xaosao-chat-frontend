@@ -1,19 +1,20 @@
+import Cookies from "js-cookie";
+import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { store } from "./store/store";
 import { Provider } from "react-redux";
 import AppRoutes from "./pages/Routes";
-import ScrrollToTop from "../src/components/ScrrollToTop";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
-import { ThemeProvider } from "./context/ThemeProvider";
-import Cookies from "js-cookie";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+
 import { FileProvider } from "./context/FileProvider";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { ThemeProvider } from "./context/ThemeProvider";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { StreamProvider } from "./context/StreamProvider";
+import ScrrollToTop from "../src/components/ScrrollToTop";
 
 function App() {
   const queryClient = new QueryClient({
@@ -27,22 +28,23 @@ function App() {
     },
   });
   const navigate = useNavigate();
-  const location = useLocation();
+
   useEffect(() => {
     const token = Cookies.get("whoxa_auth_token");
 
+    // apao_edit
     if (!token) {
-      if (
-        location.pathname != "/privacy-policy" &&
-        location.pathname != "/otp-verification"
-      ) {
-        navigate("/login");
-      }
-      // Cookies.set(
-      //   "whoxa_auth_token",
-      //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJwaG9uZV9udW1iZXIiOiI3NDMzMDcyMzUxIiwiY291bnRyeSI6ImluZGlhIiwiZmlyc3RfbmFtZSI6IlBhd2FuIiwibGFzdF9uYW1lIjoiUGF0ZWwiLCJkZXZpY2VfdG9rZW4iOiJkUHBFZ1JPUFJoQzlEX1Y0Um1teENTOkFQQTkxYkZVWDhDc2Y5SFctbFB6UmRNdVptaHNGSTFxS3RXZWRhTTBQeFV6QmZTZE92SW5fY19MZHU1UVBDLTF5NGtpc0E5dnExelVBN3pxOGdTblh3cFp1WXhlemxjMkJHNThjLVlDdHJObUZhQWdWNTVxNHBrVDNOQTctWEh4NVlIZ3JZenJXS3RDIiwib25lX3NpZ25hbF9wbGF5ZXJfaWQiOiIyMzI4NjA3MC0wNzRhLTRhYWMtYmE5My01M2RjZGNmZjk4MDUiLCJ1c2VyX25hbWUiOiJwYXdhbjE4MTciLCJiaW8iOiJBdCB3b3JrIiwiZG9iIjoiMCIsImNvdW50cnlfY29kZSI6Iis5MSIsInBhc3N3b3JkIjoiIiwibGFzdF9zZWVuIjowLCJvdHAiOjY2ODMyMCwiZ2VuZGVyIjoibWFsZSIsInByb2ZpbGVfaW1hZ2UiOiJ1cGxvYWRzL290aGVycy8xNzI3MjcxOTkxNTA3LXdwMTIxNDU3MTEtbWFyd2FyaS1ob3JzZS13YWxscGFwZXJzLmpwZyIsIkJsb2NrZWRfYnlfYWRtaW4iOmZhbHNlLCJ2aWV3ZWRfYnlfYWRtaW4iOmZhbHNlLCJjcmVhdGVkQXQiOiIyMDI0LTA2LTA3VDEwOjEyOjA5LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTA0VDA2OjQ3OjM4LjAwMFoiLCJpYXQiOjE3MjgwMjQ0ODJ9.vcghBB-zzrklnUqgeN-ADI_Vw27sULLppEuYv2Lqv_4",
-      // );
+      navigate("/login")
     }
+
+    // if (!token) {
+    //   if (
+    //     location.pathname != "/privacy-policy" &&
+    //     location.pathname != "/otp-verification"
+    //   ) {
+    //     navigate("/login");
+    //   }
+    // }
   }, []);
 
   useEffect(() => {

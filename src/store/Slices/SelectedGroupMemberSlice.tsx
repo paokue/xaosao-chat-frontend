@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { MessageList } from "../../types/MessageListType";
-import { ChatList } from "../../types/ChatListType";
 import { ConversationsUser } from "../../types/ConversationInfoType";
 
 const initialState: ConversationsUser = {

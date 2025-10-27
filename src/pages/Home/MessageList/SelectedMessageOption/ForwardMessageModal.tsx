@@ -45,7 +45,7 @@ const ForwardMessageModal: React.FC = () => {
               style={{
                 backgroundSize: "100%",
               }}
-              className="w-full space-y-5 bg-[url('/Home/add_member_bg.png')] bg-no-repeat px-4 xl:space-y-7"
+              className="w-full space-y-5 px-4 xl:space-y-7"
             >
               <div className="flex items-center gap-3 py-10 font-semibold text-black">
                 <RxCross2
@@ -55,7 +55,7 @@ const ForwardMessageModal: React.FC = () => {
                 <span className="">Forward To</span>
               </div>
             </DialogTitle>
-            <div className="relative mx-4 mt-4 h-fit">
+            <div className="relative mx-4 h-fit">
               <IoSearchOutline className="absolute left-3 top-2 text-2xl text-lightText" />
               <input
                 value={searchUser}
@@ -63,7 +63,7 @@ const ForwardMessageModal: React.FC = () => {
                   setsearchUser(e.target.value);
                 }}
                 className={` ${theme == "dark" ? "bg-transparent" : "bg-[#F2F2F2]"
-                  } w-full rounded-xl border border-borderColor py-2 pl-11 placeholder-lightText outline-none`}
+                  } w-full rounded-xl border border-rose-500 py-2 pl-11 placeholder-lightText outline-none`}
                 type="text"
                 placeholder={translate("Search User")}
               />

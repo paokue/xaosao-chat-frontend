@@ -1,5 +1,8 @@
-import { useState } from "react";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 import { FolderDown } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { MdArrowBackIos } from "react-icons/md";
 import { IoSearchOutline } from "react-icons/io5";
 
@@ -8,19 +11,48 @@ import ConversationList from "./ConversationList";
 import ArchiveConversationList from "./ArchiveConversationList";
 
 // utils, hooks and context
-import { useTheme } from "../../../context/ThemeProvider";
 import TextTranslate from "../../../utils/TextTranslate";
+import { useTheme } from "../../../context/ThemeProvider";
 import { useTranslateText } from "../../../hooks/useTranslateText";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 
 // store or redux
+import { ResData } from "../../../types/UserDataType";
+import { updateUserData } from "../../../store/Slices/UserSlice";
 import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
 
 export default function Chat() {
   const { theme } = useTheme();
+  const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const translate = useTranslateText();
   const [searchUser, setsearchUser] = useState("");
+
+  const queryParams = new URLSearchParams(location.search);
+  const fullname = queryParams.get("id");
+
+  useEffect(() => {
+    if (fullname) {
+      setsearchUser(fullname)
+    }
+  }, []);
+
+  useEffect(() => {
+    const token = Cookies.get("whoxa_auth_token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+    try {
+      const decoded = jwtDecode<ResData & { iat?: number }>(token);
+      const { iat, ...userDataWithoutIat } = decoded;
+      dispatch(updateUserData(userDataWithoutIat as ResData));
+
+    } catch (error) {
+      navigate("/login");
+    }
+  }, [dispatch]);
 
   const ViewManager = useAppSelector((state) => state.ViewManager);
   const archiveList = useAppSelector((state) => state.archiveList);
@@ -31,7 +63,7 @@ export default function Chat() {
         <div className="w-full px-4">
           <div className="flex items-center justify-between">
             <h4 className="text-lg font-semibold">
-              <TextTranslate text="My chats" />
+              <TextTranslate text="My Chats" />
             </h4>
           </div>
           <div className="relative mt-4 h-fit">

@@ -67,7 +67,7 @@ export function formatLastSeen(utcDate: Date | string): string {
   const now = new Date();
 
   const diffInMinutes = Math.floor(
-    (now.getTime() - lastSeenDate.getTime()) / (1000 * 60),
+    (now.getTime() - lastSeenDate.getTime()) / (1000 * 60)
   );
   const diffInHours = Math.floor(diffInMinutes / 60);
   const diffInDays = Math.floor(diffInHours / 24);
@@ -97,12 +97,12 @@ export function formatRelativeTime(utcDateString: Date) {
   const localDate = new Date(
     date.toLocaleString("en-US", {
       timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-    }),
+    })
   );
   const localNow = new Date(
     now.toLocaleString("en-US", {
       timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-    }),
+    })
   );
 
   // Extracting date parts
@@ -134,7 +134,6 @@ export function formatRelativeTime(utcDateString: Date) {
     `, ${formattedTime}`
   );
 }
-
 
 export const formatTime = (isoString: any): string => {
   const date = new Date(isoString);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaChevronLeft } from "react-icons/fa6";
 import { IoSearchOutline } from "react-icons/io5";
@@ -15,6 +15,16 @@ export default function Contacts() {
   const navigate = useNavigate();
   const translate = useTranslateText();
 
+  const queryParams = new URLSearchParams(location.search);
+  const fullname = queryParams.get("id");
+
+
+  useEffect(() => {
+    if (fullname) {
+      setsearchUser(fullname)
+    }
+  }, []);
+
   return (
     <div className="relative flex h-screen w-full flex-col overflow-y-auto overflow-x-hidden pb-6 shadow-inner lg:max-w-md bg-primary ">
       <div className="w-full px-4">
@@ -26,7 +36,7 @@ export default function Contacts() {
             }}
           />
           <span className="text-lg font-semibold">
-            <TextTranslate text="New Chat" />
+            <TextTranslate text="Contact Lists" />
           </span>
         </div>
 

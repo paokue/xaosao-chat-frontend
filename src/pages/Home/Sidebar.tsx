@@ -12,6 +12,7 @@ import { useTheme } from "../../context/ThemeProvider";
 import { removeMessageList } from "../../store/Slices/MessageListSlice";
 import { useWebsiteSettings } from "../../store/api/useWebsiteSettings";
 import { ChartPie, LogOut, MessageSquareText, Phone, Settings, UserRound, Users } from "lucide-react";
+import { resetCurrentConversation } from "../../store/Slices/CurrentConversationSlice";
 
 export default function Sidebar() {
   const { theme } = useTheme();
@@ -23,7 +24,12 @@ export default function Sidebar() {
   return (
     <>
       <div className="fixed hidden h-screen min-w-24 flex-col justify-between bg-primary py-10 text-darkText shadow-xl lg:flex 2xl:min-w-28">
-        <div className="bgGradient flex flex-col items-center gap-7">
+        <div
+          className="bgGradient flex flex-col items-center gap-7"
+          onClick={() => {
+            dispatch(resetCurrentConversation());
+          }}
+        >
           <NavLink to={"/chat"} className="cursor-pointer" >
             <MessageSquareText size={18} className={`${location.pathname === "/chat" ? "text-rose-500" : ""}`} />
           </NavLink>

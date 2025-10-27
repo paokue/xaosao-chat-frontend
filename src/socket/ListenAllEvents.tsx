@@ -104,6 +104,7 @@ export default function ListenAllEvents() {
       // Play message comming sound
       newMessageCommingSound();
       dispatch(updateMessageOptions({ messageListAtTop: false }));
+      socketInstance().emit("ChatList", {});
       // console.log(
       //   currentConversationIdRef.current,
       //   "currentConversationIdRef.current __________________________-",
@@ -171,7 +172,23 @@ export default function ListenAllEvents() {
   }
 
   useEffect(() => {
+
+    // console.log("PK Listion Events:::");
+
     const socket = socketInstance();
+
+    // 🔥 Once connected, emit ChatList request
+    // const requestChatList = () => {
+    //   console.log("Emitting ChatList from ListenAllEvents...");
+    //   socket.emit("ChatList", { user_id: "68f74a9f8b30dd6bca659d36" });
+    //   console.log("Emitting ChatList 1111");
+    // };
+
+    // if (socket.connected) {
+    //   requestChatList();
+    // } else {
+    //   socket.on("connect", requestChatList);
+    // }
 
     socket.on("onlineUsers", (onlineUsers: OnlineUserRes) => {
       dispatch(updateOnlineUserList(onlineUsers));
@@ -186,7 +203,7 @@ export default function ListenAllEvents() {
     });
 
     socket.on("ChatList", (ChatListRes: ChatListRes) => {
-      console.log(ChatListRes.chatList, "ChatListRes.chatList");
+      console.log("Paokue Socket Chatlist", ChatListRes.chatList);
       dispatch(updateChatList(ChatListRes.chatList));
     });
 
@@ -197,6 +214,7 @@ export default function ListenAllEvents() {
     socket.on("messageReceived", (MessageListRes: MessageListRes) => {
       appendMessageToMessageList(MessageListRes);
     });
+
     socket.on(
       "connected-user-list",
       (ConnectedUserListRes: ConnectedUserListRes) => {
@@ -336,6 +354,7 @@ export default function ListenAllEvents() {
         });
       },
     );
+
     socket.on(
       "update_reactions",
       ({
@@ -358,6 +377,7 @@ export default function ListenAllEvents() {
         );
       },
     );
+
     socket.on(
       "update_message_read",
       ({ message_id }: { message_id: number }) => {
@@ -401,6 +421,7 @@ export default function ListenAllEvents() {
         }),
       );
     });
+
     socket.on(
       "call_decline",
       (callDeclinedData: {
@@ -415,9 +436,16 @@ export default function ListenAllEvents() {
         );
       },
     );
+
     socket.on("pinMessageList", (pinMessageList: PinMessageListRes) => {
       dispatch(updatePinMessages(pinMessageList));
     });
+
+    // return () => {
+    //   socket.off("connect", requestChatList);
+    //   socket.off("ChatList");
+    //   socket.off("ArchiveList");
+    // };
   }, []);
 
   return <></>;

@@ -134,15 +134,15 @@ export default function ForwardMessageConversationsList({
                   className={`relative ml-auto mr-3 h-9 w-24 overflow-hidden rounded-full border ${ForwardMessageData.forwarded_conversations_id.includes(
                     e.conversation_id,
                   )
-                    ? "border-[#D6D6D6]"
-                    : "border-[#FCC605]"
+                    ? "border-green-500"
+                    : "border-rose-500"
                     } px-4 text-base font-medium outline-none`}
                 >
                   {ForwardMessageData.forwarded_conversations_id.includes(
                     e.conversation_id,
                   ) ? (
                     <span className="flex items-center gap-1">
-                      <IoCheckmarkOutline className="text-lg text-[#D6D6D6]" />
+                      <IoCheckmarkOutline className="text-lg text-green-500" />
                       <span>Sent</span>
                     </span>
                   ) : (

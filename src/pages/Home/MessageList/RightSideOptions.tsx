@@ -59,10 +59,10 @@ export default function RightSideOptions() {
       <div className="flex items-center gap-3 lg:gap-4">
         <div className="flex cursor-pointer items-center">
           <Menu>
-            <MenuButton className="inline-flex items-center gap-2 rounded-md py-1.5 text-sm/6 font-semibold shadow-2xl focus:outline-none data-[focus]:outline-1 lg:px-3">
+            {/* <MenuButton className="inline-flex items-center gap-2 rounded-md py-1.5 text-sm/6 font-semibold shadow-2xl focus:outline-none data-[focus]:outline-1 lg:px-3">
               <TiVideo className="text-xl sm:text-2xl" />
               <FiChevronDown className="hidden w-fit lg:flex" />
-            </MenuButton>
+            </MenuButton> */}
 
             <MenuItems
               transition

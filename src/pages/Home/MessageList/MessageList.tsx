@@ -24,6 +24,7 @@ export default function MessageList() {
   const currentConversationData = useAppSelector(
     (state) => state.CurrentConversation,
   );
+
   let { data: conversationInfo } = useConversationInfo();
   let ChatListArray = useAppSelector((state) => state.chatList);
 

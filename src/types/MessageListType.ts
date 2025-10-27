@@ -1,4 +1,5 @@
 export interface MessageListRes {
+  message_id: number;
   conversation_id(conversation_id: any, arg1: string): unknown;
   MessageList: MessageList[];
   totalPages: number;

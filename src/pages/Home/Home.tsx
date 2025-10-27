@@ -15,11 +15,11 @@ export default function Home() {
   const currentConversationData = useAppSelector(
     (state) => state.CurrentConversation,
   );
+
   const ViewManager = useAppSelector((state) => state.ViewManager);
 
   // @ts-ignore
   const { theme } = useTheme();
-
   return (
     <div>
       <div className="relative flex w-screen">
@@ -45,7 +45,9 @@ export default function Home() {
               }}
             >
               {currentConversationData.conversation_id == -1 ? (
-                <EmptyChatScreen />
+                <div>
+                  <EmptyChatScreen />
+                </div>
               ) : (
                 <MessageList />
               )}

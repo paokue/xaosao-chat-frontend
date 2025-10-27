@@ -42,6 +42,7 @@ export interface MyContactList {
   phone_number: string;
   full_name: string;
   userDetails: UserDetails;
+  createdAt: string;
 }
 
 export interface UserDetails {

@@ -6,11 +6,11 @@ import LoadMoreMessages from "./LoadMoreMessages";
 import OnClickScrollToBottom from "./OnClickScrollToBottom";
 
 // Utils
+import { useTheme } from "../../../context/ThemeProvider";
 import scrollToMessage from "../../../utils/scrollToMessage";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { formatUTCtoLocalDate } from "../../../utils/formatUTCtoLocalDate";
 import { updateMessageOptions } from "../../../store/Slices/MessageOptionsSlice";
-import { useTheme } from "../../../context/ThemeProvider";
 
 export default function MessageBody() {
   const theme = useTheme();

@@ -54,6 +54,8 @@ export default function EnterOtp() {
           Cookies.set("whoxa_auth_token", res.token);
         }
 
+        console.log("Chat user data:::", res?.resData);
+
         dispatch(updateUserData(res?.resData));
         toast.success("Otp Verified");
         if (

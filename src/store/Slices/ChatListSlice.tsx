@@ -1,18 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ChatList, ChatListRes } from "../../types/ChatListType";
+import { ChatList } from "../../types/ChatListType";
 
-// Define the initial state with an empty chatList
 const initialState: ChatList[] = [];
 
-// Create a slice of the state
 const ChatListSlice = createSlice({
   name: "chatList",
   initialState,
   reducers: {
     // Reducer to update the chatList
     updateChatList(state, action: PayloadAction<ChatList[]>) {
-      // console.log("action.payload", action.payload);
-      // Directly modify the state to replace the chatList
       return action.payload;
     },
 
@@ -22,9 +18,8 @@ const ChatListSlice = createSlice({
         conversation_id: any;
         last_message: string;
         last_message_type: string;
-      }>, // single object in payload
+      }>,
     ) {
-      // console.log(action.payload, "action.payload");
 
       return state.map((conversation) => {
         if (conversation.conversation_id == action.payload.conversation_id) {
@@ -37,15 +32,13 @@ const ChatListSlice = createSlice({
         return conversation;
       });
     },
-    
+
     updateUnreadCountByConversationId(
       state,
       action: PayloadAction<{
         conversation_id: any;
-      }>, // single object in payload
+      }>,
     ) {
-      // console.log(action.payload, "action.payload");
-
       return state.map((conversation) => {
 
         if (
@@ -63,7 +56,6 @@ const ChatListSlice = createSlice({
   },
 });
 
-// Export the reducer and actions
 export default ChatListSlice.reducer;
 export const {
   updateChatList,

@@ -1,4 +1,5 @@
 import toast from "react-hot-toast";
+import { Loader, Send } from "lucide-react";
 import { useEffect, useState } from "react";
 import "react-phone-input-2/lib/high-res.css";
 import { useNavigate } from "react-router-dom";
@@ -6,10 +7,8 @@ import { useNavigate } from "react-router-dom";
 // components
 import useApiPost from "../../hooks/PostData";
 import PhoneInputField from "./PhoneInputField";
-import EmailInputField from "./EmailInputField";
 import LoginLeftSections from "./LoginLeftSections";
 import { useWebsiteSettings } from "../../store/api/useWebsiteSettings";
-import { Loader, Send } from "lucide-react";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -19,7 +18,6 @@ export default function Login() {
     phone_number: "",
     country: "",
     country_full_name: "",
-    email_id: "",
   });
   const { data: websiteSettings } = useWebsiteSettings();
   const [bothLoginEnabled, setBothLoginEnabled] = useState(false);
@@ -73,32 +71,6 @@ export default function Login() {
     }
   }
 
-  async function postEmailId() {
-    if (formData.email_id == "" || formData.email_id == undefined) {
-      toast.error("Please Enter Email Number", { position: "bottom-center" });
-      return;
-    }
-    const dataToSend = {
-      ...formData,
-      email_id: formData.email_id,
-    };
-
-    try {
-      let registerEmailRes = await postData("register-email", {
-        email_id: formData.email_id,
-      });
-      if (registerEmailRes.success == true) {
-        sessionStorage.setItem("dataToSend", JSON.stringify(dataToSend));
-        navigate("/otp-verification");
-      } else {
-        toast.error(registerEmailRes.message);
-        return;
-      }
-    } catch (error: any) {
-      toast.error(error.response.data.message);
-    }
-  }
-
   return (
     <>
       <div id="recaptcha-container"></div>
@@ -145,30 +117,16 @@ export default function Login() {
               )}
 
               <div>
-                {currentLoginField == "phone" ? (
-                  <PhoneInputField
-                    postPhoneNumber={postPhoneNumber}
-                    formData={formData}
-                    setFormData={setFormData}
-                  />
-                ) : (
-                  <EmailInputField
-                    postEmailId={postEmailId}
-                    formData={formData}
-                    setFormData={setFormData}
-                  />
-                )}
+                <PhoneInputField
+                  postPhoneNumber={postPhoneNumber}
+                  formData={formData}
+                  setFormData={setFormData}
+                />
               </div>
             </div>
 
             <button
-              onClick={() => {
-                if (currentLoginField == "email") {
-                  postEmailId();
-                } else {
-                  postPhoneNumber();
-                }
-              }}
+              onClick={postPhoneNumber}
               className={`bg-rose-500 border relative w-full overflow-hidden rounded-lg px-4 py-2 font-medium outline-none lg:px-9 lg:text-lg`}
             >
               {loading ? (
