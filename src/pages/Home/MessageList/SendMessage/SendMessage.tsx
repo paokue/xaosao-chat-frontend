@@ -32,6 +32,7 @@ import {
 } from "../../../../store/Slices/ViewManagerSlice";
 import { useConversationInfo } from "../../../../store/api/useConversationInfo";
 import { updateCurrentConversation } from "../../../../store/Slices/CurrentConversationSlice";
+import { Loader } from "lucide-react";
 
 export default function SendMessage() {
   // @ts-ignore
@@ -381,7 +382,7 @@ export default function SendMessage() {
         >
           {messageData.conversation_id ==
             currentConversationData.conversation_id && sendMessageLoading ? (
-            <ClipLoader size={25} />
+            <Loader size={22} className="text-white animate-spin" />
           ) : (
             <VscSend className="-rotate-45 text-xl text-white" />
           )}
