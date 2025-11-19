@@ -38,7 +38,7 @@ export default function SignUp() {
       toast.success("Registration successful");
     } catch (error: any) {
       // Handle error
-      console.error("Registration error:", error);
+      console.error("Registration on React failed:", error);
       if (error.response) {
         const responseData = error.response.data;
         if (responseData && responseData.message === "Error validation") {

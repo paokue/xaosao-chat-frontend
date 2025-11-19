@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   xaosao-chat-frontend:
+    container_name: xaosao-chat-frontend
     build:
       context: .
       dockerfile: Dockerfile
@@ -14,4 +15,4 @@ services:
     restart: always
 networks:
   xaosao-share-network:
-    external: false
+    external: true
