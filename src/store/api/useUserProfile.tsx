@@ -32,8 +32,8 @@ export const useUserProfile = () => {
           Cookies.remove("whoxa_auth_token"); // clear token
           localStorage.clear();
           sessionStorage.clear();
-          if (window.location.pathname !== "/login") {
-            window.location.href = "/login";
+          if (window.location.pathname !== "/login-without-otp") {
+            window.location.href = "/login-without-otp";
           }
         }
 
@@ -47,8 +47,8 @@ export const useUserProfile = () => {
           Cookies.remove("whoxa_auth_token");
           localStorage.clear();
           sessionStorage.clear();
-          if (window.location.pathname !== "/login") {
-            window.location.href = "/login";
+          if (window.location.pathname !== "/login-without-otp") {
+            window.location.href = "/login-without-otp";
           }
         }
         throw error; // rethrow so React Query can handle error states

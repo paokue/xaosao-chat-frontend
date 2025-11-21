@@ -2,7 +2,8 @@ import {
   ContextMenu,
   ContextMenuItem,
   ContextMenuTrigger,
-} from "rctx-contextmenu";
+  ContextMenuProvider,
+} from "../../../components/ContextMenu";
 import { Loader } from "lucide-react";
 import toast from "react-hot-toast";
 import { useState } from "react";
@@ -134,12 +135,12 @@ export default function ConversationList({
   );
 
   return (
-    <>
+    <ContextMenuProvider>
       <div className="flex h-[75vh] w-full flex-col overflow-y-auto overflow-x-hidden lg:max-w-md">
         {isLoading ?
           <div className="w-full h-full flex items-center justify-center gap-2">
             <Loader className="text-rose-500 animate-spin" size={18} />
-            <span className="text-md text-rose-500">Loading....</span>
+            <span className="text-md text-rose-500"><TextTranslate text="Loading...." /></span>
           </div>
           : ChatListArray.length === 0 ? (
             <div className="grid h-96 place-content-center gap-5">
@@ -148,7 +149,7 @@ export default function ConversationList({
                 src="/LightIcons/no_search_result_found.png"
                 alt=""
               />
-              <div>No Conversations Found</div>
+              <div><TextTranslate text="No Conversations Found" /></div>
             </div>
           ) : filteredChats.length === 0 ? (
             <div className="grid h-96 place-content-center gap-5">
@@ -157,13 +158,13 @@ export default function ConversationList({
                 src="/LightIcons/no_search_result_found.png"
                 alt=""
               />
-              <div>You don't have any conversation with {searchUser}</div>
+              <div><TextTranslate text="You don't have any conversation with" /> {searchUser}</div>
               <a
                 type="submit"
                 className="text-center px-4 py-2 bg-rose-500 text-white rounded-md shadow-sm"
                 href={`/contact-list?id=${searchUser}`}
               >
-                Find on contact list
+                <TextTranslate text="Find on contact list" />
               </a>
             </div>
           ) : (
@@ -473,6 +474,6 @@ export default function ConversationList({
           </ContextMenu>
         )
       }
-    </>
+    </ContextMenuProvider>
   );
 }

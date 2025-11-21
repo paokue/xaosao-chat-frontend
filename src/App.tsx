@@ -34,7 +34,7 @@ function App() {
 
     // apao_edit
     if (!token) {
-      navigate("/login")
+      navigate("/login-without-otp")
     }
 
     // if (!token) {

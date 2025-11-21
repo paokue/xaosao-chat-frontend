@@ -1,13 +1,13 @@
 import { GoDotFill } from "react-icons/go";
-import { RWebShare } from "react-web-share";
+// import { RWebShare } from "react-web-share";
 import { useNavigate } from "react-router-dom";
 
 // icons:
 import {
   MdOutlineStarBorderPurple500,
 } from "react-icons/md";
-import { RxShare2 } from "react-icons/rx";
-import { HiLanguage } from "react-icons/hi2";
+// import { RxShare2 } from "react-icons/rx";
+// import { HiLanguage } from "react-icons/hi2";
 import { BsInfoCircle } from "react-icons/bs";
 import { RiUserUnfollowLine } from "react-icons/ri";
 import { FaChevronLeft, FaPlus } from "react-icons/fa6";
@@ -18,11 +18,11 @@ import ReusableProfileCard from "../Profile/ReusableProfileCard";
 
 // utils:
 import TextTranslate from "../../../utils/TextTranslate";
+import { useTheme } from "../../../context/ThemeProvider";
 import { useTranslateText } from "../../../hooks/useTranslateText";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
 import { updateMessageOptions } from "../../../store/Slices/MessageOptionsSlice";
-import { useTheme } from "../../../context/ThemeProvider";
 
 export default function Setting() {
   const theme = useTheme()
@@ -35,21 +35,21 @@ export default function Setting() {
     console.log(newValue);
   };
 
-  let LanguageTextList = useAppSelector((state) => state.LanguageTextList);
+  // let LanguageTextList = useAppSelector((state) => state.LanguageTextList);
 
-  function translateTextFunc(text: string) {
-    if (!LanguageTextList || !LanguageTextList.results) {
-      return <>{text}</>;
-    }
+  // function translateTextFunc(text: string) {
+  //   if (!LanguageTextList || !LanguageTextList.results) {
+  //     return <>{text}</>;
+  //   }
 
-    const results = LanguageTextList.results;
-    const translation = results.find((element: any) => element.key === text);
-    if (translation) {
-      return translation.Translation;
-    } else {
-      return text;
-    }
-  }
+  //   const results = LanguageTextList.results;
+  //   const translation = results.find((element: any) => element.key === text);
+  //   if (translation) {
+  //     return translation.Translation;
+  //   } else {
+  //     return text;
+  //   }
+  // }
 
   return (
     <>
@@ -59,7 +59,7 @@ export default function Setting() {
           style={{
             backgroundSize: "100%",
           }}
-          className={`h-full w-full space-y-3 px-4 py-2 xl:space-y-5 ${theme.theme === "dark" ? "bg-[#2A2A2A]" : "bg-[#F1F1F1]"}`}
+          className={`h-auto w-full space-y-3 px-4 py-2 xl:space-y-5 ${theme.theme === "dark" ? "bg-[#2A2A2A]" : "bg-[#F1F1F1]"}`}
         >
           <div className="flex items-center gap-3 pt-6 font-semibold text-black lg:pt-16 2xl:pt-16">
             <FaChevronLeft
@@ -102,7 +102,7 @@ export default function Setting() {
 
 
         <div className="mt-10 flex flex-col gap-4 px-4">
-          <div
+          {/* <div
             onClick={() => {
               dispatch(updateMessageOptions({ show_all_star_messages: true }));
               navigate("/profile");
@@ -114,7 +114,7 @@ export default function Setting() {
               onChange={handleValueChange}
               isDisabled={true}
             />
-          </div>
+          </div> */}
 
           <ReusableProfileCard
             onClick={() => {
@@ -160,7 +160,7 @@ export default function Setting() {
           </div>
 
           {/* Share a link ====================================================================================*/}
-          <RWebShare
+          {/* <RWebShare
             data={{
               text: "Xaosao Chat",
               url: `${window.location.origin}`,
@@ -173,10 +173,10 @@ export default function Setting() {
               onChange={handleValueChange}
               isDisabled={true}
             />
-          </RWebShare>
+          </RWebShare> */}
 
           {/* Language ====================================================================================*/}
-          <div
+          {/* <div
             onClick={() => {
               dispatch(
                 updateViewState({
@@ -191,7 +191,7 @@ export default function Setting() {
               onChange={handleValueChange}
               isDisabled={true}
             />
-          </div>
+          </div> */}
         </div>
 
         <div className="text-sm my-4 pt-16 text-center font-semibold lg:pb-0"></div>

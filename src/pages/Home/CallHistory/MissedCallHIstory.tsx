@@ -4,6 +4,7 @@ import { useTheme } from "../../../context/ThemeProvider";
 import { useCallHistory } from "../../../store/api/useCallHistory";
 import { formatDate, formatTime } from "../../../utils/formatUTCtoLocalDate";
 import LoadingSkeletonImageDynamic from "../../../components/LoadingSkeletonImageDynamic";
+import TextTranslate from "../../../utils/TextTranslate";
 
 export default function MissedCallHIstory() {
   let { data: callHistory, isLoading } = useCallHistory();
@@ -24,7 +25,7 @@ export default function MissedCallHIstory() {
             src="/LightIcons/no_search_result_found.png"
             alt=""
           />
-          <div>No Missed Calls found</div>
+          <div><TextTranslate text="No Missed Calls found" /></div>
         </div>
       ) : callHistory?.callList.filter((e) => e.missed_call == "1").length ==
         0 ? (
@@ -34,7 +35,7 @@ export default function MissedCallHIstory() {
             src="/LightIcons/no_search_result_found.png"
             alt=""
           />
-          <div>No Calls Found</div>
+          <div><TextTranslate text="No Calls Found" /></div>
         </div>
       ) : (
         callHistory?.callList

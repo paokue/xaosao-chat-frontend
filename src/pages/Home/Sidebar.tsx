@@ -36,9 +36,9 @@ export default function Sidebar() {
           <NavLink to={"/contact-list"} className="cursor-pointer">
             <Users size={18} className={`${location.pathname === "/contact-list" ? "text-rose-500" : ""}`} />
           </NavLink>
-          <NavLink to={"/call-history"} className="cursor-pointer">
+          {/* <NavLink to={"/call-history"} className="cursor-pointer">
             <Phone size={18} className={`${location.pathname === "/call-history" ? "text-rose-500" : ""}`} />
-          </NavLink>
+          </NavLink> */}
           <NavLink to={"/setting"} className="cursor-pointer">
             <Settings size={18} className={`${location.pathname === "/setting" ? "text-rose-500" : ""}`} />
           </NavLink>
