@@ -214,8 +214,6 @@ export default function SignUp() {
                       placeholder=""
                       value={phone}
                       onChange={(value: string, data) => {
-                        // console.log("data", data);
-                        // console.log("value", value);
                         setPhone(value);
                         setFormData((prevData) => ({
                           ...prevData,

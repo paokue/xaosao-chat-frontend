@@ -4,7 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useAppDispatch } from "../../utils/hooks";
 import { useTheme } from "../../context/ThemeProvider";
 import { updateViewState } from "../../store/Slices/ViewManagerSlice";
-import { Home, MessageSquareText, Phone, Settings, Users } from "lucide-react";
+import { Home, MessageSquareText, Settings, Users } from "lucide-react";
 import { resetCurrentConversation } from "../../store/Slices/CurrentConversationSlice";
 
 export default function Bottombar() {
@@ -21,7 +21,7 @@ export default function Bottombar() {
       }}
       className="fixed bottom-0 z-50 flex w-full items-center justify-evenly bg-primary py-4 lg:hidden"
     >
-      <NavLink to={"http://localhost:5175/dashboard/"} className="flex items-center justify-center flex-col cursor-pointer space-y-1">
+      <NavLink to={"http://localhost:5176/dashboard/"} className="flex items-center justify-center flex-col cursor-pointer space-y-1">
         <Home size={16} />
         <p className="text-xs text-gray-500 text-sm">Home</p>
       </NavLink>
@@ -33,10 +33,10 @@ export default function Bottombar() {
         <Users size={16} className={`${location.pathname === "/contact-list" ? "text-rose-500" : ""}`} />
         <p className="text-xs text-gray-500 text-sm">Contacts</p>
       </NavLink>
-      <NavLink to={"/call-history"} className="flex items-center justify-center flex-col cursor-pointer space-y-1">
+      {/* <NavLink to={"/call-history"} className="flex items-center justify-center flex-col cursor-pointer space-y-1">
         <Phone size={16} className={`${location.pathname === "/call-history" ? "text-rose-500" : ""}`} />
         <p className="text-xs text-gray-500 text-sm">Calls</p>
-      </NavLink>
+      </NavLink> */}
       <NavLink to={"/setting"} className="flex items-center justify-center flex-col cursor-pointer space-y-1">
         <Settings size={16} className={`${location.pathname === "/setting" ? "text-rose-500" : ""}`} />
         <p className="text-xs text-gray-500 text-sm">Settings</p>
