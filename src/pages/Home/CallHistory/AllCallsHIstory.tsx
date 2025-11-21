@@ -5,6 +5,7 @@ import { useTheme } from "../../../context/ThemeProvider";
 import { useCallHistory } from "../../../store/api/useCallHistory";
 import CallInCallHistory from "./CallInCallHistory";
 import { formatDate, formatTime } from "../../../utils/formatUTCtoLocalDate";
+import TextTranslate from "../../../utils/TextTranslate";
 
 export default function AllCallsHIstory() {
   let { data: callHistory, isLoading } = useCallHistory();
@@ -25,7 +26,7 @@ export default function AllCallsHIstory() {
             src="/LightIcons/no_search_result_found.png"
             alt=""
           />
-          <div>No Calls found</div>
+          <div><TextTranslate text="No Calls found" /></div>
         </div>
       ) : callHistory?.callList.length == 0 ? (
         <div className="grid h-96 place-content-center gap-5">
@@ -34,7 +35,7 @@ export default function AllCallsHIstory() {
             src="/LightIcons/no_search_result_found.png"
             alt=""
           />
-          <div>No Calls Found</div>
+          <div><TextTranslate text="No Calls Found" /></div>
         </div>
       ) : (
         callHistory?.callList.map((e) => {

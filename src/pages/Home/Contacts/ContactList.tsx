@@ -102,7 +102,7 @@ export default function ContactList({ searchUser }: { searchUser: string }) {
       {isLoading ? (
         <div className="w-full h-full flex items-center justify-center gap-2">
           <Loader className="text-rose-500 animate-spin" size={18} />
-          <span className="text-md text-rose-500">Loading....</span>
+          <span className="text-md text-rose-500"><TextTranslate text="Loading...." /></span>
         </div>
       ) : contactListUser?.myContactList?.filter(
         (contact) => userData.user_id != contact?.userDetails?.user_id,
@@ -114,7 +114,7 @@ export default function ContactList({ searchUser }: { searchUser: string }) {
               src="/LightIcons/no_search_result_found.png"
               alt=""
             />
-            <div>No Contacts Found</div>
+            <div><TextTranslate text="No Contacts Found" /></div>
           </div>
         ) : (
           <div className="grid h-96 place-content-center gap-5">
@@ -124,8 +124,7 @@ export default function ContactList({ searchUser }: { searchUser: string }) {
               alt=""
             />
             <div className="px-5 text-center">
-              Install the Whoxa mobile app first to sync your account and
-              display your contacts here.
+              <TextTranslate text="Install the Whoxa mobile app first to sync your account and display your contacts here." />
             </div>
           </div>
         )

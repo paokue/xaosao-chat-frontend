@@ -3,6 +3,7 @@ import { useState } from "react";
 import AllCallsHIstory from "./AllCallsHIstory";
 import { Phone, PhoneMissed } from "lucide-react";
 import MissedCallHIstory from "./MissedCallHIstory";
+import TextTranslate from "../../../utils/TextTranslate";
 
 export default function CallHistoryTabs() {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -19,7 +20,7 @@ export default function CallHistoryTabs() {
               } flex w-40 cursor-pointer items-center justify-center gap-2 rounded-lg text-center text-sm font-medium`}
           >
             <Phone size={20} className={`${selectedTab == 0 ? "bg-rose-500 text-white" : ""}`} />
-            <span className="w-fit">All Calls</span>
+            <span className="w-fit"><TextTranslate text="All Calls" /></span>
           </div>
           <div
             onClick={() => {
@@ -29,7 +30,7 @@ export default function CallHistoryTabs() {
               } flex w-40 cursor-pointer items-center justify-center gap-2 rounded-lg text-center text-sm font-medium`}
           >
             <PhoneMissed size={20} className={`${selectedTab == 1 ? "bg-rose-500 text-white" : ""}`} />
-            <span className="w-fit">Missed Call</span>
+            <span className="w-fit"><TextTranslate text="Missed Call" /></span>
           </div>
         </div>
 
