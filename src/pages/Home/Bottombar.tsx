@@ -28,12 +28,12 @@ export default function Bottombar() {
           <TextTranslate text="Discover" />
         </p>
       </NavLink>
-      <NavLink to={`${import.meta.env.VITE_FRONTEND_URL}dashboard/matches`} className="flex items-center justify-center flex-col cursor-pointer space-y-1">
+      {/* <NavLink to={`${import.meta.env.VITE_FRONTEND_URL}dashboard/matches`} className="flex items-center justify-center flex-col cursor-pointer space-y-1">
         <Heart size={18} className="text-gray-700" />
         <p className="text-gray-500 text-sm">
           <TextTranslate text="Match" />
         </p>
-      </NavLink>
+      </NavLink> */}
       <NavLink to={"/chat"} className="flex items-center justify-center flex-col cursor-pointer space-y-1">
         <MessageSquareText size={18} className={`${location.pathname === "/chat" ? "text-rose-500" : "text-gray-700"}`} />
         <p className={`text-sm ${location.pathname === "/chat" ? "text-rose-500" : "text-gray-700"}`}>
