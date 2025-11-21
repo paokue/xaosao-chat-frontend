@@ -41,7 +41,7 @@ export default function Chat() {
   useEffect(() => {
     const token = Cookies.get("whoxa_auth_token");
     if (!token) {
-      navigate("/login");
+      navigate("/login-without-otp");
       return;
     }
     try {
@@ -50,7 +50,7 @@ export default function Chat() {
       dispatch(updateUserData(userDataWithoutIat as ResData));
 
     } catch (error) {
-      navigate("/login");
+      navigate("/login-without-otp");
     }
   }, [dispatch]);
 

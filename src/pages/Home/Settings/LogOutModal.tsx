@@ -22,7 +22,7 @@ export default function LogoutModal({ isOpen, setIsOpen }: LogoutModalProps) {
     Cookies.remove("whoxa_auth_token");
     sessionStorage.clear();
     localStorage.clear();
-    navigate("/login");
+    navigate("/login-without-otp");
   }
 
   return (

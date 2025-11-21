@@ -47,6 +47,7 @@ import CallDeclinedModal from "./Home/VideoCall/CallDeclinedModal";
 import CallHIstory from "./Home/CallHistory/CallHIstory";
 import StatusModal from "./Home/Status/StatusModal/StatusModal";
 import ViewReactionModal from "./Home/MessageList/SelectedMessageOption/ViewReactionModal";
+import LoginWithoutOTP from "./Register/loginWithoutOTP";
 
 const AppRoutes = () => {
   const pathname = useLocation().pathname;
@@ -149,6 +150,7 @@ const AppRoutes = () => {
               <Route path="video-call" element={<VideoCall />} />
               <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/login-without-otp" element={<LoginWithoutOTP />} />
               <Route path="/user-details" element={<UserDetails />} />
               <Route path="/select-profile" element={<SelectProfilePic />} />
               <Route path="/otp-verification" element={<EnterOtp />} />
