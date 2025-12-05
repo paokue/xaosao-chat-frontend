@@ -24,6 +24,55 @@ import LinkPreview from "../../../components/LinkPreview";
 import CallInMessageList from "../MessageList/CallInMessageList";
 import LoadingSkeletonImageDynamic from "../../../components/LoadingSkeletonImageDynamic";
 
+// Helper function to fix image URL and check validity
+const getValidImageUrl = (url: string): string | null => {
+  if (!url) return null;
+
+  let cleanUrl = url;
+  if (url.includes("http://localhost:3000/https://")) {
+    cleanUrl = url.replace("http://localhost:3000/", "");
+  } else if (url.includes("http://localhost:3000/http://")) {
+    cleanUrl = url.replace("http://localhost:3000/", "");
+  }
+
+  if (cleanUrl.includes("not-found-images") || cleanUrl.includes("profile-image.png")) {
+    return null;
+  }
+
+  if (cleanUrl.startsWith("/uploads") || cleanUrl === "") {
+    return null;
+  }
+
+  // Only accept URLs that are proper CDN URLs or have image extensions
+  if (!cleanUrl.includes("b-cdn.net") && !cleanUrl.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+    return null;
+  }
+
+  return cleanUrl;
+};
+
+// Generate consistent color based on username
+const getAvatarColor = (name: string): string => {
+  const colors = [
+    "bg-rose-500", "bg-pink-500", "bg-purple-500", "bg-indigo-500",
+    "bg-blue-500", "bg-cyan-500", "bg-teal-500", "bg-emerald-500",
+    "bg-green-500", "bg-amber-500", "bg-orange-500", "bg-red-500",
+  ];
+
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  return colors[Math.abs(hash) % colors.length];
+};
+
+// Get first letter of name
+const getInitial = (name: string): string => {
+  if (!name) return "?";
+  return name.charAt(0).toUpperCase();
+};
+
 // Socket:
 import { socketInstance } from "../../../socket/socket";
 import { removeMessageList } from "../../../store/Slices/MessageListSlice";
@@ -154,11 +203,26 @@ export default function StarMessageList() {
                           <div
                             className={`flex cursor-pointer items-center ${starMessage.Chat.senderId == userData.user_id ? "flex-row-reverse" : "flex-row"} gap-2`}
                           >
-                            <img
-                              src={starMessage.Chat.User?.profile_image}
-                              alt="My profile"
-                              className={`mb-2 h-7 w-7 rounded-full object-cover`}
-                            />
+                            {(() => {
+                              const validUrl = getValidImageUrl(starMessage.Chat.User?.profile_image || "");
+                              const displayName = starMessage.Chat.User?.user_name || starMessage.Chat.User?.first_name || "";
+
+                              if (validUrl) {
+                                return (
+                                  <img
+                                    src={validUrl}
+                                    alt="My profile"
+                                    className={`mb-2 h-7 w-7 rounded-full object-cover`}
+                                  />
+                                );
+                              } else {
+                                return (
+                                  <div className={`mb-2 h-7 w-7 rounded-full flex items-center justify-center text-white font-semibold text-xs ${getAvatarColor(displayName)}`}>
+                                    {getInitial(displayName)}
+                                  </div>
+                                );
+                              }
+                            })()}
 
                             <div className={``}>
                               {starMessage.Chat.User.user_id == userData.user_id

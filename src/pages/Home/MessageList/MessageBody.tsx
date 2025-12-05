@@ -87,7 +87,7 @@ export default function MessageBody() {
 
       {MessageListArray.map((e) => {
         return (
-          <>
+          <div key={e.message_id}>
             {e.message_type == "date" ? (
               <div
                 id={String(e.message_id)}
@@ -108,7 +108,7 @@ export default function MessageBody() {
                 <MyMessage messageData={e} image_urls={image_urls} />
               </>
             )}
-          </>
+          </div>
         );
       })}
     </div>

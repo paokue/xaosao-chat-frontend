@@ -14,6 +14,65 @@ import { useConversationInfo } from "../../../store/api/useConversationInfo";
 import { resetCurrentConversation } from "../../../store/Slices/CurrentConversationSlice";
 import LoadingSkeletonImageDynamic from "../../../components/LoadingSkeletonImageDynamic";
 
+// Helper function to fix image URL and check validity
+const getValidImageUrl = (url: string): string | null => {
+  if (!url) return null;
+
+  let cleanUrl = url;
+  if (url.includes("http://localhost:3000/https://")) {
+    cleanUrl = url.replace("http://localhost:3000/", "");
+  } else if (url.includes("http://localhost:3000/http://")) {
+    cleanUrl = url.replace("http://localhost:3000/", "");
+  }
+
+  if (cleanUrl.includes("not-found-images") || cleanUrl.includes("profile-image.png")) {
+    return null;
+  }
+
+  if (cleanUrl.startsWith("/uploads") || cleanUrl === "") {
+    return null;
+  }
+
+  // Only accept URLs that are proper CDN URLs or have image extensions
+  if (!cleanUrl.includes("b-cdn.net") && !cleanUrl.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+    return null;
+  }
+
+  return cleanUrl;
+};
+
+// Generate consistent color based on username
+const getAvatarColor = (name: string): string => {
+  const colors = [
+    "bg-rose-500",
+    "bg-pink-500",
+    "bg-purple-500",
+    "bg-indigo-500",
+    "bg-blue-500",
+    "bg-cyan-500",
+    "bg-teal-500",
+    "bg-emerald-500",
+    "bg-green-500",
+    "bg-amber-500",
+    "bg-orange-500",
+    "bg-red-500",
+  ];
+
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  const index = Math.abs(hash) % colors.length;
+  return colors[index];
+};
+
+// Get first letter of name
+const getInitial = (name: string): string => {
+  if (!name) return "?";
+  return name.charAt(0).toUpperCase();
+};
+
 export default function Profile() {
   let dispatch = useAppDispatch();
   const [currentConversationTyping, setcurrentConversationTyping] =
@@ -53,33 +112,47 @@ export default function Profile() {
         className="mr-2 flex w-fit cursor-pointer text-2xl lg:hidden"
       />
 
-      <div
-        onClick={() => {
-          dispatch(
-            setViewImage({
-              show_image: true,
-              image_src: [
-                currentConversationData.is_group
-                  ? currentConversationData.group_profile_image
-                  : currentConversationData.profile_image,
-              ],
-            }),
+      {(() => {
+        const imageUrl = currentConversationData.is_group
+          ? currentConversationData.group_profile_image
+          : currentConversationData.profile_image;
+        const validUrl = getValidImageUrl(imageUrl);
+        const displayName = currentConversationData.is_group
+          ? currentConversationData.group_name
+          : currentConversationData.user_name;
+
+        if (validUrl) {
+          return (
+            <div
+              onClick={() => {
+                dispatch(
+                  setViewImage({
+                    show_image: true,
+                    image_src: [validUrl],
+                  }),
+                );
+              }}
+              className="mr-3 h-10 w-10 cursor-pointer overflow-hidden rounded-full 2xl:h-12 2xl:w-12"
+            >
+              <LoadingSkeletonImageDynamic
+                radius=""
+                className="h-10 w-10 object-cover 2xl:h-12 2xl:w-12"
+                image_height="100%"
+                image_url={validUrl}
+                image_width=""
+              />
+            </div>
           );
-        }}
-        className="mr-3 h-10 w-10 cursor-pointer overflow-hidden rounded-full 2xl:h-12 2xl:w-12"
-      >
-        <LoadingSkeletonImageDynamic
-          radius=""
-          className="h-10 w-10 object-cover 2xl:h-12 2xl:w-12"
-          image_height="100%"
-          image_url={
-            currentConversationData.is_group
-              ? currentConversationData.group_profile_image
-              : currentConversationData.profile_image
-          }
-          image_width=""
-        />
-      </div>
+        } else {
+          return (
+            <div
+              className={`mr-3 h-10 w-10 2xl:h-12 2xl:w-12 rounded-full flex items-center justify-center text-white font-semibold text-lg cursor-pointer ${getAvatarColor(displayName)}`}
+            >
+              {getInitial(displayName)}
+            </div>
+          );
+        }
+      })()}
       <div className="flex flex-col">
         <div
           onClick={() => {
@@ -179,11 +252,7 @@ export default function Profile() {
                   currentConversationData.user_id.toString(),
                 ) ? (
                   <div className="flex items-center gap-2 text-xs sm:text-sm">
-                    <img
-                      className="h-3 w-3"
-                      src="/Home/Online_Green_dot.png"
-                      alt=""
-                    />
+                    <span className="h-3 w-3 bg-emerald-500 rounded-full" />
                     <div>
                       <TextTranslate text="Online" />
                     </div>

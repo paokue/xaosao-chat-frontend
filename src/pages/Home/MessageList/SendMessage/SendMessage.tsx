@@ -46,8 +46,6 @@ export default function SendMessage() {
   const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { selectedFile, setSelectedFile } = useFile();
   const { refetch } = useConversationInfo();
-  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
-  const [isIOS, setIsIOS] = useState(false);
   const dispatch = useAppDispatch();
   const { loading: sendMessageLoading, progress, postData } = useApiPost();
   const scrollToBottom = useScrollToBottom();
@@ -70,9 +68,6 @@ export default function SendMessage() {
     keydownListenerRef.current = handleKeyDown;
   }, [selectedFile, messageData]);
 
-  useEffect(() => {
-    setIsIOS(/iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream);
-  }, []);
 
 
   useEffect(() => {
@@ -293,7 +288,7 @@ export default function SendMessage() {
 
   return (
     <div
-      className={`mb-5 sm:-mb-3 ${location.pathname != "/video-call" && location.pathname != "/status" && "absolute"} -bottom-16 lg:bottom-5  flex w-full ${isIOS ? (isKeyboardOpen ? "-translate-y-20" : "-translate-y-20") : isKeyboardOpen ? "-translate-y-14" : "-translate-y-14"} items-center justify-center transition-all duration-300 md:translate-y-0`}
+      className={`${location.pathname != "/video-call" && location.pathname != "/status" ? "fixed bottom-0 left-0 right-0 lg:absolute lg:bottom-auto lg:left-auto lg:right-auto" : "absolute"} flex w-full items-center justify-center pb-4 pt-2 bg-primary transition-all duration-300`}
     >
       <div className="flex w-[90%] items-center gap-3 xl:w-[90%]">
         <div
@@ -342,7 +337,6 @@ export default function SendMessage() {
                 );
               }}
               onFocus={() => {
-                setIsKeyboardOpen(true);
                 dispatch(
                   updateViewState({
                     showOtherProfile: false,
@@ -351,9 +345,6 @@ export default function SendMessage() {
                     showMediaDocLinks: false,
                   }),
                 );
-              }}
-              onBlur={() => {
-                setIsKeyboardOpen(false);
               }}
               className="h-full w-full resize-none bg-transparent px-2 py-1 pt-3 text-sm placeholder-lightText outline-none"
               placeholder={translate("Type Message")}

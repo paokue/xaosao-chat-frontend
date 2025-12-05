@@ -1,16 +1,13 @@
 import { GoDotFill } from "react-icons/go";
-// import { RWebShare } from "react-web-share";
 import { useNavigate } from "react-router-dom";
 
 // icons:
 import {
   MdOutlineStarBorderPurple500,
 } from "react-icons/md";
-// import { RxShare2 } from "react-icons/rx";
-// import { HiLanguage } from "react-icons/hi2";
 import { BsInfoCircle } from "react-icons/bs";
 import { RiUserUnfollowLine } from "react-icons/ri";
-import { FaChevronLeft, FaPlus } from "react-icons/fa6";
+import { FaChevronLeft } from "react-icons/fa6";
 
 // conponents:
 import BlockUserListModal from "./BlockUserListModal";
@@ -23,6 +20,55 @@ import { useTranslateText } from "../../../hooks/useTranslateText";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { updateViewState } from "../../../store/Slices/ViewManagerSlice";
 import { updateMessageOptions } from "../../../store/Slices/MessageOptionsSlice";
+
+// Helper function to fix image URL and check validity
+const getValidImageUrl = (url: string): string | null => {
+  if (!url) return null;
+
+  let cleanUrl = url;
+  if (url.includes("http://localhost:3000/https://")) {
+    cleanUrl = url.replace("http://localhost:3000/", "");
+  } else if (url.includes("http://localhost:3000/http://")) {
+    cleanUrl = url.replace("http://localhost:3000/", "");
+  }
+
+  if (cleanUrl.includes("not-found-images") || cleanUrl.includes("profile-image.png")) {
+    return null;
+  }
+
+  if (cleanUrl.startsWith("/uploads") || cleanUrl === "") {
+    return null;
+  }
+
+  // Only accept URLs that are proper CDN URLs or have image extensions
+  if (!cleanUrl.includes("b-cdn.net") && !cleanUrl.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+    return null;
+  }
+
+  return cleanUrl;
+};
+
+// Generate consistent color based on username
+const getAvatarColor = (name: string): string => {
+  const colors = [
+    "bg-rose-500", "bg-pink-500", "bg-purple-500", "bg-indigo-500",
+    "bg-blue-500", "bg-cyan-500", "bg-teal-500", "bg-emerald-500",
+    "bg-green-500", "bg-amber-500", "bg-orange-500", "bg-red-500",
+  ];
+
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  return colors[Math.abs(hash) % colors.length];
+};
+
+// Get first letter of name
+const getInitial = (name: string): string => {
+  if (!name) return "?";
+  return name.charAt(0).toUpperCase();
+};
 
 export default function Setting() {
   const theme = useTheme()
@@ -59,9 +105,9 @@ export default function Setting() {
           style={{
             backgroundSize: "100%",
           }}
-          className={`h-auto w-full space-y-3 px-4 py-2 xl:space-y-5 ${theme.theme === "dark" ? "bg-[#2A2A2A]" : "bg-[#F1F1F1]"}`}
+          className={`h-auto w-full space-y-3 px-4 pb-4 ${theme.theme === "dark" ? "bg-[#2A2A2A]" : "bg-[#F1F1F1]"}`}
         >
-          <div className="flex items-center gap-3 pt-6 font-semibold text-black lg:pt-16 2xl:pt-16">
+          <div className="flex items-center gap-3 pt-6 font-semibold text-black 2xl:pt-16">
             <FaChevronLeft
               className={`cursor-pointer ${theme.theme === "dark" ? "text-white" : "text-black"}`}
               onClick={() => {
@@ -74,19 +120,34 @@ export default function Setting() {
           </div>
 
           <div className="relative mx-auto h-fit w-fit pt-16 lg:pt-3">
-            <img
-              src={userData.profile_image}
-              className={`mx-auto h-32 w-32 rounded-full bg-secondary object-cover p-2`}
-              alt=""
-            />
-            <div
+            {(() => {
+              const validUrl = getValidImageUrl(userData.profile_image || "");
+              const displayName = userData.first_name || userData.user_name || "";
+
+              if (validUrl) {
+                return (
+                  <img
+                    src={validUrl}
+                    className={`mx-auto h-32 w-32 rounded-full bg-rose-500 object-cover p-0.5`}
+                    alt=""
+                  />
+                );
+              } else {
+                return (
+                  <div className={`mx-auto h-32 w-32 rounded-full flex items-center justify-center text-white font-bold text-4xl ${getAvatarColor(displayName)}`}>
+                    {getInitial(displayName)}
+                  </div>
+                );
+              }
+            })()}
+            {/* <div
               onClick={() => {
                 dispatch(updateViewState({ showChangeProfileModal: true }));
               }}
               className="absolute bottom-1 right-2 z-10 grid h-8 w-8 cursor-pointer place-content-center rounded-full bg-primary"
             >
               <FaPlus className="primary-gradient rounded-full p-1 text-xl" />
-            </div>
+            </div> */}
           </div>
 
           <div className="space-y-2 text-center">

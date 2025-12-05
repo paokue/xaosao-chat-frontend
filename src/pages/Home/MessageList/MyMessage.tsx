@@ -40,6 +40,68 @@ import ReactionPicker from "./SelectedMessageOption/ReactionPicker";
 import SelectedMessageOption from "./SelectedMessageOption/SelectedMessageOption";
 import LoadingSkeletonImageDynamic from "../../../components/LoadingSkeletonImageDynamic";
 
+// Helper function to fix image URL and check validity
+const getValidImageUrl = (url: string): string | null => {
+  if (!url) return null;
+
+  // Remove localhost prefix if URL contains CDN link
+  let cleanUrl = url;
+  if (url.includes("http://localhost:3000/https://")) {
+    cleanUrl = url.replace("http://localhost:3000/", "");
+  } else if (url.includes("http://localhost:3000/http://")) {
+    cleanUrl = url.replace("http://localhost:3000/", "");
+  }
+
+  // Check if it's the default not-found image
+  if (cleanUrl.includes("not-found-images") || cleanUrl.includes("profile-image.png")) {
+    return null;
+  }
+
+  // If it's a relative path starting with /uploads, it's likely invalid or default
+  if (cleanUrl.startsWith("/uploads") || cleanUrl === "") {
+    return null;
+  }
+
+  // Only accept URLs that are proper CDN URLs or have image extensions
+  if (!cleanUrl.includes("b-cdn.net") && !cleanUrl.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+    return null;
+  }
+
+  return cleanUrl;
+};
+
+// Generate consistent color based on username
+const getAvatarColor = (name: string): string => {
+  const colors = [
+    "bg-rose-500",
+    "bg-pink-500",
+    "bg-purple-500",
+    "bg-indigo-500",
+    "bg-blue-500",
+    "bg-cyan-500",
+    "bg-teal-500",
+    "bg-emerald-500",
+    "bg-green-500",
+    "bg-amber-500",
+    "bg-orange-500",
+    "bg-red-500",
+  ];
+
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  const index = Math.abs(hash) % colors.length;
+  return colors[index];
+};
+
+// Get first letter of name
+const getInitial = (name: string): string => {
+  if (!name) return "?";
+  return name.charAt(0).toUpperCase();
+};
+
 interface MyMessageProps {
   messageData: MessageList;
   image_urls: string[];
@@ -415,15 +477,36 @@ const MyMessage: React.FC<MyMessageProps> = ({ messageData, image_urls }) => {
           </div>
         </div>
 
-        <img
-          src={messageData.senderData?.profile_image}
-          alt="My profile"
-          className={`h-7 w-7 rounded-full object-cover ${messageData.myMessage ? "order-2" : "order-1"
-            } mt-auto ${["video", "image"].includes(messageData.message_type!)
-              ? "mb-7"
-              : "mb-5"
-            }`}
-        />
+        {(() => {
+          const validUrl = getValidImageUrl(messageData.senderData?.profile_image || "");
+          const displayName = messageData.senderData?.user_name || "";
+
+          if (validUrl) {
+            return (
+              <img
+                src={validUrl}
+                alt="My profile"
+                className={`h-7 w-7 rounded-full object-cover ${messageData.myMessage ? "order-2" : "order-1"
+                  } mt-auto ${["video", "image"].includes(messageData.message_type!)
+                    ? "mb-7"
+                    : "mb-5"
+                  }`}
+              />
+            );
+          } else {
+            return (
+              <div
+                className={`h-7 w-7 rounded-full flex items-center justify-center text-white font-semibold text-xs ${getAvatarColor(displayName)} ${messageData.myMessage ? "order-2" : "order-1"
+                  } mt-auto ${["video", "image"].includes(messageData.message_type!)
+                    ? "mb-7"
+                    : "mb-5"
+                  }`}
+              >
+                {getInitial(displayName)}
+              </div>
+            );
+          }
+        })()}
       </div>
     </div>
   );

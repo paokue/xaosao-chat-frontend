@@ -23,7 +23,7 @@ export default function Sidebar() {
 
   return (
     <>
-      <div className="fixed hidden h-screen min-w-24 flex-col justify-between bg-primary py-10 text-darkText shadow-xl lg:flex 2xl:min-w-28">
+      <div className="fixed hidden h-screen min-w-24 flex-col justify-between bg-primary py-6 text-darkText shadow-xl lg:flex 2xl:min-w-28">
         <div
           className="bgGradient flex flex-col items-center gap-7"
           onClick={() => {
@@ -36,9 +36,6 @@ export default function Sidebar() {
           <NavLink to={"/contact-list"} className="cursor-pointer">
             <Users size={18} className={`${location.pathname === "/contact-list" ? "text-rose-500" : ""}`} />
           </NavLink>
-          {/* <NavLink to={"/call-history"} className="cursor-pointer">
-            <Phone size={18} className={`${location.pathname === "/call-history" ? "text-rose-500" : ""}`} />
-          </NavLink> */}
           <NavLink to={"/setting"} className="cursor-pointer">
             <Settings size={18} className={`${location.pathname === "/setting" ? "text-rose-500" : ""}`} />
           </NavLink>

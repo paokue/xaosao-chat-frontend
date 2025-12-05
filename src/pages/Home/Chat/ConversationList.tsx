@@ -48,6 +48,68 @@ import CallInConversationList from "./CallInConversationList";
 import { useChatList } from "../../../store/api/useChatList";
 import LoadingSkeletonImageDynamic from "../../../components/LoadingSkeletonImageDynamic";
 
+// Helper function to fix image URL and check validity
+const getValidImageUrl = (url: string): string | null => {
+  if (!url) return null;
+
+  // Remove localhost prefix if URL contains CDN link
+  let cleanUrl = url;
+  if (url.includes("http://localhost:3000/https://")) {
+    cleanUrl = url.replace("http://localhost:3000/", "");
+  } else if (url.includes("http://localhost:3000/http://")) {
+    cleanUrl = url.replace("http://localhost:3000/", "");
+  }
+
+  // Check if it's the default not-found image
+  if (cleanUrl.includes("not-found-images") || cleanUrl.includes("profile-image.png")) {
+    return null;
+  }
+
+  // If it's a relative path starting with /uploads, it's likely invalid or default
+  if (cleanUrl.startsWith("/uploads") || cleanUrl === "") {
+    return null;
+  }
+
+  // Only accept URLs that are proper CDN URLs or have image extensions
+  if (!cleanUrl.includes("b-cdn.net") && !cleanUrl.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+    return null;
+  }
+
+  return cleanUrl;
+};
+
+// Generate consistent color based on username
+const getAvatarColor = (name: string): string => {
+  const colors = [
+    "bg-rose-500",
+    "bg-pink-500",
+    "bg-purple-500",
+    "bg-indigo-500",
+    "bg-blue-500",
+    "bg-cyan-500",
+    "bg-teal-500",
+    "bg-emerald-500",
+    "bg-green-500",
+    "bg-amber-500",
+    "bg-orange-500",
+    "bg-red-500",
+  ];
+
+  // Create a simple hash from the name
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  const index = Math.abs(hash) % colors.length;
+  return colors[index];
+};
+
+// Get first letter of name
+const getInitial = (name: string): string => {
+  if (!name) return "?";
+  return name.charAt(0).toUpperCase();
+};
 
 export default function ConversationList({
   searchUser,
@@ -233,24 +295,36 @@ export default function ConversationList({
                     className={`group flex cursor-pointer items-center px-3 py-4 rounded-xl ${currentConversationData.conversation_id == e.conversation_id ? theme === "dark" ? "border border-gray-500" : "bg-rose-50 border border-rose-500" : ""}`}
                   >
                     <div className="relative mr-3 h-12 w-12">
-                      <LoadingSkeletonImageDynamic
-                        radius=""
-                        className="h-12 w-12 rounded-full object-cover"
-                        image_height="100%"
-                        image_url={
-                          e.is_group ? e.group_profile_image : e.profile_image
+                      {(() => {
+                        const imageUrl = e.is_group ? e.group_profile_image : e.profile_image;
+                        const validUrl = getValidImageUrl(imageUrl);
+                        const displayName = e.is_group ? e.group_name : e.user_name;
+
+                        if (validUrl) {
+                          return (
+                            <LoadingSkeletonImageDynamic
+                              radius=""
+                              className="h-12 w-12 rounded-full object-cover"
+                              image_height="100%"
+                              image_url={validUrl}
+                              image_width=""
+                            />
+                          );
+                        } else {
+                          return (
+                            <div
+                              className={`h-12 w-12 rounded-full flex items-center justify-center text-white font-semibold text-lg ${getAvatarColor(displayName)}`}
+                            >
+                              {getInitial(displayName)}
+                            </div>
+                          );
                         }
-                        image_width=""
-                      />
+                      })()}
                       {!e.is_group &&
                         OnlineUserList.onlineUserList.includes(
                           e.user_id.toString(),
                         ) && (
-                          <img
-                            className="absolute bottom-0 right-0 z-30 h-4 w-4"
-                            src="/Home/Online_Green_dot.png"
-                            alt=""
-                          />
+                          <span className="absolute bottom-0 right-0 z-30 h-4 w-4 bg-emerald-500 rounded-full border-2 border-white" />
                         )}
                     </div>
                     <div className="min-w-44 sm:min-w-52 2xl:min-w-60">

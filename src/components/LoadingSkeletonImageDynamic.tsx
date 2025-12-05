@@ -42,6 +42,8 @@ export default function LoadingSkeletonImageDynamic({
       // }, 1000);
     };
   }, [image_url]);
+
+  // console.log("Chat profile:::", image_url);
   return (
     <>
       <div
@@ -62,11 +64,6 @@ export default function LoadingSkeletonImageDynamic({
             baseColor={theme == "dark" ? "#1d1d1d" : "#DFDFDF"}
             highlightColor={theme == "dark" ? "#252525" : "#fff"}
             className={className}
-            // style={{
-            //   height: image_height,
-            //   width: image_width,
-            //   borderRadius: radius,
-            // }}
           />
         )}
       </div>
