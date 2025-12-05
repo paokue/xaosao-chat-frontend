@@ -1,16 +1,16 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 import { useQuery } from "react-query";
+import { getAuthToken } from "../../utils/getAuthToken";
 import { useAppDispatch } from "../../utils/hooks";
 import { updateChatList } from "../Slices/ChatListSlice";
 import { ChatListRes } from "../../types/ChatListType";
 
 export const useChatList = ({ full_name }: { full_name?: string }) => {
-  const token = Cookies.get("whoxa_auth_token");
+  const token = getAuthToken();
   const dispatch = useAppDispatch();
 
   return useQuery<ChatListRes, Error>(
-    ["my-chat-lists", full_name],
+    ["my-chat-lists", full_name, token],
     async () => {
       const response = await axios.post<ChatListRes>(
         `${import.meta.env.VITE_API_URL}my-chat-lists`,

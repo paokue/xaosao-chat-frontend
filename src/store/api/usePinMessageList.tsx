@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 
 import { useAppSelector } from "../../utils/hooks";
-import Cookies from "js-cookie";
+import { getAuthToken } from "../../utils/getAuthToken";
 import { PinMessageListRes } from "../../types/ResType";
 
 export const usePinMessageList = () => {
@@ -10,10 +10,10 @@ export const usePinMessageList = () => {
     (state) => state.CurrentConversation,
   );
 
-  const token = Cookies.get("whoxa_auth_token");
+  const token = getAuthToken();
 
   return useQuery<PinMessageListRes, Error>(
-    ["pin-message-list", currentConversationData.conversation_id],
+    ["pin-message-list", currentConversationData.conversation_id, token],
     async () => {
       const response = await axios.post<PinMessageListRes>(
         `${import.meta.env.VITE_API_URL}/pin-message-list`,

@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { store } from "./store/store";
@@ -9,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { getAuthToken } from "./utils/getAuthToken";
 
 import { FileProvider } from "./context/FileProvider";
 import { ThemeProvider } from "./context/ThemeProvider";
@@ -30,7 +30,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = Cookies.get("whoxa_auth_token");
+    const token = getAuthToken();
 
     // apao_edit
     if (!token) {

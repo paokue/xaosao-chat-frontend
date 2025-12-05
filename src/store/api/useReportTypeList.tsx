@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
 import axios from "axios";
-import Cookies from "js-cookie";
+import { getAuthToken } from "../../utils/getAuthToken";
 import { ReportTypeRes } from "../../types/ResType";
 
 export const useReportTypeList = () => {
-  const token = Cookies.get("whoxa_auth_token");
+  const token = getAuthToken();
 
   return useQuery<ReportTypeRes, Error>(
     ["Report-type-list"],

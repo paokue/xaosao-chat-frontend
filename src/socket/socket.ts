@@ -1,12 +1,12 @@
 // @ts-nocheck
-import Cookies from "js-cookie";
 import { io } from "socket.io-client";
+import { getAuthToken } from "../utils/getAuthToken";
 
 let socket: SocketIOClient;
 
 export const initiateSocketConnection = () => {
   if (!socket) {
-    const token = Cookies.get("whoxa_auth_token");
+    const token = getAuthToken();
     socket = io(`${import.meta.env.VITE_SOCKET_URL}?token=${token}`, {
       path: "/socket",
     });
@@ -23,7 +23,7 @@ export const disconnectSocket = () => {
 
 export const socketInstance = () => {
   if (!socket) {
-    const token = Cookies.get("whoxa_auth_token");
+    const token = getAuthToken();
     socket = io(`${import.meta.env.VITE_SOCKET_URL}?token=${token}`, {
       path: "/socket",
     });

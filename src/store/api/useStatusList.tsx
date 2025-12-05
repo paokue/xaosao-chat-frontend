@@ -1,16 +1,16 @@
 import { useQuery } from "react-query";
 import axios from "axios";
-import Cookies from "js-cookie";
+import { getAuthToken } from "../../utils/getAuthToken";
 import { StatusListRes } from "../../types/StatusTypes";
 import { useAppDispatch } from "../../utils/hooks";
 import { updateStatusListRes } from "../../store/Slices/StatusSlice";
 
 export const useStatusList = () => {
-  const token = Cookies.get("whoxa_auth_token");
+  const token = getAuthToken();
   const dispatch = useAppDispatch();
 
   return useQuery<StatusListRes, Error>(
-    ["status-list"],
+    ["status-list", token],
     async () => {
       const response = await axios.post<StatusListRes>(
         `${import.meta.env.VITE_API_URL}status-list`,

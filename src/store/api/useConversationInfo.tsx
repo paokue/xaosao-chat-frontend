@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { ConversationInfoRes } from "../../types/ConversationInfoType";
 import { useAppSelector } from "../../utils/hooks";
-import Cookies from "js-cookie";
+import { getAuthToken } from "../../utils/getAuthToken";
 
 export const useConversationInfo = () => {
   const currentConversationData = useAppSelector(
@@ -11,10 +11,10 @@ export const useConversationInfo = () => {
 
   // console.log("1111kkkk::", currentConversationData);
 
-  const token = Cookies.get("whoxa_auth_token");
+  const token = getAuthToken();
 
   return useQuery<ConversationInfoRes, Error>(
-    ["group-info", currentConversationData.conversation_id],
+    ["group-info", currentConversationData.conversation_id, token],
     async () => {
       const response = await axios.post<ConversationInfoRes>(
         `${import.meta.env.VITE_API_URL}get-one-to-one-media`,

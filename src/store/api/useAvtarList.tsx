@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
 import axios from "axios";
-import Cookies from "js-cookie";
+import { getAuthToken } from "../../utils/getAuthToken";
 import { AvatarListRes } from "../../types/ResType";
 
 export const useAvtarList = () => {
-  const token = Cookies.get("whoxa_auth_token");
+  const token = getAuthToken();
   return useQuery<AvatarListRes, Error>(
     ["list-all-avtars"],
     async () => {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import Cookies from "js-cookie";
+import { getAuthToken } from "../utils/getAuthToken";
 
 const useApiPost = () => {
   const [loading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ const useApiPost = () => {
     bodyData: any,
     contentType = "application/json",
   ) => {
-    let token = Cookies.get("whoxa_auth_token");
+    let token = getAuthToken();
     try {
       setLoading(true);
       setError(null);

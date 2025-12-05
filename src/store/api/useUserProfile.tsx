@@ -1,16 +1,16 @@
 import { useQuery } from "react-query";
 import axios, { AxiosError } from "axios";
 import { useDispatch } from "react-redux";
-import Cookies from "js-cookie";
+import { getAuthToken, removeAuthTokens } from "../../utils/getAuthToken";
 import { UserDataRes } from "../../types/UserDataType";
 import { updateUserData } from "../Slices/UserSlice";
 
 export const useUserProfile = () => {
   const dispatch = useDispatch();
-  const token = Cookies.get("whoxa_auth_token"); // or "whoxa_web_token" depending on what you use
+  const token = getAuthToken();
 
   return useQuery<UserDataRes, AxiosError>(
-    ["user-details"],
+    ["user-details", token],
     async () => {
       try {
         const response = await axios.post<UserDataRes>(
@@ -29,7 +29,7 @@ export const useUserProfile = () => {
           response.data.resData?.is_account_deleted ||
           !response.data.resData
         ) {
-          Cookies.remove("whoxa_auth_token"); // clear token
+          removeAuthTokens(); // clear token
           localStorage.clear();
           sessionStorage.clear();
           if (window.location.pathname !== "/login-without-otp") {
@@ -44,7 +44,7 @@ export const useUserProfile = () => {
       } catch (error) {
         // Handle unauthorized (expired/invalid token)
         if (axios.isAxiosError(error) && error.response?.status === 401) {
-          Cookies.remove("whoxa_auth_token");
+          removeAuthTokens();
           localStorage.clear();
           sessionStorage.clear();
           if (window.location.pathname !== "/login-without-otp") {

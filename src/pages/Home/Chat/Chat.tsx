@@ -1,10 +1,10 @@
-import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { FolderDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { MdArrowBackIos } from "react-icons/md";
 import { IoSearchOutline, IoClose } from "react-icons/io5";
+import { getAuthToken } from "../../../utils/getAuthToken";
 
 // components
 import ConversationList from "./ConversationList";
@@ -53,7 +53,7 @@ export default function Chat() {
   };
 
   useEffect(() => {
-    const token = Cookies.get("whoxa_auth_token");
+    const token = getAuthToken();
     if (!token) {
       navigate("/login-without-otp");
       return;

@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
 import axios from "axios";
-import Cookies from "js-cookie";
+import { getAuthToken } from "../../utils/getAuthToken";
 import { GroupSettingsRes } from "../../types/ResType";
 
 export const useGroupSettings = () => {
-  const token = Cookies.get("whoxa_auth_token");
+  const token = getAuthToken();
 
   return useQuery<GroupSettingsRes, Error>(
     ["get-Group-settings"],

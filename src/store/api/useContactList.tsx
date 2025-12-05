@@ -1,16 +1,16 @@
 import { useQuery } from "react-query";
 import axios from "axios";
-import Cookies from "js-cookie";
+import { getAuthToken } from "../../utils/getAuthToken";
 
 import { ContactListRes } from "../../types/SendMessageType";
 import { updateContactListRes } from "../Slices/ContactListSlice";
 import { useAppDispatch } from "../../utils/hooks";
 
 export const useContactList = ({ full_name }: { full_name?: string }) => {
-  const token = Cookies.get("whoxa_auth_token");
+  const token = getAuthToken();
   let dispatch = useAppDispatch();
   return useQuery<ContactListRes, Error>(
-    ["my-contacts", full_name],
+    ["my-contacts", full_name, token],
     async () => {
       const response = await axios.post<ContactListRes>(
         `${import.meta.env.VITE_API_URL}my-contacts`,

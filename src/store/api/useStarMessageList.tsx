@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import Cookies from "js-cookie";
+import { getAuthToken } from "../../utils/getAuthToken";
 
 import { StarMessageListRes } from "../../types/StarMessageListTypes";
 import { useAppSelector } from "../../utils/hooks";
@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 
 export const useStarMessageList = () => {
   const dispatch = useDispatch();
-  const token = Cookies.get("whoxa_auth_token");
+  const token = getAuthToken();
   let CurrentConversation = useAppSelector(
     (state) => state.CurrentConversation,
   );
@@ -23,13 +23,13 @@ export const useStarMessageList = () => {
   //   alert(MessageOptions.show_all_star_messages);
   //   updatedFields.conversation_id = CurrentConversation.conversation_id;
   // }
-  let api_name = [];
+  let api_name: (string | number | undefined)[] = [];
 
   if (location.pathname != "/star-messages") {
     updatedFields.conversation_id = CurrentConversation.conversation_id;
-    api_name = ["star-message-list", CurrentConversation.conversation_id];
+    api_name = ["star-message-list", CurrentConversation.conversation_id, token];
   } else {
-    api_name = ["star-message-list"];
+    api_name = ["star-message-list", token];
   }
   // console.log(
   //   CurrentConversation.conversation_id,

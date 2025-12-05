@@ -1,12 +1,12 @@
 import { useQuery } from "react-query";
 import axios from "axios";
-import Cookies from "js-cookie";
-import { AvatarListRes, CallListRes } from "../../types/ResType";
+import { getAuthToken } from "../../utils/getAuthToken";
+import {  CallListRes } from "../../types/ResType";
 
 export const useCallHistory = () => {
-  const token = Cookies.get("whoxa_auth_token");
+  const token = getAuthToken();
   return useQuery<CallListRes, Error>(
-    ["call-list"],
+    ["call-list", token],
     async () => {
       const response = await axios.post<CallListRes>(
         `${import.meta.env.VITE_API_URL}call-list`,

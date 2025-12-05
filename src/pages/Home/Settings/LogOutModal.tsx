@@ -1,9 +1,9 @@
-import Cookies from "js-cookie";
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 import TextTranslate from "../../../utils/TextTranslate";
+import { removeAuthTokens } from "../../../utils/getAuthToken";
 
 interface LogoutModalProps {
   isOpen: boolean;
@@ -19,7 +19,7 @@ export default function LogoutModal({ isOpen, setIsOpen }: LogoutModalProps) {
 
   function yesLogout() {
     setIsOpen(false);
-    Cookies.remove("whoxa_auth_token");
+    removeAuthTokens();
     sessionStorage.clear();
     localStorage.clear();
     navigate("/login-without-otp");

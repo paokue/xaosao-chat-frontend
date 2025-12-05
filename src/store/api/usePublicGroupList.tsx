@@ -1,11 +1,11 @@
 import { useQuery } from "react-query";
 import axios from "axios";
-import Cookies from "js-cookie";
+import { getAuthToken } from "../../utils/getAuthToken";
 
 import { AllPublicGroupRes } from "../../types/ResType";
 
 export const usePublicGroupList = ({ group_name }: { group_name?: string }) => {
-  const token = Cookies.get("whoxa_auth_token");
+  const token = getAuthToken();
 
   return useQuery<AllPublicGroupRes, Error>(
     ["get-public-groups", group_name],
