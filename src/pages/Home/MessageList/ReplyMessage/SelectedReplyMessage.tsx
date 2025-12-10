@@ -23,9 +23,9 @@ export default function SelectedReplyMessage() {
     <>
       <div
         className={` ${messageData.reply_id != 0
-          ? "visible translate-y-3"
+          ? "visible translate-y-0"
           : "invisible translate-y-20 opacity-0"
-          } absolute -left-28 ${["image", "video", "gif", "document"].includes(SendMessageData.message_type!) && selectedFile ? "bottom-64" : "bottom-16"} z-10 border ${theme === "dark" ? "border-[#EEEEEE14]" : ""} w-full rounded-xl bg-primary transition-all duration-500 sm:-left-0`}
+          } absolute left-0 ${["image", "video", "gif", "document"].includes(SendMessageData.message_type!) && selectedFile ? "bottom-64" : "bottom-14 sm:bottom-16"} z-10 border ${theme === "dark" ? "border-[#EEEEEE14]" : ""} w-full rounded-xl bg-primary transition-all duration-500`}
       >
         <div className="relative border-l-4 border-[#FCCA16]">
           <RxCross2

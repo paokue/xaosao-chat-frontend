@@ -440,7 +440,7 @@ export default function ConversationList({
                               event.stopPropagation();
                               setSelectedConversation(e);
                             }}
-                            className="invisible items-center font-semibold shadow-2xl focus:outline-none group-hover:visible data-[focus]:outline-0"
+                            className="items-center font-semibold shadow-2xl focus:outline-none data-[focus]:outline-0"
                           >
                             <IoIosArrowDown className={`${theme === "dark" ? "text-white" : ""} cursor-pointer text-xl`} />
                           </MenuButton>

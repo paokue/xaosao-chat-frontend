@@ -67,9 +67,9 @@ export default function SelectedMessageOption({
               event.stopPropagation(); // Prevents the parent onClick event
               // setSelectedConversation(e);
             }}
-            className="invisible items-center font-semibold shadow-2xl focus:outline-none group-hover:visible data-[focus]:outline-0"
+            className="items-center font-semibold shadow-2xl focus:outline-none data-[focus]:outline-0"
           >
-            <IoIosArrowDown className="cursor-pointer text-xl drop-shadow-[0_0_1px_white]" />
+            <IoIosArrowDown className="cursor-pointer text-xl text-white" />
           </MenuButton>
 
           <MenuItems

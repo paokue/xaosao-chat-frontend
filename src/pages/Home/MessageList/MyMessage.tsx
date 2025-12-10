@@ -175,7 +175,6 @@ const MyMessage: React.FC<MyMessageProps> = ({ messageData, image_urls }) => {
         : ""
         }`}
     >
-      {/* {messageData.delete_from_everyone} */}
       <div className="flex items-end justify-end">
         {!["video_call", "audio_call", "delete_from_everyone"].includes(
           messageData.message_type!,
@@ -417,7 +416,7 @@ const MyMessage: React.FC<MyMessageProps> = ({ messageData, image_urls }) => {
                       ""
                     ) : (
                       <div
-                        className={`absolute ${messageData.message_type == "text" ? "right-0 top-1" : "right-3 top-3"} pl-2 opacity-0 ${MessageOptions.selectMessage ? "" : "group-hover:opacity-100"}`}
+                        className={`absolute ${messageData.message_type == "text" ? "right-0 top-1" : "right-3 top-3"} pl-2 opacity-100 ${MessageOptions.selectMessage ? "opacity-100" : "opacity-100"}`}
                       >
                         <SelectedMessageOption messageData={messageData} />
                       </div>
