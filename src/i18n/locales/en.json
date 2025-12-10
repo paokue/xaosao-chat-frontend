@@ -30,6 +30,7 @@
     "conversationDeleted": "Conversation Deleted!"
   },
   "contacts": {
+    "contactLists": "Contact Lists",
     "contactDetails": "Contact Details",
     "nonChangeable": "Non Changeable",
     "next": "Next",

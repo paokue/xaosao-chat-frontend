@@ -30,6 +30,7 @@
     "conversationDeleted": "대화가 삭제되었습니다!"
   },
   "contacts": {
+    "contactLists": "연락처 목록",
     "contactDetails": "연락처 세부정보",
     "nonChangeable": "변경 불가",
     "next": "다음",

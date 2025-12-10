@@ -30,6 +30,7 @@
     "conversationDeleted": "ลบการสนทนาแล้ว!"
   },
   "contacts": {
+    "contactLists": "รายชื่อผู้ติดต่อ",
     "contactDetails": "รายละเอียดผู้ติดต่อ",
     "nonChangeable": "ไม่สามารถเปลี่ยนแปลงได้",
     "next": "ถัดไป",

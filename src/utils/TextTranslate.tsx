@@ -30,6 +30,7 @@ const textKeyMap: Record<string, string> = {
   "Unblock": "chat.unblock",
   "Conversation Archived": "chat.conversationArchived",
   "Conversation Deleted!": "chat.conversationDeleted",
+  "Contact Lists": "contacts.contactLists",
   "Contact Details": "contacts.contactDetails",
   "Non Changeable": "contacts.nonChangeable",
   "Next": "contacts.next",

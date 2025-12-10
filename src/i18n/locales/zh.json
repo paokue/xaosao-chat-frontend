@@ -30,6 +30,7 @@
     "conversationDeleted": "对话已删除！"
   },
   "contacts": {
+    "contactLists": "联系人列表",
     "contactDetails": "联系人详情",
     "nonChangeable": "不可更改",
     "next": "下一步",

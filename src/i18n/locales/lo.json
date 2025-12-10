@@ -30,6 +30,7 @@
     "conversationDeleted": "ລຶບການສົນທະນາແລ້ວ!"
   },
   "contacts": {
+    "contactLists": "ລາຍຊື່ຜູ້ຕິດຕໍ່",
     "contactDetails": "ລາຍລະອຽດການຕິດຕໍ່",
     "nonChangeable": "ບໍ່ສາມາດປ່ຽນແປງໄດ້",
     "next": "ຕໍ່ໄປ",
